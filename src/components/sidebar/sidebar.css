@@ -1,0 +1,31 @@
+.sidebar {
+    display: grid;
+    grid-template-rows: 80px 1fr;
+    grid-template-columns: 1fr;
+    max-width: 320px;
+    max-height: 720px;
+    height: 100%;
+    background-color: #FBFBFB;
+    border-right: 1px solid #EAEAEA;
+    padding: 20px 10px 0 10px;
+    box-sizing: border-box;
+}
+
+.sidebar_empty {
+    display: block;
+}
+
+.sidebar__body {
+    overflow-y: auto;
+    height: 100%;
+}
+
+.sidebar__body_centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar_small {
+    width: 80px;
+}

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Профиль</title>
+
+    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/src/components/dialog/dialog.css">
+    <link rel="stylesheet" href="/src/components/chat-body/chat-body.css">
+    <link rel="stylesheet" href="/src/components/badge/badge.css">
+    <link rel="stylesheet" href="/src/components/interlocutor/interlocutor.css">
+    <link rel="stylesheet" href="/src/components/message/message.css">
+    <link rel="stylesheet" href="/src/components/modal/modal.css">
+    <link rel="stylesheet" href="/src/components/button/button.css">
+    <link rel="stylesheet" href="/src/components/field/field.css">
+    <link rel="stylesheet" href="/src/components/sidebar/sidebar.css">
+    <link rel="stylesheet" href="/src/components/list/list.css">
+    <link rel="stylesheet" href="/src/components/avatar/avatar.css">
+
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<main class="messenger-container">
+    <div class="messenger-body messenger-body_profile">
+        <aside class="sidebar sidebar_small sidebar_empty">
+            <div class="sidebar__body sidebar__body_centered">
+                <button class="button button_main button_circle">
+                    <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                </button>
+            </div>
+        </aside>
+        <div class="profile-content">
+            <div class="avatar avatar_big avatar_centered avatar_profile">
+                <img src="/static/icon/Union.png" alt="" class="">
+            </div>
+            <div class="profile-name">Иван</div>
+            <ul class="list list_full">
+                <li class="list__item">
+                    <div class="profile-data">
+                        <div class="profile-data__label">Почта</div>
+                        <div class="profile-data__value">pochta@yandex.ru</div>
+                    </div>
+                </li>
+                <li class="list__item">
+                    <div class="profile-data">
+                        <div class="profile-data__label">Логин</div>
+                        <div class="profile-data__value">ivanivanov</div>
+                    </div>
+                </li>
+                <li class="list__item">
+                    <div class="profile-data">
+                        <div class="profile-data__label">Имя</div>
+                        <div class="profile-data__value">Иван</div>
+                    </div>
+                </li>
+                <li class="list__item">
+                    <div class="profile-data">
+                        <div class="profile-data__label">Фамилия</div>
+                        <div class="profile-data__value">Иванов</div>
+                    </div>
+                </li>
+                <li class="list__item">
+                    <div class="profile-data">
+                        <div class="profile-data__label">Имя в чате</div>
+                        <div class="profile-data__value">Иван</div>
+                    </div>
+                </li>
+                <li class="list__item">
+                    <div class="profile-data">
+                        <div class="profile-data__label">Телефон</div>
+                        <div class="profile-data__value">+7 (909) 967 30 30</div>
+                    </div>
+                </li>
+            </ul>
+            <ul class="list list_full">
+                <li class="list__item">
+                    <a href="#" class="link">Изменить данные</a>
+                </li>
+                <li class="list__item">
+                    <a href="#" class="link">Изменить пароль</a>
+                </li>
+                <li class="list__item">
+                    <a href="#" class="link link_danger">Выйти</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="modal modal_hide">
+        <div class="modal__body">
+            <div class="modal__title modal__title_error">Ошибка, попробуйте ещё раз</div>
+            <div class="field">
+                <label class="field__label field__label_input-file">
+                    Выбрать файл на компьютере
+                    <input type="file" class="field__input_file">
+                </label>
+            </div>
+            <div class="load-file-name">pic.jpg</div>
+            <button class="button button_main button_full-width">Поменять</button>
+            <div class="modal__error error-label error-label_center">Нужно выбрать файл</div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

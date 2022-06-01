@@ -1,0 +1,45 @@
+.avatar {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    background: #EFEFEF;
+    border-radius: 50%;
+    overflow: hidden;;
+}
+
+.avatar_big {
+    width: 130px;
+    height: 130px;
+}
+
+.avatar_centered {
+    margin: 0 auto;
+}
+
+.avatar_middle {
+
+}
+
+.avatar_small {
+
+}
+
+.avatar_profile:hover {
+    cursor: pointer;
+}
+.avatar_profile:hover::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: rgba(0,0,0, .5);
+    color: #FFF;
+    content: 'Поменять аватар';
+    line-height: 1;
+}

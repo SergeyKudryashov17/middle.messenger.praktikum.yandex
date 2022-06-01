@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap');
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 13px;
+}
+
+.messenger-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.messenger-body {
+    display: grid;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 1280px;
+    max-height: 720px;
+    grid-template-columns: 25% 75%;
+    border: 1px solid #EAEAEA;
+}
+.messenger-body_profile {
+    grid-template-columns: 80px 1fr;
+}
+.messenger-body_entrance {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.messenger-controls {
+    text-align: right;
+}
+
+.chat-body {
+    position: relative;
+}
+
+.empty-chat-warning {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #999999;
+}
+
+.search-dialog {
+    display: block;
+    width: 100%;
+    max-width: 280px;
+    height: 32px;
+    padding: 0 10px;
+    background: #EFEFEF;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    font-family: FontAwesome;
+    font-style: normal;
+    margin-top: 20px;
+    transition: all .2s;
+}
+.setting-dialog:hover {
+    color: #3369F3;
+}
+.search-dialog:focus {
+    outline: 0;
+}
+
+.setting-dialog {
+    font-size: 20px;
+    cursor: pointer;
+    color: #1E1E1E;
+}
+
+.dialog-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+}
+
+.link {
+    color: #999999;
+    text-decoration: none;
+}
+.link_centered {
+    display: block;
+    text-align: center;
+}
+
+.input-message {
+    background: #EFEFEF;
+    border-radius: 25px;
+    padding: 10px 15px;
+}
+.input-message:focus {
+    outline: 0;
+}
+
+.add-attached-file {
+    font-size: 26px;
+    color: #999999;
+}
+
+.profile-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    max-width: 550px;
+    margin: 0 auto;
+}
+
+.profile-data {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.profile-data__label {
+    color: #1E1E1E;
+    font-size: 13px;
+}
+.profile-data__value {
+    color: #999999;
+    font-size: 13px;
+}
+
+.profile-name {
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    margin: 20px 0 60px;
+}
+
+.link {
+    color: #3369F3;
+    text-decoration: none;
+}
+.link:hover {
+    text-decoration: underline;
+}
+.link_danger {
+    color: #FF0000;
+}
+
+.load-file-name {
+    text-align: center;
+    color: #8D8D8D;
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 50px;
+}
+
+.error-label {
+    color: #FF2F2F;
+    font-size: 11px;
+}
+.error-label_center {
+    text-align: center;
+}
