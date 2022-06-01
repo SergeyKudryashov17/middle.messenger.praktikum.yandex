@@ -6,6 +6,23 @@ html, body {
     font-family: Inter;
     font-weight: 400;
     font-size: 13px;
+    color: #1E1E1E;
+}
+
+h1 {
+    display: block;
+    font-size: 60px;
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+h2 {
+    display: block;
+    font-size: 30px;
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 60px;
 }
 
 .messenger-container {
@@ -33,6 +50,12 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.messenger-body_error-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .messenger-controls {
