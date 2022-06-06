@@ -1,0 +1,27 @@
+{
+  "name": "messenger",
+  "version": "1.0.0",
+  "description": "### Откройте pull request в ветку main из ветки, где вы разрабатывали проект, и добавьте ссылку на этот pr в README.md в ветке main.  ### ВАЖНО: pull request должен называться “Sprint i” (i — номер спринта).",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel src/pages/index.hbs --no-cache"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SergeyKudryashov17/middle.messenger.praktikum.yandex.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SergeyKudryashov17/middle.messenger.praktikum.yandex/issues"
+  },
+  "homepage": "https://github.com/SergeyKudryashov17/middle.messenger.praktikum.yandex#readme",
+  "devDependencies": {
+    "@anikin/parcel-transformer-handlebars": "^1.0.9",
+    "cssnano": "^5.1.11",
+    "parcel": "^2.3.2",
+    "postcss": "^8.4.14"
+  }
+}
