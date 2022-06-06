@@ -7,6 +7,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{title}}</title>
 
+    {{#each cssComponents}}
+        <link rel="stylesheet" href="/src/components/{{this}}/{{this}}.css">
+    {{/each}}
+
     <!--    <link rel="stylesheet" href="/static/lib/font-awesome.min.css">-->
     <link rel="stylesheet" href="/src/styles/style.css">
 </head>

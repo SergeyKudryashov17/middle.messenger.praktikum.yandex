@@ -9,14 +9,14 @@
 
 <!--    <link rel="stylesheet" href="/static/lib/font-awesome.min.css">-->
 
-    {{#each css}}
+    {{#each cssComponents}}
         <link rel="stylesheet" href="/src/components/{{this}}/{{this}}.css">
     {{/each}}
 
     <link rel="stylesheet" href="/src/styles/style.css">
 </head>
 <body>
-    <main class="messenger-container {{#if isErrorPage}}messenger-body_error-page{{/if}}">
+    <main class="messenger-container">
         <div class="messenger-body">
             {{{body}}}
         </div>
