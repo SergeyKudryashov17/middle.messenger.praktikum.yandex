@@ -1,6 +1,6 @@
 ---
 title: Диалог
-css:
+cssComponents:
   - dialog
   - chat-body
   - badge
@@ -10,9 +10,25 @@ css:
   - modal
   - button
   - field
+
+modalTitle: Добавить пользователя
 ---
 
 {{!< base}}
 
-{{> sidebar}}
+{{> sidebar isFullSize=true}}
 {{> chat-body isEmpty=false}}
+
+<div class="modal modal_hide">
+    <div class="modal__body">
+        <div class="modal__title">{{modalTitle}}</div>
+        <div class="form">
+            {{#each formAddUser.fields}}
+                {{> field label="Логин" type="text"}}
+            {{/each}}
+        </div>
+        {{#each formAddUser.buttons}}
+            {{> button className="button_main button_full-width" label="Добавить"}}
+        {{/each}}
+    </div>
+</div>
