@@ -1,20 +1,22 @@
-<li class="dialog">
-    <div class="dialog__interlocutor-photo"></div>
-    <div class="dialog__title">
-        <div class="dialog__interlocutor-name">{{this.name}}</div>
-        <div class="dialog__time">{{this.time}}</div>
-    </div>
-    <div class="dialog__message-preview">
-        {{#if this.lastMessageFromMe }}
-            Вы:
-        {{/if}}
-        {{this.preview}}
-    </div>
-    <div class="dialog__unread-badge">
-        {{#if this.unread}}
-            <div class="badge">
-                {{this.unread}}
-            </div>
-        {{/if}}
-    </div>
+<li class="dialog-list__item">
+    <a href="/src/pages/chat.hbs" class="dialog">
+        <div class="dialog__interlocutor-photo"></div>
+        <div class="dialog__title">
+            <div class="dialog__interlocutor-name">{{this.name}}</div>
+            <div class="dialog__time">{{this.time}}</div>
+        </div>
+        <div class="dialog__message-preview">
+            {{#if this.lastMessageFromMe }}
+                Вы:
+            {{/if}}
+            {{this.preview}}
+        </div>
+        <div class="dialog__unread-badge">
+            {{#if this.unread}}
+                <div class="badge">
+                    {{this.unread}}
+                </div>
+            {{/if}}
+        </div>
+    </a>
 </li>

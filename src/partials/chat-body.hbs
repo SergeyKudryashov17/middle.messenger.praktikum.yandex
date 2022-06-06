@@ -1,3 +1,9 @@
 <div class="chat-body">
-
+    {{#if isEmpty}}
+        <div class="empty-chat-warning">Выберите чат чтобы отправить сообщение</div>
+    {{else}}
+        {{> dialog/dialog-header}}
+        {{> dialog/dialog-body}}
+        {{> dialog/dialog-footer}}
+    {{/if}}
 </div>

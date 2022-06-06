@@ -1,13 +1,26 @@
-<aside class="sidebar">
-    <div class="sidebar__head">
-        <div class="messenger-controls">
-            <a href="" class="link">Профиль ></a>
+<aside class="sidebar {{#if isCollapse}} sidebar_small sidebar_empty {{/if}}">
+    {{#if isFullSize}}
+        <div class="sidebar__head">
+            <div class="messenger-controls">
+                {{> link href="/src/pages/profile.hbs" label="Профиль >"}}
+            </div>
+            <input type="text" class="input search-dialog" placeholder="&#xf002; Поиск">
         </div>
-        <input type="text" class="input search-dialog" placeholder="&#xf002; Поиск">
-    </div>
-    <div class="sidebar__body">
-        <ul class="dialog-list">
-            {{> dialog-item}}
-        </ul>
+    {{/if}}
+
+    <div class="sidebar__body {{#if isCollapse}} sidebar__body_centered {{/if}}">
+        {{#if isFullSize}}
+            <ul class="dialog-list">
+                {{#each dialogList}}
+                    {{> dialog/dialog-item}}
+                {{/each}}
+            </ul>
+        {{/if}}
+
+        {{#if isCollapse}}
+            <a href="{{urlBtnBack}}" class="link button button_main button_circle">
+                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+            </a>
+        {{/if}}
     </div>
 </aside>
