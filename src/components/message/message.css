@@ -27,6 +27,9 @@
 .message__content p {
     margin: 0 0 10px;
 }
+.message__content p:last-child {
+    margin-bottom: 0;
+}
 
 .message__time {
     position: absolute;
