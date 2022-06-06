@@ -1,37 +1,37 @@
 [
   {
     "label": "Почта",
-    "isEditable": false,
+    "isEditable": true,
     "value": "pochta@yandex.ru",
     "typeValue": "email"
   },
   {
     "label": "Логин",
-    "isEditable": false,
+    "isEditable": true,
     "value": "ivanivanov",
     "typeValue": "text"
   },
   {
     "label": "Имя",
-    "isEditable": false,
+    "isEditable": true,
     "value": "Иван",
     "typeValue": "text"
   },
   {
     "label": "Фамилия",
-    "isEditable": false,
+    "isEditable": true,
     "value": "Иванов",
     "typeValue": "text"
   },
   {
     "label": "Имя в чате",
-    "isEditable": false,
+    "isEditable": true,
     "value": "Иван",
     "typeValue": "text"
   },
   {
     "label": "Телефон",
-    "isEditable": false,
+    "isEditable": true,
     "value": "+7 (909) 967 30 30",
     "typeValue": "text"
   }

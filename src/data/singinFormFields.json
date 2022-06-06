@@ -1,11 +1,35 @@
 [
     {
-      "name": "Логин",
+      "label": "Почта",
       "type": "text",
-      "errorLabel": "Неверный логин"
+      "errorText": ""
     },
     {
-      "name": "Пароль",
-      "type": "password"
+      "label": "Логин",
+      "type": "text"
+    },
+    {
+      "label": "Имя",
+      "type": "text",
+      "errorText": ""
+    },
+    {
+      "label": "Фамилия",
+      "type": "text"
+    },
+    {
+      "label": "Телефон",
+      "type": "number",
+      "errorText": ""
+    },
+    {
+      "label": "Пароль",
+      "type": "password",
+      "errorText": ""
+    },
+    {
+      "label": "Пароль (ещё раз)",
+      "type": "password",
+      "errorText": ""
     }
 ]
