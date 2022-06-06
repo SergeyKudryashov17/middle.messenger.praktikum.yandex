@@ -46,12 +46,7 @@ h2 {
 .messenger-body_profile {
     grid-template-columns: 80px 1fr;
 }
-.messenger-body_entrance {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.messenger-body_error-page {
+.messenger-body_default {
     display: flex;
     align-items: center;
     justify-content: center;
