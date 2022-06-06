@@ -1,0 +1,11 @@
+[
+    {
+      "name": "Логин",
+      "type": "text",
+      "errorLabel": "Неверный логин"
+    },
+    {
+      "name": "Пароль",
+      "type": "password"
+    }
+]

@@ -1,0 +1,26 @@
+---
+title: Вход
+bodyType: default
+cssComponents:
+- chat-body
+- button
+- field
+- form
+---
+
+{{!< base}}
+
+<div class="form">
+    <div class="form__title">Вход</div>
+    <div class="form__fields">
+        {{#each loginFormFields}}
+            {{> field}}
+        {{/each}}
+    </div>
+    <div class="form__footer">
+        {{> button className="button button_main button_full-width button_centered" label="Авторизоваться"}}
+        {{> link className="link_centered" href="/" label="Нет аккаунта"}}
+    </div>
+</div>
+
+
