@@ -1,0 +1,29 @@
+.form {
+    display: grid;
+    grid-template-rows: 60px 1fr 65px;
+    width: 340px;
+    min-height: 450px;
+    padding: 50px 30px 30px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
+    border-radius: 12px;
+    margin: 0 auto;
+}
+
+.form__title {
+    font-size: 20px;
+    color: #1E1E1E;
+    font-weight: 500;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.form__fields {
+    margin-bottom: 40px;
+}
+
+.form__footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+

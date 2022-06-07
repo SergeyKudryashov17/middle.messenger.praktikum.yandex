@@ -1,0 +1,17 @@
+<div class="message {{#if this.fromMe}}message_your{{/if}} {{#if this.isRead}}message_read{{/if}}">
+    <div class="message__body {{#if this.isImage}}message__body_file{{/if}}">
+        <div class="message__content">
+            {{# if this.isText}}
+                {{#each this.text}}
+                    <p>{{this}}</p>
+                {{/each}}
+            {{/if}}
+            {{#if this.isImage}}
+                <img src="{{this.src}}" alt="">
+            {{/if}}
+        </div>
+        <div class="message__time">
+            {{this.date}}
+        </div>
+    </div>
+</div>

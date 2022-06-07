@@ -1,0 +1,31 @@
+---
+title: Регистрация
+bodyType: profile
+urlBtnBack: /src/pages/profile.hbs
+cssComponents:
+- modal
+- button
+- field
+- sidebar
+- list
+- avatar
+---
+
+{{!< base}}
+
+{{> sidebar isCollapse=true}}
+
+<div class="profile-content">
+    {{> avatar imageUrl="/static/icon/Union.png"}}
+    <div class="profile-name">Иван</div>
+
+    <ul class="list list_full">
+        {{#each profileDataEdit}}
+            <li class="list__item">
+                {{> profileDataItem data=this}}
+            </li>
+        {{/each}}
+    </ul>
+
+    {{> link href=urlBtnBack className="button button_main button_full-width button_centered" label="Сохранить"}}
+</div>

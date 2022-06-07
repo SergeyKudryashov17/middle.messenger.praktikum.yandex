@@ -1,0 +1,35 @@
+[
+    {
+      "label": "Почта",
+      "type": "text",
+      "errorText": ""
+    },
+    {
+      "label": "Логин",
+      "type": "text"
+    },
+    {
+      "label": "Имя",
+      "type": "text",
+      "errorText": ""
+    },
+    {
+      "label": "Фамилия",
+      "type": "text"
+    },
+    {
+      "label": "Телефон",
+      "type": "number",
+      "errorText": ""
+    },
+    {
+      "label": "Пароль",
+      "type": "password",
+      "errorText": ""
+    },
+    {
+      "label": "Пароль (ещё раз)",
+      "type": "password",
+      "errorText": ""
+    }
+]

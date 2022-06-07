@@ -1,0 +1,14 @@
+{
+  "fields": [
+    {
+      "label": "Логин",
+      "type": "text"
+    }
+  ],
+  "button": [
+    {
+      "label": "Добавить",
+      "className": "button_main button_full-width"
+    }
+  ]
+}

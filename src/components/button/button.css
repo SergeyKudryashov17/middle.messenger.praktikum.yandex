@@ -1,0 +1,35 @@
+.button {
+    margin: 0;
+    padding: 12px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.button_main {
+    background: #3369F3;
+    color: #FFF !important;
+    font-size: 13px;
+}
+
+.button_full-width {
+    width: 100%;
+    max-width: 280px;
+}
+
+.button_centered {
+    display: block;
+    margin: 0 auto;
+}
+
+.button_circle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+    border-radius: 50%;
+    padding: 0;
+}

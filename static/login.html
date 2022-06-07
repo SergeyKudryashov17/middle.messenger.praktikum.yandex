@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Чат</title>
+
+    <link rel="stylesheet" href="/static/lib/font-awesome.min.css">
+    <link rel="stylesheet" href="/src/components/dialog/dialog.css">
+    <link rel="stylesheet" href="/src/components/chat-body/chat-body.css">
+    <link rel="stylesheet" href="/src/components/badge/badge.css">
+    <link rel="stylesheet" href="/src/components/interlocutor/interlocutor.css">
+    <link rel="stylesheet" href="/src/components/message/message.css">
+    <link rel="stylesheet" href="/src/components/modal/modal.css">
+    <link rel="stylesheet" href="/src/components/button/button.css">
+    <link rel="stylesheet" href="/src/components/field/field.css">
+    <link rel="stylesheet" href="/src/components/sidebar/sidebar.css">
+    <link rel="stylesheet" href="/src/components/form/form.css">
+
+    <link rel="stylesheet" href="/src/styles/style.css">
+</head>
+<body>
+<main class="messenger-container">
+    <div class="messenger-body messenger-body_default">
+        <div class="form">
+            <div class="form__title">Вход</div>
+            <div class="form__fields">
+                <div class="field field_error">
+                    <label class="field__label">Логин:</label>
+                    <input type="text" class="field__input" placeholder="">
+                    <small class="field__error field__error-label">Неверный логин</small>
+                </div>
+                <div class="field">
+                    <label class="field__label">Пароль:</label>
+                    <input type="text" class="field__input" placeholder="">
+                </div>
+            </div>
+            <div class="form__footer">
+                <button class="button button_main button_full-width button_centered">Авторизоваться</button>
+                <a href="#" class="link link_centered">Нет аккаунта</a>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

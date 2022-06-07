@@ -1,0 +1,13 @@
+<div class="field">
+    {{#if this.label}}
+        <label class="field__label">{{this.label}}</label>
+    {{/if}}
+    <input
+            type="{{this.type}}"
+            class="field__input field__input_{{this.type}} {{this.addClasses}}"
+            placeholder="{{this.placeholder}}"
+            value="{{this.value}}">
+    {{#if this.errorText}}
+        <small class="field__error field__error-label">{{this.errorText}}</small>
+    {{/if}}
+</div>
