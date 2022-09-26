@@ -9,7 +9,7 @@
 
 .button_main {
     background: #3369F3;
-    color: #FFF !important;
+    color: #FFF;
     font-size: 13px;
 }
 
@@ -24,7 +24,7 @@
 }
 
 .button_circle {
-    display: flex !important;
+    display: flex;
     align-items: center;
     justify-content: center;
     width: 30px;
