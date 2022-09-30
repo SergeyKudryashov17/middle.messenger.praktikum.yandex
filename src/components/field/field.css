@@ -10,25 +10,25 @@
     display: block;
     font-size: 9px;
     line-height: 1;
-    color: #999999;
+    color: var(--secondary-text-color);
 }
 
 .field__label_input-file {
-    font-size: 13px;
+    font-size: var(--base-size-text);
     text-decoration: underline;
     cursor: pointer;
     text-align: center;
     margin-bottom: 40px;
-    color: #3369F3;
+    color: var(--main-color);
 }
 
 .field__input {
     width: 100%;
     border: 0;
-    border-bottom: 1px solid #3369F3;
+    border-bottom: 1px solid var(--main-color);
     padding: 7px 0;
-    font-size: 13px;
-    color: #1E1E1E;
+    font-size: var(--base-size-text);
+    color: var(--base-text-color);
 }
 .field__input:focus {
     outline: 0;
@@ -45,20 +45,20 @@
 }
 
 .field__input_password::-webkit-input-placeholder {
-    color: #999999;
-    font-size: 11px;
+    color: var(--secondary-text-color);
+    font-size: var(--base-size-text);
 }
 .field__input_password::-moz-placeholder          {
-    color: #999999;
-    font-size: 11px;
+    color: var(--secondary-text-color);
+    font-size: var(--base-size-text);
 }
 .field__input_password:-moz-placeholder           {
-    color: #999999;
-    font-size: 11px;
+    color: var(--secondary-text-color);
+    font-size: var(--base-size-text);
 }
 .field__input_password:-ms-input-placeholder      {
-    color: #999999;
-    font-size: 11px;
+    color: var(--secondary-text-color);
+    font-size: var(--base-size-text);
 }
 
 .field__input_number {
@@ -73,7 +73,7 @@
     display: none;
     font-size: 8px;
     line-height: 1;
-    color: #FF2F2F;
+    color: var(--danger-color);
     margin-top: 7px;
 }
 

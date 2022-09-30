@@ -5,14 +5,14 @@
     grid-template-areas: 'photo title title'
                         'photo preview unread';
     grid-gap: 5px 10px;
-    border-top: 1px solid #EAEAEA;
+    border-top: var(--base-border);
     padding: 12px 10px;
     transition: background-color .2s;
     text-decoration: none;
-    color: #1E1E1E;
+    color: var(--base-text-color);
 }
 .dialog:last-child {
-    border-bottom: 1px solid #EAEAEA;
+    border-bottom: var(--base-border);
 }
 .dialog:hover {
     background-color: #E4EDFD;
@@ -28,28 +28,28 @@
 
 .dialog__interlocutor-name {
     grid-area: name;
-    font-weight: 600;
-    font-size: 13px;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--base-size-text);
 }
 
 .dialog__interlocutor-photo {
     grid-area: photo;
     width: 55px;
     height: 55px;
-    background: #EFEFEF;
+    background: var(--bg-color);
     border-radius: 50%;
 }
 
 .dialog__message-preview {
     grid-area: preview;
-    color: #999999;
+    color: var(--secondary-text-color);
     font-size: 12px;
 }
 
 .dialog__time {
     grid-area: time;
     font-size: 9px;
-    color: #999999;
+    color: var(--secondary-text-color);
 }
 
 .dialog__unread-badge {
