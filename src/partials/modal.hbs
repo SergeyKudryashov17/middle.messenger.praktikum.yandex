@@ -1,12 +1,16 @@
-<div class="modal modal_hide">
-    <div class="modal__body">
+<div class="modal modal_hide" id="{{this.ID}}">
+    <div class="modal__window">
         <div class="modal__title">{{this.title}}</div>
-        <div class="form">
-            <div class="field">
-                <label class="field__label">Логин</label>
-                <input type="text" class="field__input">
+        <div class="modal__body">
+            <div class="form">
+                {{> field label=this.fieldLabel
+                        type=this.fieldType
+                        labelClass=this.fieldLabelClass
+                        inputID=this.fieldInputID}}
             </div>
         </div>
-        <button class="button button_main button_full-width">Добавить</button>
+        <div class="modal__footer">
+            {{> button className="button_main button_full-width button_center-poss" label=this.btnLabel}}
+        </div>
     </div>
 </div>
