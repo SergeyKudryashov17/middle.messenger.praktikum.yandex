@@ -19,5 +19,10 @@
         {{{body}}}
     </div>
 </main>
+
+{{#each scripts}}
+    <script type="{{this.type}}" src="{{this.url}}"></script>
+{{/each}}
+
 </body>
 </html>
