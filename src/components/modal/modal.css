@@ -14,11 +14,15 @@
     display: none;
 }
 
-.modal__body {
+.modal__window {
     min-width: 340px;
     background: #fff;
     border-radius: var(--base-border-radius);
     padding: 50px 30px 40px;
+}
+
+.modal__body {
+    margin-bottom: 30px;
 }
 
 .modal__title {

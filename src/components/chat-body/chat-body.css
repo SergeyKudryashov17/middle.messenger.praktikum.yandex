@@ -1,7 +1,7 @@
 .chat-body {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 60px 1fr 55px;
+    grid-template-rows: 60px 1fr 60px;
     padding: 10px 20px;
 }
 
@@ -37,5 +37,4 @@
     align-items: center;
     border-top: var(--base-border);
     margin-top: 10px;
-    padding-top: 10px;
 }
