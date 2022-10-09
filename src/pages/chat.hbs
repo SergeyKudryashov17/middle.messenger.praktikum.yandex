@@ -10,8 +10,10 @@ cssComponents:
   - modal
   - button
   - field
-
-modalTitle: Добавить пользователя
+  - dropdownMenu
+scripts: [
+  { type: 'module', url: '/src/scripts/main.js' }
+]
 ---
 
 {{!< base}}
@@ -19,16 +21,28 @@ modalTitle: Добавить пользователя
 {{> sidebar isFullSize=true}}
 {{> chat-body isEmpty=false}}
 
-<div class="modal modal_hide">
-    <div class="modal__body">
-        <div class="modal__title">{{modalTitle}}</div>
-        <div class="form">
-            {{#each formAddUser.fields}}
-                {{> field label="Логин" type="text"}}
-            {{/each}}
-        </div>
-        {{#each formAddUser.buttons}}
-            {{> button className="button_main button_full-width" label="Добавить"}}
-        {{/each}}
-    </div>
-</div>
+{{> modal
+        title="Добавить пользователя"
+        ID="modal-invite-member"
+        fieldLabel="Логин"
+        fieldType="text"
+        btnLabel="Добавить"
+}}
+
+{{> modal
+        title="Удалить пользователя"
+        ID="modal-delete-member"
+        fieldLabel="Логин"
+        fieldType="text"
+        btnLabel="Удалить"
+}}
+
+{{> modal
+        title="Загрузить фото или видео"
+        ID="modal-upload-img"
+        fieldLabel="Выберите файл на компьютере"
+        fieldType="file"
+        fieldLabelClass="field__label_input-file"
+        fieldInputID="input-image"
+        btnLabel="Загрузить"
+}}
