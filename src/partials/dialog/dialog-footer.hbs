@@ -1,5 +1,22 @@
 <div class="chat-body__footer">
-    <i class="fa fa-paperclip fa-flip-vertical add-attached-file" aria-hidden="true"></i>
-    <div class="input-message" contenteditable="true"></div>
+    <div class="add-attached-file">
+        <i class="fa fa-paperclip fa-flip-vertical" aria-hidden="true"></i>
+    </div>
+    <div class="dropdownMenu" id="attached-menu">
+        <div class="dropdownMenu__item open-modal-upload-image">
+            <img class="dropdownMenu__icon-item" src="/static/icon/attach-image.svg" alt="">
+            Фото или видео
+        </div>
+        <div class="dropdownMenu__item">
+            <img class="dropdownMenu__icon-item" src="/static/icon/attach-file.svg" alt="">
+            Файл
+        </div>
+        <div class="dropdownMenu__item">
+            <img class="dropdownMenu__icon-item" src="/static/icon/attach-location.svg" alt="">
+            Локация
+        </div>
+    </div>
+
+    <input type="text" name="message" class="input-message">
     <i class="fa fa-arrow-right button button_circle button_main" aria-hidden="true"></i>
 </div>

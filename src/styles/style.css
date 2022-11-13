@@ -137,6 +137,7 @@ h2 {
     background: var(--bg-color);
     border-radius: 25px;
     padding: 10px 15px;
+    border: 1px solif var(--bg-color);
 }
 .input-message:focus {
     outline: 0;
