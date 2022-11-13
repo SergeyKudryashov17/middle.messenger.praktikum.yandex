@@ -1,0 +1,31 @@
+.dropdownMenu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: -1;
+    background: #FFFFFF;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
+    visibility: hidden;
+}
+
+.dropdownMenu_show {
+    visibility: visible;
+    z-index: 2;
+}
+
+.dropdownMenu__item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+.dropdownMenu__item:last-child {
+    margin-bottom: 0;
+}
+
+.dropdownMenu__icon-item {
+    flex-shrink: 0;
+    margin-right: 15px;
+}
