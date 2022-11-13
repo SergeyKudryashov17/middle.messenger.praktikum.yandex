@@ -3,5 +3,18 @@
         <div class="interlocutor__photo"></div>
         <div class="interlocutor__name">{{dialogData.interlocutorName}}</div>
     </div>
-    <i class="fa fa-ellipsis-v setting-dialog" aria-hidden="true"></i>
+    <div class="setting-dialog">
+        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+    </div>
+
+    <div class="dropdownMenu" id="setting-dialog-menu">
+        <div class="dropdownMenu__item open-invite-modal">
+            <img class="dropdownMenu__icon-item" src="/static/icon/add-icon.svg" alt="">
+            Добавить пользователя
+        </div>
+        <div class="dropdownMenu__item open-delete-modal">
+            <img class="dropdownMenu__icon-item" src="/static/icon/remove-icon.svg" alt="">
+            Удалить пользователя
+        </div>
+    </div>
 </div>
