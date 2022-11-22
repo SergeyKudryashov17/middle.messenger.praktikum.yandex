@@ -5,7 +5,7 @@ import 'link.css';
 export default class Link extends Block {
     constructor(props) {
         // Создаём враппер дом-элемент button
-        super("button", {...props});
+        super("a", {...props});
     }
 
     render() {
