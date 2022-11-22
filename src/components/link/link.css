@@ -1,0 +1,8 @@
+.link {
+    color: var(--secondary-text-color);
+    text-decoration: none;
+}
+.link_centered {
+    display: block;
+    text-align: center;
+}
