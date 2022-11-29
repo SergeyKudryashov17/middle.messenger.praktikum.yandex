@@ -5,3 +5,7 @@
 .field:first-child {
     margin-top: 0;
 }
+
+.field_right {
+    text-align: right;
+}

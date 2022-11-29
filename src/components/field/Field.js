@@ -17,7 +17,7 @@ export default class Field extends Block {
         props.inputComponent = new Input({
             type: props.inputType,
             ID: props.inputID,
-            classes: props.inputClass,
+            className: props.inputClass,
             placeholder: props.inputPlacecholder,
             value: props.inputValue,
             name: props.inputName,
@@ -27,6 +27,7 @@ export default class Field extends Block {
 
         props.errorTextComponent = (props.errorText !== undefined)
             ? new ErrorText({
+                className: props.className,
                 text: props.errorText
             }) : '';
 
@@ -35,7 +36,7 @@ export default class Field extends Block {
 
     render() {
         return `
-            <div class="field">
+            <div class="field ${this.props.fieldClass}">
                 {{{ labelComponent }}}
                 {{{ inputComponent }}}
                 {{{ errorTextComponent }}}
