@@ -44,3 +44,30 @@
 .input_number::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
+
+.input_search-dialog {
+    display: block;
+    width: 100%;
+    max-width: 280px;
+    height: 32px;
+    padding: 0 10px;
+    background: var(--bg-color);
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    font-family: FontAwesome;
+    font-style: normal;
+    margin-top: 20px;
+    transition: all .2s;
+}
+
+.input_message {
+    background: var(--bg-color);
+    border-radius: 25px;
+    padding: 10px 15px;
+    border: 1px solif var(--bg-color);
+    width: auto;
+}
+.input_message:focus {
+    outline: 0;
+}
