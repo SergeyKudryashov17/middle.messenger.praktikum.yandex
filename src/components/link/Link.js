@@ -1,6 +1,7 @@
 import Block from "../../core/Block";
 
-import 'link.css';
+import './link.css';
+import '../button/button.css';
 
 export default class Link extends Block {
     constructor(props) {
@@ -9,7 +10,7 @@ export default class Link extends Block {
     }
 
     render() {
-        return '<a href="{{href}}" class="link {{className}}">{{label}}</a>';
+        return `<a href="{{href}}" class="link {{className}}">${this.props.label}</a>`;
     }
 }
 

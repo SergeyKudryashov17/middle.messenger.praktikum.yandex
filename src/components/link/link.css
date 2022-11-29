@@ -1,8 +1,19 @@
 .link {
-    color: var(--secondary-text-color);
+    color: var(--main-color);
     text-decoration: none;
+}
+.link_white {
+    color: #fff;
 }
 .link_centered {
     display: block;
     text-align: center;
+}
+.link_danger {
+    color: var(--danger-color);
+}
+
+
+.link:hover {
+    text-decoration: underline;
 }
