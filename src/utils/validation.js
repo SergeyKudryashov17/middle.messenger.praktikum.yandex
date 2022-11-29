@@ -7,7 +7,7 @@ const validateTypes = {
     Message: 'message'
 };
 
-export function validate(type, value) {
+export function validate(type = '', value) {
     if (value.length === 0) {
         return 'Поле не может быть пустым';
     }
@@ -102,7 +102,8 @@ export function resetValidateField(fieldComponent) {
 
 export function validateForm(listFields) {
    return listFields.reduce((flag, component) => {
-       let status = handleValidateField(component);
+       const errorTextNode = component.children.errorTextComponent.getContent();
+       let status = (errorTextNode.textContent !== '') ? false : handleValidateField(component);
        return flag && status;
    }, true);
 }
