@@ -1,0 +1,61 @@
+.dialog {
+    display: grid;
+    grid-template-columns: 55px 1fr 25px;
+    grid-template-rows: 18px 1fr;
+    grid-template-areas: 'photo title title'
+                        'photo preview unread';
+    grid-gap: 5px 10px;
+    border-top: var(--base-border);
+    padding: 12px 10px;
+    transition: background-color .2s;
+    text-decoration: none;
+    color: var(--base-text-color);
+}
+.dialog:last-child {
+    border-bottom: var(--base-border);
+}
+.dialog:hover {
+    background-color: #E4EDFD;
+    cursor: pointer;
+}
+
+.dialog__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    grid-area: title;
+}
+
+.dialog__interlocutor-name {
+    grid-area: name;
+    font-weight: var(--font-weight-bold);
+    font-size: var(--base-size-text);
+}
+
+.dialog__interlocutor-photo {
+    grid-area: photo;
+    width: 55px;
+    height: 55px;
+    background: var(--bg-color);
+    border-radius: 50%;
+}
+
+.dialog__message-preview {
+    grid-area: preview;
+    color: var(--secondary-text-color);
+    font-size: 12px;
+}
+
+.dialog__time {
+    grid-area: time;
+    font-size: 9px;
+    color: var(--secondary-text-color);
+}
+
+.dialog__unread-badge {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    grid-area: unread;
+    margin-bottom: 5px;
+}
