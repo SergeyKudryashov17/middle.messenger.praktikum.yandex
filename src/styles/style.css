@@ -85,21 +85,7 @@ h2 {
     color: var(--secondary-text-color);
 }
 
-.search-dialog {
-    display: block;
-    width: 100%;
-    max-width: 280px;
-    height: 32px;
-    padding: 0 10px;
-    background: var(--bg-color);
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    font-family: FontAwesome;
-    font-style: normal;
-    margin-top: 20px;
-    transition: all .2s;
-}
+
 .setting-dialog:hover {
     color: var(--main-color);
 }
@@ -124,14 +110,7 @@ h2 {
     overflow-y: auto;
 }
 
-.link {
-    color: var(--secondary-text-color);
-    text-decoration: none;
-}
-.link_centered {
-    display: block;
-    text-align: center;
-}
+
 
 .input-message {
     background: var(--bg-color);
@@ -181,17 +160,6 @@ h2 {
     font-weight: var(--font-weight-bold);
     text-align: center;
     margin: 20px 0 60px;
-}
-
-.link {
-    color: var(--main-color);
-    text-decoration: none;
-}
-.link:hover {
-    text-decoration: underline;
-}
-.link_danger {
-    color: var(--danger-color);
 }
 
 .load-file-name {
