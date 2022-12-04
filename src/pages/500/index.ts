@@ -1,0 +1,18 @@
+import Link from "../../components/link/Link";
+import renderDOM from '../../core/renderDOM';
+import ErrorPage from "../../components/errorPage/ErrorPage";
+
+const linkBackChats: Link = new Link({
+    href: '#',
+    className: '',
+    label: 'Назад к чатам'
+});
+
+const pageServerError: ErrorPage = new ErrorPage({
+    title: '500',
+    typeBody: 'default',
+    caption: 'Мы уже фиксим',
+    link: linkBackChats
+});
+
+renderDOM("#app", pageServerError);
