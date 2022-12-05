@@ -1,10 +1,13 @@
 import Block from '../../core/Block';
 import Sidebar from "../../components/sidebar/Sidebar";
 
+import { getListDialogs } from "../../models/dialogsData";
+
 export default class ListDialogsPage extends Block {
     constructor(props: any = {}) {
         props.sidebar = new Sidebar({
-            isFullSize: true
+            isFullSize: true,
+            dialogList: getListDialogs()
         });
 
         super("div", {...props});

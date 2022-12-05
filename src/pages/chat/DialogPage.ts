@@ -6,6 +6,7 @@ import DropdownMenu from "../../components/dropdownMenu/DropdownMenu";
 import Input from '../../components/input/Input';
 import MessagesGroup from '../../components/messages-group/MessagesGroup'
 import { validate } from '../../utils/validation';
+import { getListDialogs } from "../../models/dialogsData";
 
 export default class DialogPage extends Block {
     constructor(props: any = {}) {
@@ -17,7 +18,8 @@ export default class DialogPage extends Block {
         });
 
         props.sidebar = new Sidebar({
-            isFullSize: true
+            isFullSize: true,
+            dialogList: getListDialogs()
         });
 
         props.interlocutor = new Interlocutor({
