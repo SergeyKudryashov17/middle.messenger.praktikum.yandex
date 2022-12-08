@@ -1,7 +1,7 @@
 import Field from "../../components/field/Field";
 import Link from "../../components/link/Link";
 import renderDOM from '../../core/renderDOM';
-import { handleValidateField, resetValidateField, validateForm, checkPasswordMatch } from '../../utils/validation.js';
+import { handleValidateField, resetValidateField, validateForm, checkPasswordMatch } from '../../utils/validation';
 import SinginPage from "./SinginPage";
 import Block from "../../core/Block";
 

@@ -1,4 +1,4 @@
-import renderDOM from '../../core/renderDOM.js';
+import renderDOM from '../../core/renderDOM';
 import EditProfilePage from "./EditProfilePage";
 
 const editProfilePage = new EditProfilePage({

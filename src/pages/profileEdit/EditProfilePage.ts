@@ -1,4 +1,4 @@
-import Block from '../../core/Block.js';
+import Block from '../../core/Block';
 import Button from '../../components/button/Button';
 import Avatar from '../../components/avatar/Avatar';
 import ProfileDataItem from '../../components/profileDataItem/ProfileDataItem';

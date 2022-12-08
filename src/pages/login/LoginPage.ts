@@ -1,4 +1,4 @@
-import Block from '../../core/Block.js';
+import Block from '../../core/Block';
 
 export default class LoginPage extends Block {
     private typeBody: string = '';
