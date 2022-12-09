@@ -24,9 +24,9 @@ export default class Sidebar extends Block {
             label: '<i class="fa fa-arrow-left" aria-hidden="true"></i>'
         });
 
-        props.dialogListComponent = new DialogList({
+        props.dialogListComponent = (props.dialogList) ? new DialogList({
             dialogsData: props.dialogList
-        });
+        }) : '';
 
         super("aside", {...props});
     }
