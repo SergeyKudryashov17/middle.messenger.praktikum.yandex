@@ -1,4 +1,3 @@
-import renderDOM from '../../core/renderDOM';
 import DialogPage from "./DialogPage";
 
 import imageUrl from '../../static/img/image.png';
@@ -35,6 +34,4 @@ export const listDialogsPage = new DialogPage({
         }
     ]
 });
-
-renderDOM("#app", listDialogsPage);
 

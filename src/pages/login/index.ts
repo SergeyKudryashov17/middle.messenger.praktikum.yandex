@@ -1,6 +1,5 @@
 import Field from "../../components/field/Field";
 import Link from "../../components/link/Link";
-import renderDOM from '../../core/renderDOM';
 import LoginPage from "./LoginPage";
 import { handleValidateField, resetValidateField, validateForm } from "../../utils/validation";
 import Button from "../../components/button/Button";
@@ -66,5 +65,3 @@ export const loginPage: LoginPage = new LoginPage({
     linkLogin: btnLogIn,
     linkRegistration: linkRegistration
 });
-
-renderDOM("#app", loginPage);

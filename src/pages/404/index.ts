@@ -1,5 +1,4 @@
 import Link from "../../components/link/Link";
-import renderDOM from "../../core/renderDOM";
 import ErrorPage from "../../components/errorPage/ErrorPage";
 
 const linkBackChats: Link = new Link({
@@ -17,5 +16,3 @@ export const pageNotFound: ErrorPage = new ErrorPage({
     caption: "Не туда попали",
     link: linkBackChats,
 });
-
-renderDOM("#app", pageNotFound);
