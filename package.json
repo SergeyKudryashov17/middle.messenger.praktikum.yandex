@@ -4,9 +4,9 @@
   "description": "### Откройте pull request в ветку main из ветки, где вы разрабатывали проект, и добавьте ссылку на этот pr в README.md в ветке main.  ### ВАЖНО: pull request должен называться “Sprint i” (i — номер спринта).",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "parcel src/pages/chat/index.html --no-cache",
-    "build": "parcel build src/pages/*/*.html",
-    "start": "node src/index.js",
+    "dev": "parcel src/index.html --no-cache",
+    "build": "parcel build src/index.html",
+    "start": "node src/server.js",
     "eslint": "eslint"
   },
   "repository": {

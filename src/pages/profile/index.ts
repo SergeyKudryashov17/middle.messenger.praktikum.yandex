@@ -1,10 +1,12 @@
 import renderDOM from '../../core/renderDOM';
 import ProfilePage from "./ProfilePage";
 
-const profilePage: ProfilePage = new ProfilePage({
+import imageUrl from '../../static/icon/Union.png';
+
+export const profilePage: ProfilePage = new ProfilePage({
     typeBody: 'profile',
     userName: 'Иван',
-    imageUrl: '/static/icon/Union.png'
+    imageUrl: imageUrl
 });
 
 renderDOM("#app", profilePage);

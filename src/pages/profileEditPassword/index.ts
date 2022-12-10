@@ -1,11 +1,13 @@
 import renderDOM from '../../core/renderDOM';
 import EditPasswordPage from "./editPasswordPage";
 
-const editProfilePage = new EditPasswordPage({
+import imageUrl from "../../static/icon/Union.png";
+
+export const editProfilePasswordPage = new EditPasswordPage({
     typeBody: 'profile',
     userName: 'Иван',
-    imageUrl: '/static/icon/Union.png'
+    imageUrl: imageUrl
 });
 
-renderDOM("#app", editProfilePage);
+renderDOM("#app", editProfilePasswordPage);
 

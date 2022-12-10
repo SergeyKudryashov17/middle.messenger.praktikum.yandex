@@ -11,7 +11,7 @@ export default class Message extends Block {
         const text: string = (this.props.isText)
             ? this.props.text?.reduce((content, text) => content + `<p>${text}</p>`, '')
             : '';
-        const image: string = (this.props.src) ? this.props.src : '';
+        const image: string = (this.props.src) ? `<img src="${this.props.src}">` : '';
         const isMyMessage: Boolean = Boolean(this.props.fromMe);
         const isRead: Boolean = Boolean(this.props.isRead);
         const isImage: Boolean = Boolean(image);

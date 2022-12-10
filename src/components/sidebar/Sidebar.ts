@@ -14,14 +14,20 @@ export default class Sidebar extends Block {
         });
 
         props.profileLink = new Link({
-            href: '/src/pages/profile/index.html',
-            label: 'Профиль >'
+            href: '#',
+            label: 'Профиль >',
+            dataset: {
+                page: 'pageProfile'
+            }
         });
 
         props.backLink = new Link({
             href: '#',
             className: 'button button_main button_circle link_white',
-            label: '<i class="fa fa-arrow-left" aria-hidden="true"></i>'
+            label: '<i class="fa fa-arrow-left" aria-hidden="true"></i>',
+            dataset: {
+                page: 'chatStart'
+            }
         });
 
         props.dialogListComponent = (props.dialogList) ? new DialogList({

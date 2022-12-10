@@ -8,6 +8,12 @@ import MessagesGroup from '../../components/messages-group/MessagesGroup'
 import { validate } from '../../utils/validation';
 import { getListDialogs } from "../../models/dialogsData";
 
+import addIconUrl from '../../static/icon/add-icon.svg';
+import removeIconUrl from '../../static/icon/remove-icon.svg';
+import attachImgIconUrl from '../../static/icon/attach-image.svg';
+import attachFileUrl from '../../static/icon/attach-file.svg';
+import attachLocationUrl from '../../static/icon/attach-location.svg';
+
 export default class DialogPage extends Block {
     constructor(props: any = {}) {
         props.messagesGroupsLabels = '';
@@ -32,12 +38,12 @@ export default class DialogPage extends Block {
                 {
                     label: "Добавить пользователя",
                     className: "open-invite-modal",
-                    icon: "/static/icon/add-icon.svg"
+                    icon: addIconUrl
                 },
                 {
                     label: "Удалить пользователя",
                     className: "open-delete-modal",
-                    icon: "/static/icon/remove-icon.svg"
+                    icon: removeIconUrl
                 }
             ]
         });
@@ -48,17 +54,17 @@ export default class DialogPage extends Block {
                 {
                     label: "Фото или видео",
                     className: "open-modal-upload-image",
-                    icon: "/static/icon/attach-image.svg"
+                    icon: attachImgIconUrl
                 },
                 {
                     label: "Файл",
                     className: "open-modal-upload-image",
-                    icon: "/static/icon/attach-file.svg"
+                    icon: attachFileUrl
                 },
                 {
                     label: "Локация",
                     className: "open-modal-upload-image",
-                    icon: "/static/icon/attach-location.svg"
+                    icon: attachLocationUrl
                 }
             ]
         });
@@ -86,8 +92,8 @@ export default class DialogPage extends Block {
         });
 
         props.sendMessageBtn = new Button({
-            type: 'icon',
-            className: 'fa-arrow-right button button_circle button_main',
+            className: 'button button_circle button_main',
+            label: '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
             events: {
                 click: () => {
                     let messageText: string = props.inputMessage.getContent().value;

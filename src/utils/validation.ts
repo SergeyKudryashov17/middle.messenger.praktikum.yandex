@@ -82,7 +82,7 @@ export function validate(type: string = '', value: string): string {
 
 export function handleValidateField(fieldComponent: Block): boolean {
     const inputValue = (fieldComponent.children.inputComponent.getContent() as HTMLInputElement).value;
-    const validateRule = fieldComponent.children.inputComponent.getContent().getAttribute('validateRule');
+    const validateRule = fieldComponent.children.inputComponent.getContent().getAttribute('validateRule') || '';
 
     let error = validate(validateRule, inputValue);
     const errorComponent = fieldComponent.children.errorTextComponent;

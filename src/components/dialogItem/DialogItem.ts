@@ -18,7 +18,7 @@ export default class DialogItem extends Block {
 
         return `
             <li class="dialog-list__item">
-                <a class="dialog" href="/src/pages/chat/index.html">
+                <a class="dialog" href="#" data-page="chat">
                     <div class="dialog__interlocutor-photo"></div>
                     <div class="dialog__title">
                         <div class="dialog__interlocutor-name">${this.props.name}</div>

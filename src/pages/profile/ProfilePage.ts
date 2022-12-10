@@ -55,18 +55,27 @@ export default class ProfilePage extends Block {
 
         props.linkChangeData = new Link({
             label: "Изменить данные",
-            href: "/src/pages/profileEdit/index.html"
+            href: "#",
+            dataset: {
+                page: 'pageProfileEdit'
+            }
         });
 
         props.linkChangePassword = new Link({
             label: "Изменить пароль",
-            href: "/src/pages/profileEditPassword/index.html"
+            href: "#",
+            dataset: {
+                page: 'pageEditPassword'
+            }
         });
 
         props.linkLogout = new Link({
             label: "Выйти",
-            href: "/src/pages/login/index.html",
-            className: "link_danger"
+            href: "#",
+            className: "link_danger",
+            dataset: {
+                page: 'pageLogin'
+            }
         });
 
         super("div", {...props});

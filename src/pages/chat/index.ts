@@ -1,7 +1,9 @@
 import renderDOM from '../../core/renderDOM';
 import DialogPage from "./DialogPage";
 
-const listDialogsPage = new DialogPage({
+import imageUrl from '../../static/img/image.png';
+
+export const listDialogsPage = new DialogPage({
     emptyChatBody: true,
     messagesGroups: [
         {
@@ -18,7 +20,7 @@ const listDialogsPage = new DialogPage({
                 },
                 {
                     "isImage": true,
-                    "src": "/static/img/image.png",
+                    "src": imageUrl,
                     "date": "11:56",
                     "fromMe": false
                 },

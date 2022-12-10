@@ -4,6 +4,7 @@ import renderDOM from '../../core/renderDOM';
 import { handleValidateField, resetValidateField, validateForm, checkPasswordMatch } from '../../utils/validation';
 import SinginPage from "./SinginPage";
 import Block from "../../core/Block";
+import Button from "../../components/button/Button";
 
 
 const fieldEmail: Field  = new Field({
@@ -103,9 +104,8 @@ let fields = [
     fieldPasswordRepeat
 ];
 
-const linkLogIn = new Link({
-    href: '/src/pages/chatStart/index.html',
-    className: 'button button_main button_full-width button_centered',
+const btnLogIn: Link = new Button({
+    className: 'button_main button_full-width button_centered',
     label: 'Авторизоваться',
     events: {
         click: (event: Event) => {
@@ -126,12 +126,15 @@ const linkLogIn = new Link({
     }
 });
 const linkToCome: Link = new Link({
-    href: '/src/pages/login/index.html',
+    href: '#',
     className: 'link_centered',
-    label: 'Войти'
+    label: 'Войти',
+    dataset: {
+        page: 'pageLogin'
+    }
 });
 
-const singInPage: SinginPage = new SinginPage({
+export const singInPage: SinginPage = new SinginPage({
     title: 'Регистрация',
     typeBody: 'default',
     fieldEmail: fieldEmail,
@@ -142,7 +145,7 @@ const singInPage: SinginPage = new SinginPage({
     fieldPassword: fieldPassword,
     fieldPasswordRepeat: fieldPasswordRepeat,
     linkToCome: linkToCome,
-    linkLogin: linkLogIn
+    linkLogin: btnLogIn
 });
 
 renderDOM("#app", singInPage);

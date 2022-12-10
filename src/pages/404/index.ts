@@ -6,9 +6,12 @@ const linkBackChats: Link = new Link({
     href: "#",
     className: "",
     label: "Назад к чатам",
+    dataset: {
+        page: 'chatStart'
+    }
 });
 
-const pageNotFound: ErrorPage = new ErrorPage({
+export const pageNotFound: ErrorPage = new ErrorPage({
     title: "404",
     typeBody: "default",
     caption: "Не туда попали",

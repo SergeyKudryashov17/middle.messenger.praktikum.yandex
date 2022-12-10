@@ -5,10 +5,13 @@ import ErrorPage from "../../components/errorPage/ErrorPage";
 const linkBackChats: Link = new Link({
     href: '#',
     className: '',
-    label: 'Назад к чатам'
+    label: 'Назад к чатам',
+    dataset: {
+        page: 'chatStart'
+    }
 });
 
-const pageServerError: ErrorPage = new ErrorPage({
+export const pageServerError: ErrorPage = new ErrorPage({
     title: '500',
     typeBody: 'default',
     caption: 'Мы уже фиксим',
