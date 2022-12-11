@@ -71,6 +71,8 @@ function renderPage(pageLabel: string): void {
   document.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', (event) => {
       event.preventDefault();
+      if (!link.dataset.page) return;
+
       const label: string = link.dataset.page;
       selectPage.value = label;
       renderPage(label);
