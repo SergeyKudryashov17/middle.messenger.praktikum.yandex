@@ -22,6 +22,7 @@ export default class EditPasswordPage extends Block {
             isEditable: true,
             value: "oldTestPassword123",
             typeValue: "password",
+            inputName: "password-old",
             validateRule: "password",
             fieldClass: 'field_right',
             eventsField: {
@@ -34,6 +35,7 @@ export default class EditPasswordPage extends Block {
             isEditable: true,
             value: "newTestPassword123",
             typeValue: "password",
+            inputName: "password-new",
             validateRule: "password",
             fieldClass: 'field_right',
             eventsField: {
@@ -46,6 +48,7 @@ export default class EditPasswordPage extends Block {
             isEditable: true,
             value: "newTestPassword123",
             typeValue: "password",
+            inputName: "password-new-repeat",
             validateRule: "password",
             fieldClass: 'field_right',
             eventsField: {

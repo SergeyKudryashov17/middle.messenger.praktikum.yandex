@@ -31,7 +31,7 @@ const fieldLogin: Field = new Field({
 const fieldFName: Field  = new Field({
     labelText: 'Имя',
     inputType: 'text',
-    inputName: 'FName',
+    inputName: 'first_name',
     inputValidateRule: 'name',
     errorText: '',
     eventsInput: {
@@ -42,7 +42,7 @@ const fieldFName: Field  = new Field({
 const fieldSName: Field  = new Field({
     labelText: 'Фамилия',
     inputType: 'text',
-    inputName: 'SName',
+    inputName: 'second_name',
     inputValidateRule: 'name',
     errorText: '',
     eventsInput: {
@@ -75,6 +75,7 @@ const fieldPassword: Field = new Field({
 const fieldPasswordRepeat: Field = new Field({
     labelText: 'Пароль (ещё раз)',
     inputType: 'password',
+    inputName: 'password-repeat',
     inputValidateRule: 'password',
     errorText: '',
     eventsInput: {

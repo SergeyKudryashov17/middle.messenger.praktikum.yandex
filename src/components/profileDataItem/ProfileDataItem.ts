@@ -8,6 +8,7 @@ export default class ProfileDataItem extends Block {
         if (props.isEditable) {
             props.field = new Field({
                 fieldClass: props.fieldClass,
+                inputName: props.inputName,
                 inputType: props.typeValue,
                 inputValue: props.value,
                 inputClass: 'input_simple input_right',

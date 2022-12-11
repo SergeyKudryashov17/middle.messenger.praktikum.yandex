@@ -22,6 +22,7 @@ export default class EditProfilePage extends Block {
             isEditable: true,
             value: "pochta@yandex.ru",
             typeValue: "email",
+            inputName: 'email',
             validateRule: 'email',
             fieldClass: 'field_right',
             eventsField: {
@@ -34,6 +35,7 @@ export default class EditProfilePage extends Block {
             isEditable: true,
             value: "ivanivanov",
             typeValue: "text",
+            inputName: 'login',
             validateRule: 'login',
             fieldClass: 'field_right',
             eventsField: {
@@ -46,6 +48,7 @@ export default class EditProfilePage extends Block {
             isEditable: true,
             value: "Иван",
             typeValue: "text",
+            inputName: 'first_name',
             validateRule: 'name',
             fieldClass: 'field_right',
             eventsField: {
@@ -58,6 +61,7 @@ export default class EditProfilePage extends Block {
             isEditable: true,
             value: "Иванов",
             typeValue: "text",
+            inputName: 'second_name',
             validateRule: 'name',
             fieldClass: 'field_right',
             eventsField: {
@@ -70,6 +74,7 @@ export default class EditProfilePage extends Block {
             isEditable: true,
             value: "Иван",
             typeValue: "text",
+            inputName: 'chat-name',
             validateRule: 'name',
             fieldClass: 'field_right',
             eventsField: {
@@ -82,6 +87,7 @@ export default class EditProfilePage extends Block {
             isEditable: true,
             value: "+79099673030",
             typeValue: "text",
+            inputName: 'phone',
             validateRule: 'phone',
             fieldClass: 'field_right',
             eventsField: {
