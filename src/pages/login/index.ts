@@ -8,6 +8,7 @@ const fieldLogin: Field = new Field({
     labelText: 'Логин',
     inputName: 'login',
     inputType: 'text',
+    validateRule: 'login',
     errorText: '',
     eventsInput: {
         input: () => resetValidateField(fieldLogin),
@@ -18,6 +19,7 @@ const fieldPassword: Field = new Field({
     labelText: 'Пароль',
     inputName: 'password',
     inputType: 'password',
+    validateRule: 'password',
     errorText: '',
     eventsInput: {
         input: () => resetValidateField(fieldPassword),
@@ -31,12 +33,12 @@ const btnLogIn: Link = new Button({
     className: 'button_main button_full-width button_centered',
     label: 'Авторизоваться',
     events: {
-        click: (event) => {
+        click: (event: Event) => {
             event.preventDefault();
 
             let status: boolean = validateForm(fields);
             if (status) {
-                let formData = {};
+                let formData: Record<string, string> = {};
                 fields.map(fieldComponent => {
                     let fieldName: string = (fieldComponent.children.inputComponent.getContent() as HTMLInputElement).name;
                     let fieldValue: string = (fieldComponent.children.inputComponent.getContent() as HTMLInputElement).value;
