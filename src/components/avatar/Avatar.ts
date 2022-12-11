@@ -10,7 +10,7 @@ export default class Avatar extends Block {
     render(): string {
         return `
             <div class="avatar avatar_big avatar_centered avatar_profile">
-                <img src="${this.props.url}" alt="" class="">
+                <img src="${this.props.url}" alt="avatar" class="">
             </div>
         `;
     }

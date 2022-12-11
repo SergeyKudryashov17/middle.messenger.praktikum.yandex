@@ -10,9 +10,9 @@ export default class DropdownMenu extends Block {
     }
 
     render(): string {
-        let items: string = this.props.items.reduce((itemsHTML, item) =>
+        let items: string = this.props.items.reduce((itemsHTML: string, item: { className: string; icon: string; label: string; }) =>
             itemsHTML + `<div class="dropdownMenu__item ${item.className}">
-                <img class="dropdownMenu__icon-item" src="${item.icon}" alt="">
+                <img class="dropdownMenu__icon-item" src="${item.icon}" alt="icon">
                 ${item.label}
             </div>`
             , '');

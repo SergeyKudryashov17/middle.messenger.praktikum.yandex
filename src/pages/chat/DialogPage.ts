@@ -116,7 +116,7 @@ export default class DialogPage extends Block {
             type: 'icon',
             className: 'fa-paperclip fa-flip-vertical add-attached-file',
             events: {
-                click: (event) => {
+                click: (event: Event) => {
                     const attachBtn: HTMLElement = props.attachedBtn.getContent();
                     const attachMenu: DropdownMenu = props.attachMenu;
 
