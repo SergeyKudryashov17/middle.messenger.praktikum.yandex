@@ -7,7 +7,7 @@ type BlockMeta = {
     props: any
 }
 
-export default class Block {
+export default class Block<P = any> {
     static EVENTS = {
         INIT: "init",
         FLOW_CDM: "flow:component-did-mount",
@@ -17,13 +17,13 @@ export default class Block {
 
     private readonly _meta: BlockMeta;
     public _id;
-    protected readonly props: any;
+    protected readonly props: P;
     eventBus;
-    protected _element = null;
+    protected _element: HTMLElement | null = null;
     public children: {[id: string]: Block} = {};
 
 
-    public constructor(tagName:string = "div", propsAndChildren: any = {}) {
+    public constructor(tagName:string = "div", propsAndChildren: P = {} as P) {
         const { children, props } = this._getChildren(propsAndChildren);
 
         const eventBus = new EventBus();
@@ -66,13 +66,13 @@ export default class Block {
         this.componentDidMount();
     }
 
-    componentDidMount(oldProps: any = {}) {}
+    componentDidMount() {}
 
     dispatchComponentDidMount() {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
     }
 
-    _componentDidUpdate(oldProps: any, newProps: any) {
+    _componentDidUpdate(oldProps: P, newProps: P) {
         const response:Boolean = this.componentDidUpdate(oldProps, newProps);
         if (!response) {
             return;
@@ -81,11 +81,11 @@ export default class Block {
     }
 
     // Может переопределять пользователь, необязательно трогать
-    componentDidUpdate(oldProps: any, newProps: any) {
+    componentDidUpdate(oldProps: P, newProps: P) {
         return true;
     }
 
-    setProps = (nextProps: any) => {
+    setProps = (nextProps: P) => {
         if (!nextProps) {
             return;
         }
@@ -93,7 +93,7 @@ export default class Block {
         Object.assign(this.props, nextProps);
     };
 
-    get element() {
+    get element(): HTMLElement {
         return this._element;
     }
 
@@ -102,7 +102,7 @@ export default class Block {
 
         this._removeEvents();
 
-        const newElement = fragment.firstElementChild;
+        const newElement: HTMLElement = fragment.firstElementChild as HTMLElement;
 
         this._element.replaceWith(newElement);
         this._element = newElement;
@@ -137,22 +137,22 @@ export default class Block {
         });
     }
 
-    _makePropsProxy(props: any): any {
+    _makePropsProxy(props: P): any {
         // Можно и так передать this
         // Такой способ больше не применяется с приходом ES6+
         const self = this;
 
-        return new Proxy(props, {
-            get(target, prop) {
+        return new Proxy(props as object, {
+            get(target: Record<string, unknown>, prop: string) {
                 const value = target[prop];
                 return typeof value === 'function' ? value.bind(target) : value;
             },
-            set(target, prop, value) {
+            set(target: Record<string, unknown>, prop: string, value) {
                 target[prop] = value;
                 self.eventBus().emit(Block.EVENTS.FLOW_CDU, {...target}, target);
                 return true;
             },
-            deleteProperty(target, prop) {
+            deleteProperty() {
                 throw new Error('Нет доступа');
             }
         });
@@ -164,8 +164,8 @@ export default class Block {
     }
 
     _getChildren(propsAndChildren: any): {children: any, props: any} {
-        const children: {} = {};
-        const props: {} = {};
+        const children: Record<string, unknown> = {};
+        const props: Record<string, unknown> = {};
 
         Object.entries(propsAndChildren).forEach(([key, value]) => {
             if (value instanceof Block) {
