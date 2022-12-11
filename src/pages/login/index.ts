@@ -36,12 +36,12 @@ const btnLogIn: Link = new Button({
         click: (event: Event) => {
             event.preventDefault();
 
-            let status: boolean = validateForm(fields);
+            const status: boolean = validateForm(fields);
             if (status) {
                 let formData: Record<string, string> = {};
                 fields.map(fieldComponent => {
-                    let fieldName: string = (fieldComponent.children.inputComponent.getContent() as HTMLInputElement).name;
-                    let fieldValue: string = (fieldComponent.children.inputComponent.getContent() as HTMLInputElement).value;
+                    const fieldName: string = (fieldComponent.children.inputComponent.getContent() as HTMLInputElement).name;
+                    const fieldValue: string = (fieldComponent.children.inputComponent.getContent() as HTMLInputElement).value;
                     formData[fieldName] = fieldValue;
                 });
 

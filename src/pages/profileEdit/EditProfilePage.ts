@@ -110,16 +110,16 @@ export default class EditProfilePage extends Block {
             className: "button_main button_centered",
             events: {
                 click: () => {
-                    let statusValidate: boolean = validateForm(this.props.fieldList);
+                    const statusValidate: boolean = validateForm(this.props.fieldList);
 
                     if (!statusValidate) {
                         alert('Форма заполнена неверно. Сохранение невозможно');
                         return;
                     }
 
-                    let formData = Array.from(document.querySelectorAll('.profile-data')).map(item => {
+                    const formData = Array.from(document.querySelectorAll('.profile-data')).map((item: HTMLElement) => {
                         return {
-                            label: item.querySelector('.profile-data__label').textContent,
+                            label: (item.querySelector('.profile-data__label') as HTMLLabelElement).textContent,
                             value: (item.querySelector('.input') as HTMLInputElement).value
                         }
                     });

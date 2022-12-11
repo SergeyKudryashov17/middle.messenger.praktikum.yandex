@@ -82,7 +82,7 @@ const fieldPasswordRepeat: Field = new Field({
         input: () => resetValidateField(fieldPasswordRepeat),
         blur: () => {
             if (!handleValidateField(fieldPasswordRepeat)) return;
-            let error: string = (!checkPasswordMatch(fieldPassword, fieldPasswordRepeat))
+            const error: string = (!checkPasswordMatch(fieldPassword, fieldPasswordRepeat))
                 ? 'Пароли не совпадают'
                 : '';
             const errorComponent: Block = fieldPasswordRepeat.children.errorTextComponent;
@@ -111,12 +111,12 @@ const btnLogIn: Link = new Button({
         click: (event: Event) => {
             event.preventDefault();
 
-            let status: boolean = validateForm(fields);
+            const status: boolean = validateForm(fields);
             if (status) {
-                let formData = {};
+                let formData: Record<string, string> = {};
                 fields.map(fieldComponent => {
-                    let fieldName: string = (fieldComponent.children.inputComponent.getContent() as HTMLInputElement).name;
-                    let fieldValue: string = (fieldComponent.children.inputComponent.getContent() as HTMLInputElement).value;
+                    const fieldName: string = (fieldComponent.children.inputComponent.getContent() as HTMLInputElement).name;
+                    const fieldValue: string = (fieldComponent.children.inputComponent.getContent() as HTMLInputElement).value;
                     formData[fieldName] = fieldValue;
                 });
 

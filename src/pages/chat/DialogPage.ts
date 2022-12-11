@@ -79,7 +79,7 @@ export default class DialogPage extends Block {
             className: 'fa-ellipsis-v setting-dialog',
             type: 'icon',
             events: {
-                click: (event) => {
+                click: (event: Event) => {
                     const btnElem: HTMLElement = props.settingsDialogBtn.getContent();
                     const settingMenu: DropdownMenu = props.settingsDialogMenu;
 
@@ -96,13 +96,13 @@ export default class DialogPage extends Block {
             label: '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
             events: {
                 click: () => {
-                    let messageText: string = props.inputMessage.getContent().value;
-                    let validateStatus: string = validate('', messageText);
+                    const messageText: string = props.inputMessage.getContent().value;
+                    const validateStatus: string = validate('', messageText);
 
                     if (validateStatus !== '') {
                         alert(validateStatus);
                     } else {
-                        let response = {
+                        const response = {
                             message: messageText
                         };
 

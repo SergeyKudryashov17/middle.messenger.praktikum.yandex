@@ -56,10 +56,13 @@ document.addEventListener("DOMContentLoaded", () => {
   renderPage(activePageLabel);
 });
 
-const selectPage: HTMLSelectElement = document.querySelector('#select-page');
-selectPage.addEventListener('change', (event: Event) => {
-  renderPage(selectPage.value);
-});
+const selectPage: HTMLSelectElement | null = document.querySelector('#select-page');
+
+if (selectPage) {
+  selectPage.addEventListener('change', () => {
+    renderPage(selectPage.value);
+  });
+}
 
 function renderPage(pageLabel: string): void {
   let pageTitle = PAGES[pageLabel].title;
@@ -74,7 +77,9 @@ function renderPage(pageLabel: string): void {
       if (!link.dataset.page) return;
 
       const label: string = link.dataset.page;
-      selectPage.value = label;
+      if (selectPage) {
+        selectPage.value = label;
+      }
       renderPage(label);
     });
   });
