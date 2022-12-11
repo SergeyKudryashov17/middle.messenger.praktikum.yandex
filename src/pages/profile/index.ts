@@ -7,4 +7,3 @@ export const profilePage: ProfilePage = new ProfilePage({
     userName: 'Иван',
     imageUrl: imageUrl
 });
-

@@ -17,5 +17,3 @@ export default class Link extends Block {
         return `<a href="{{href}}" class="link {{className}}" ${dataAttributes}>${this.props.label}</a>`;
     }
 }
-
-

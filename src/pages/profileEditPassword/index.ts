@@ -7,4 +7,3 @@ export const editProfilePasswordPage = new EditPasswordPage({
     userName: 'Иван',
     imageUrl: imageUrl
 });
-

@@ -7,4 +7,3 @@ export const editProfilePage = new EditProfilePage({
     userName: 'Иван',
     imageUrl: imageUrl
 });
-
