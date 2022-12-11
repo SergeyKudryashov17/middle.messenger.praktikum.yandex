@@ -55,6 +55,7 @@ class HTTPTransport {
         resolve(xhr);
       }
 
+      xhr.timeout = timeout;
       xhr.onabort = reject;
       xhr.onerror = reject;
       xhr.ontimeout = reject;
