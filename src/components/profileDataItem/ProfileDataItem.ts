@@ -23,7 +23,7 @@ export default class ProfileDataItem extends Block {
 
     render(): string {
         return `
-            <div class="profile-data">
+            <div class="profile-data ${this.props.className || ''}">
                 <div class="profile-data__label">${this.props.label}</div>
                 <div class="profile-data__value">
                     ${ this.props.isEditable ? '{{{ field }}}' : this.props.value }
