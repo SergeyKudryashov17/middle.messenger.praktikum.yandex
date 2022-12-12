@@ -13,7 +13,7 @@ export default class LoginPage extends Block {
         return `
             <main class="messenger-container">
                 <div class="messenger-body ${this.typeBody}">
-                    <div class="form">
+                    <form class="form">
                         <div class="form__title">${this.props.title}</div>
                         <div class="form__fields">
                             {{{ fieldLogin }}}
@@ -23,7 +23,7 @@ export default class LoginPage extends Block {
                             {{{ linkLogin }}}
                             {{{ linkRegistration }}}
                         </div>
-                    </div>
+                    </form>
                 </div>
             </main>
         `;

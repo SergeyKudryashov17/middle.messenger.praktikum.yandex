@@ -112,13 +112,15 @@ export default class EditPasswordPage extends Block {
                         {{{ userAvatar }}}
                         <div class="profile-name">${this.props.userName}</div>
                     
-                        <ul class="list list_full">
-                            <li class="list__item">{{{ profileItemOldPassword }}}</li>
-                            <li class="list__item">{{{ profileItemNewPassword }}}</li>
-                            <li class="list__item">{{{ profileItemNewPasswordRepeat }}}</li>
-                        </ul>
-                    
-                        {{{ btnSave }}}
+                        <form>
+                            <ul class="list list_full">
+                                <li class="list__item">{{{ profileItemOldPassword }}}</li>
+                                <li class="list__item">{{{ profileItemNewPassword }}}</li>
+                                <li class="list__item">{{{ profileItemNewPasswordRepeat }}}</li>
+                            </ul>
+                        
+                            {{{ btnSave }}}
+                        </form>
                     </div>
                 </div>
             </main>

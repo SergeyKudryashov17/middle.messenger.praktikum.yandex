@@ -141,16 +141,18 @@ export default class EditProfilePage extends Block {
                         {{{ userAvatar }}}
                         <div class="profile-name">${this.props.userName}</div>
                     
-                        <ul class="list list_full">
-                            <li class="list__item">{{{ profileItemEmail }}}</li>
-                            <li class="list__item">{{{ profileItemLogin }}}</li>
-                            <li class="list__item">{{{ profileItemFName }}}</li>
-                            <li class="list__item">{{{ profileItemSName }}}</li>
-                            <li class="list__item">{{{ profileChatName }}}</li>
-                            <li class="list__item">{{{ profileItemPhone }}}</li>
-                        </ul>
-                    
-                        {{{ btnSave }}}
+                        <form>
+                            <ul class="list list_full">
+                                <li class="list__item">{{{ profileItemEmail }}}</li>
+                                <li class="list__item">{{{ profileItemLogin }}}</li>
+                                <li class="list__item">{{{ profileItemFName }}}</li>
+                                <li class="list__item">{{{ profileItemSName }}}</li>
+                                <li class="list__item">{{{ profileChatName }}}</li>
+                                <li class="list__item">{{{ profileItemPhone }}}</li>
+                            </ul>
+                        
+                            {{{ btnSave }}}
+                        </form>
                     </div>
                 </div>
             </main>
