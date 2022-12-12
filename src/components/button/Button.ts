@@ -8,14 +8,16 @@ export default class Button extends Block {
     }
 
     render(): string {
+        const typeButton: string = this.props.type || 'button';
+
         const button: string = `
-            <button class="button ${this.props.className}" id="${this.props.id ?? ''}">
+            <button class="button ${this.props.className}" type="${typeButton}" id="${this.props.id ?? ''}">
                 ${this.props.label}
             </button>
         `;
 
         const icon: string = `
-            <i class="fa ${this.props.className}" id="${this.props.id ?? ''}" aria-hidden="true"></i>
+            <i class="fa ${this.props.className}" type="${typeButton}" id="${this.props.id ?? ''}" aria-hidden="true"></i>
         `;
 
         return this.props.type === 'icon' ? icon : button;
