@@ -1,9 +1,10 @@
+import Block from "../../core/Block";
+import { handleValidateField, resetValidateField, validateForm, checkPasswordMatch } from '../../utils/validation';
 import Field from "../../components/field/Field";
 import Link from "../../components/link/Link";
-import { handleValidateField, resetValidateField, validateForm, checkPasswordMatch } from '../../utils/validation';
-import SinginPage from "./SinginPage";
-import Block from "../../core/Block";
+import Form from "../../components/form/Form";
 import Button from "../../components/button/Button";
+import SinginPage from "./SinginPage";
 
 
 const fieldEmail: Field  = new Field({
@@ -104,11 +105,30 @@ let fields = [
     fieldPasswordRepeat
 ];
 
-const btnLogIn: Link = new Button({
+const btnLogIn: Button = new Button({
+    type: 'submit',
     className: 'button_main button_full-width button_centered',
-    label: 'Авторизоваться',
+    label: 'Авторизоваться'
+});
+const linkToCome: Link = new Link({
+    href: '#',
+    className: 'link_centered',
+    label: 'Войти',
+    dataset: {
+        page: 'pageLogin'
+    }
+});
+
+const form: Form = new Form({
+    title: 'Регистрация',
+    className: 'form',
+    fields: fields,
+    controls: [
+        btnLogIn,
+        linkToCome
+    ],
     events: {
-        click: (event: Event) => {
+        submit: (event: Event) => {
             event.preventDefault();
 
             const status: boolean = validateForm(fields);
@@ -125,25 +145,9 @@ const btnLogIn: Link = new Button({
         }
     }
 });
-const linkToCome: Link = new Link({
-    href: '#',
-    className: 'link_centered',
-    label: 'Войти',
-    dataset: {
-        page: 'pageLogin'
-    }
-});
 
 export const singInPage: SinginPage = new SinginPage({
     title: 'Регистрация',
     typeBody: 'default',
-    fieldEmail: fieldEmail,
-    fieldLogin: fieldLogin,
-    fieldFName: fieldFName,
-    fieldSName: fieldSName,
-    fieldPhone: fieldPhone,
-    fieldPassword: fieldPassword,
-    fieldPasswordRepeat: fieldPasswordRepeat,
-    linkToCome: linkToCome,
-    linkLogin: btnLogIn
+    form: form
 });

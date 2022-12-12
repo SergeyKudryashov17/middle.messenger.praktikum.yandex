@@ -13,17 +13,7 @@ export default class LoginPage extends Block {
         return `
             <main class="messenger-container">
                 <div class="messenger-body ${this.typeBody}">
-                    <form class="form">
-                        <div class="form__title">${this.props.title}</div>
-                        <div class="form__fields">
-                            {{{ fieldLogin }}}
-                            {{{ fieldPassword }}}
-                        </div>
-                        <div class="form__footer">
-                            {{{ linkLogin }}}
-                            {{{ linkRegistration }}}
-                        </div>
-                    </form>
+                    {{{ form }}}
                 </div>
             </main>
         `;

@@ -6,6 +6,7 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import {checkPasswordMatch, handleValidateField, resetValidateField, validateForm} from "../../utils/validation";
 
 import '../../components/list/list.css';
+import Form from "../../components/form/Form";
 
 export default class EditPasswordPage extends Block {
     constructor(props: any = {}) {
@@ -18,6 +19,7 @@ export default class EditPasswordPage extends Block {
         });
 
         props.profileItemOldPassword = new ProfileDataItem({
+            className: 'list__item',
             label: "Старый пароль",
             isEditable: true,
             value: "oldTestPassword123",
@@ -31,6 +33,7 @@ export default class EditPasswordPage extends Block {
             }
         });
         props.profileItemNewPassword = new ProfileDataItem({
+            className: 'list__item',
             label: "Новый пароль",
             isEditable: true,
             value: "newTestPassword123",
@@ -44,6 +47,7 @@ export default class EditPasswordPage extends Block {
             }
         });
         props.profileItemNewPasswordRepeat = new ProfileDataItem({
+            className: 'list__item',
             label: "Повторите новый пароль",
             isEditable: true,
             value: "newTestPassword123",
@@ -77,10 +81,24 @@ export default class EditPasswordPage extends Block {
         ];
 
         props.btnSave = new Button({
+            type: "submit",
             label: "Сохранить",
-            className: "button_main button_centered",
+            className: "button_main button_centered"
+        });
+
+        props.form = new Form({
+            className: 'list list_full',
+            fields: [
+                props.profileItemOldPassword,
+                props.profileItemNewPassword,
+                props.profileItemNewPasswordRepeat
+            ],
+            controls: [
+                props.btnSave
+            ],
             events: {
-                click: () => {
+                submit: (event: Event) => {
+                    event.preventDefault();
                     const statusValidate: boolean = validateForm(this.props.fieldList);
 
                     if (!statusValidate) {
@@ -89,9 +107,10 @@ export default class EditPasswordPage extends Block {
                     }
 
                     let formData = Array.from(document.querySelectorAll('.profile-data')).map((item: HTMLElement) => {
+                        const input: HTMLInputElement | null = item.querySelector('.input');
                         return {
-                            label: (item.querySelector('.profile-data__label') as HTMLLabelElement).textContent,
-                            value: (item.querySelector('.input') as HTMLInputElement).value
+                            label: input?.name,
+                            value: input?.value
                         }
                     });
 
@@ -112,15 +131,7 @@ export default class EditPasswordPage extends Block {
                         {{{ userAvatar }}}
                         <div class="profile-name">${this.props.userName}</div>
                     
-                        <form>
-                            <ul class="list list_full">
-                                <li class="list__item">{{{ profileItemOldPassword }}}</li>
-                                <li class="list__item">{{{ profileItemNewPassword }}}</li>
-                                <li class="list__item">{{{ profileItemNewPasswordRepeat }}}</li>
-                            </ul>
-                        
-                            {{{ btnSave }}}
-                        </form>
+                        {{{ form }}}
                     </div>
                 </div>
             </main>

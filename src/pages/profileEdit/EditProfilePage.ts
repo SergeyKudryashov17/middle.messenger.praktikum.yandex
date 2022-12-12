@@ -3,6 +3,7 @@ import Button from '../../components/button/Button';
 import Avatar from '../../components/avatar/Avatar';
 import ProfileDataItem from '../../components/profileDataItem/ProfileDataItem';
 import Sidebar from "../../components/sidebar/Sidebar";
+import Form from "../../components/form/Form";
 import {handleValidateField, resetValidateField, validateForm} from "../../utils/validation";
 
 import '../../components/list/list.css';
@@ -18,6 +19,7 @@ export default class EditProfilePage extends Block {
         });
 
         props.profileItemEmail = new ProfileDataItem({
+            className: 'list__item',
             label: "Почта",
             isEditable: true,
             value: "pochta@yandex.ru",
@@ -31,6 +33,7 @@ export default class EditProfilePage extends Block {
             }
         });
         props.profileItemLogin = new ProfileDataItem({
+            className: 'list__item',
             label: "Логин",
             isEditable: true,
             value: "ivanivanov",
@@ -44,6 +47,7 @@ export default class EditProfilePage extends Block {
             }
         });
         props.profileItemFName = new ProfileDataItem({
+            className: 'list__item',
             label: "Имя",
             isEditable: true,
             value: "Иван",
@@ -57,6 +61,7 @@ export default class EditProfilePage extends Block {
             }
         });
         props.profileItemSName = new ProfileDataItem({
+            className: 'list__item',
             label: "Фамилия",
             isEditable: true,
             value: "Иванов",
@@ -70,6 +75,7 @@ export default class EditProfilePage extends Block {
             }
         });
         props.profileChatName = new ProfileDataItem({
+            className: 'list__item',
             label: "Имя в чате",
             isEditable: true,
             value: "Иван",
@@ -83,6 +89,7 @@ export default class EditProfilePage extends Block {
             }
         });
         props.profileItemPhone = new ProfileDataItem({
+            className: 'list__item',
             label: "Телефон",
             isEditable: true,
             value: "+79099673030",
@@ -106,10 +113,27 @@ export default class EditProfilePage extends Block {
         ];
 
         props.btnSave = new Button({
+            type: 'submit',
             label: "Изменить данные",
-            className: "button_main button_centered",
+            className: "button_main button_centered"
+        });
+
+        props.form = new Form({
+            className: 'list list_full',
+            fields: [
+                props.profileItemEmail,
+                props.profileItemLogin,
+                props.profileItemFName,
+                props.profileItemSName,
+                props.profileChatName,
+                props.profileItemPhone
+            ],
+            controls: [
+                props.btnSave
+            ],
             events: {
-                click: () => {
+                submit: (event: Event) => {
+                    event.preventDefault();
                     const statusValidate: boolean = validateForm(this.props.fieldList);
 
                     if (!statusValidate) {
@@ -140,19 +164,8 @@ export default class EditProfilePage extends Block {
                     <div class="profile-content">
                         {{{ userAvatar }}}
                         <div class="profile-name">${this.props.userName}</div>
-                    
-                        <form>
-                            <ul class="list list_full">
-                                <li class="list__item">{{{ profileItemEmail }}}</li>
-                                <li class="list__item">{{{ profileItemLogin }}}</li>
-                                <li class="list__item">{{{ profileItemFName }}}</li>
-                                <li class="list__item">{{{ profileItemSName }}}</li>
-                                <li class="list__item">{{{ profileChatName }}}</li>
-                                <li class="list__item">{{{ profileItemPhone }}}</li>
-                            </ul>
                         
-                            {{{ btnSave }}}
-                        </form>
+                        {{{ form }}}
                     </div>
                 </div>
             </main>
