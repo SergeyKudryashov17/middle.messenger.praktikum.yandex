@@ -3,13 +3,16 @@ import Button from '../../components/button/Button';
 import Avatar from '../../components/avatar/Avatar';
 import ProfileDataItem from '../../components/profileDataItem/ProfileDataItem';
 import Sidebar from "../../components/sidebar/Sidebar";
+
 import {checkPasswordMatch, handleValidateField, resetValidateField, validateForm} from "../../utils/validation";
+
+import IProfilePageProps from '../../types/IProfilePageProps';
 
 import '../../components/list/list.css';
 import Form from "../../components/form/Form";
 
 export default class EditPasswordPage extends Block {
-    constructor(props: any = {}) {
+    constructor(props: IProfilePageProps) {
         props.sidebar = new Sidebar({
             isFullSize: false
         });
@@ -63,8 +66,8 @@ export default class EditPasswordPage extends Block {
 
                     if (!handleValidateField(props.profileItemNewPasswordRepeat.children.field)) return;
                     const error: string = (!checkPasswordMatch(fieldNewPassword, fieldNewPasswordRepeat))
-                        ? 'Пароли не совпадают'
-                        : '';
+                      ? 'Пароли не совпадают'
+                      : '';
                     const errorComponent: Block = fieldNewPasswordRepeat.children.errorTextComponent;
                     errorComponent.setProps({
                         className: (error !== '') ? 'error-label_show' : '',

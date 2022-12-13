@@ -3,8 +3,15 @@ import Block from "../../core/Block";
 import './link.css';
 import '../button/button.css';
 
+interface ILinkProps {
+    href: string,
+    label: string,
+    className?: string
+    dataset?: Record<string, string>
+}
+
 export default class Link extends Block {
-    constructor(props: any) {
+    constructor(props: ILinkProps) {
         super("a", {...props});
     }
 

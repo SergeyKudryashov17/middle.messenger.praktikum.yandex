@@ -4,10 +4,12 @@ import Avatar from '../../components/avatar/Avatar';
 import ProfileDataItem from '../../components/profileDataItem/ProfileDataItem';
 import Sidebar from "../../components/sidebar/Sidebar";
 
+import IProfilePageProps from '../../types/IProfilePageProps';
+
 import '../../components/list/list.css';
 
 export default class ProfilePage extends Block {
-    constructor(props: any = {}) {
+    constructor(props: IProfilePageProps) {
         props.sidebar = new Sidebar({
             isFullSize: false
         });
@@ -22,7 +24,7 @@ export default class ProfilePage extends Block {
             value: "pochta@yandex.ru",
             typeValue: "email"
         });
-        props.profielItemLogin = new ProfileDataItem({
+        props.profileItemLogin = new ProfileDataItem({
             label: "Логин",
             isEditable: false,
             value: "ivanivanov",
@@ -92,7 +94,7 @@ export default class ProfilePage extends Block {
                     
                         <ul class="list list_full">
                             <li class="list__item">{{{ profileItemEmail }}}</li>
-                            <li class="list__item">{{{ profielItemLogin }}}</li>
+                            <li class="list__item">{{{ profileItemLogin }}}</li>
                             <li class="list__item">{{{ profileItemFName }}}</li>
                             <li class="list__item">{{{ profileItemSName }}}</li>
                             <li class="list__item">{{{ profileItemChatName }}}</li>

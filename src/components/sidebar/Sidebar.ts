@@ -1,12 +1,18 @@
 import Block from '../../core/Block';
-import DialogList from "../dialogList/DialogList";
+import DialogList, { dialogsData } from "../dialogList/DialogList";
 import Input from "../input/Input";
 import Link from "../link/Link";
 
 import './sidebar.css';
 
+interface ISidebar {
+    isFullSize: boolean,
+    dialogList?: dialogsData[]
+}
+
 export default class Sidebar extends Block {
-    constructor(props) {
+
+    constructor(props: ISidebar) {
         props.search = new Input({
             type: 'text',
             className: 'input_search-dialog',

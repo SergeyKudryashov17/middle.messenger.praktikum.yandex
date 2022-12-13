@@ -3,8 +3,20 @@ import Field from "../field/Field";
 
 import './profileDataItem.css';
 
+interface IProfileDataItem {
+    className?: string,
+    label: string,
+    isEditable?: boolean,
+    fieldClass?: string,
+    inputName?: string,
+    typeValue?: string,
+    value: string,
+    validateRule?: string,
+    eventsField?: Record<string, Function>
+}
+
 export default class ProfileDataItem extends Block {
-    constructor(props: any) {
+    constructor(props: IProfileDataItem) {
         if (props.isEditable) {
             props.field = new Field({
                 fieldClass: props.fieldClass,
@@ -17,7 +29,6 @@ export default class ProfileDataItem extends Block {
                 eventsInput: props.eventsField ?? {}
             });
         }
-
         super("a", {...props});
     }
 

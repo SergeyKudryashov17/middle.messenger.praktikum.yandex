@@ -2,8 +2,15 @@ import Block from "../../core/Block";
 
 import './label.css';
 
+interface ILabelProps {
+    text?: string,
+    className?: string,
+    attrFor?: string,
+    events?: Record<string, Function>
+}
+
 export default class Label extends Block {
-    constructor(props: any) {
+    constructor(props: ILabelProps) {
         super("label", {...props});
     }
 

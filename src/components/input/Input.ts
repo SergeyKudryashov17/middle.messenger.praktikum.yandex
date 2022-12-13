@@ -2,8 +2,19 @@ import Block from "../../core/Block";
 
 import './input.css';
 
+interface IInputProps {
+    type?: string,
+    id?: string,
+    className?: string,
+    placeholder?: string,
+    value?: string,
+    name?: string,
+    validateRule?: string,
+    events?: Record<string, Function>
+}
+
 export default class Input extends Block {
-    constructor(props: any) {
+    constructor(props: IInputProps) {
         super("input",{...props});
     }
 

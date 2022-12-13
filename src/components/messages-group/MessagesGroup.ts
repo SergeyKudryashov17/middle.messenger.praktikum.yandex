@@ -1,8 +1,13 @@
 import Block from '../../core/Block';
-import Message from '../message/Message';
+import Message, { IMessageProps } from "../message/Message";
+
+export interface IMessagesGroupProps {
+    date: string,
+    messages: IMessageProps[]
+}
 
 export default class MessagesGroup extends Block {
-    constructor(props: any) {
+    constructor(props: IMessagesGroupProps) {
         props.listMessageLabels = '';
         props.messages.forEach((messageData, index) => {
             let label: string = `message${index}`;

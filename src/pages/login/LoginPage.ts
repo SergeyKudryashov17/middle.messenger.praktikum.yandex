@@ -1,9 +1,16 @@
 import Block from '../../core/Block';
+import Form from "../../components/form/Form";
+
+interface ILoginPageProps {
+    typeBody?: string,
+    title: string,
+    form: Form
+}
 
 export default class LoginPage extends Block {
     private typeBody: string = '';
 
-    constructor(props: any) {
+    constructor(props: ILoginPageProps) {
         super("div", { ...props});
     }
 

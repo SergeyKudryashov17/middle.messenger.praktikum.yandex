@@ -4,7 +4,7 @@ import Interlocutor from "../../components/interlocutor/Interlocutor";
 import Button from "../../components/button/Button";
 import DropdownMenu from "../../components/dropdownMenu/DropdownMenu";
 import Input from '../../components/input/Input';
-import MessagesGroup from '../../components/messages-group/MessagesGroup'
+import MessagesGroup, { IMessagesGroupProps } from "../../components/messages-group/MessagesGroup";
 import { validate } from '../../utils/validation';
 import { getListDialogs } from "../../models/dialogsData";
 
@@ -14,8 +14,13 @@ import attachImgIconUrl from '../../static/icon/attach-image.svg';
 import attachFileUrl from '../../static/icon/attach-file.svg';
 import attachLocationUrl from '../../static/icon/attach-location.svg';
 
+interface IDialogPageProps {
+    emptyChatBody: boolean,
+    messagesGroups: IMessagesGroupProps[]
+}
+
 export default class DialogPage extends Block {
-    constructor(props: any = {}) {
+    constructor(props: IDialogPageProps) {
         props.messagesGroupsLabels = '';
         props.messagesGroups.forEach((group, index) => {
             let label = `messagesGroup${index}`;
@@ -77,7 +82,7 @@ export default class DialogPage extends Block {
 
         props.settingsDialogBtn = new Button({
             className: 'fa-ellipsis-v setting-dialog',
-            type: 'icon',
+            view: 'icon',
             events: {
                 click: (event: Event) => {
                     const btnElem: HTMLElement = props.settingsDialogBtn.getContent();
@@ -85,8 +90,8 @@ export default class DialogPage extends Block {
 
                     btnElem.classList.toggle('setting-dialog_active');
                     btnElem.classList.contains('setting-dialog_active')
-                        ? settingMenu.open(event)
-                        : settingMenu.close();
+                      ? settingMenu.open(event)
+                      : settingMenu.close();
                 }
             }
         });
@@ -113,7 +118,7 @@ export default class DialogPage extends Block {
         });
 
         props.attachedBtn = new Button({
-            type: 'icon',
+            view: 'icon',
             className: 'fa-paperclip fa-flip-vertical add-attached-file',
             events: {
                 click: (event: Event) => {
@@ -122,8 +127,8 @@ export default class DialogPage extends Block {
 
                     attachBtn.classList.toggle('add-attached-file_active');
                     attachBtn.classList.contains('add-attached-file_active')
-                        ? attachMenu.open(event)
-                        : attachMenu.close();
+                      ? attachMenu.open(event)
+                      : attachMenu.close();
                 }
             }
         });

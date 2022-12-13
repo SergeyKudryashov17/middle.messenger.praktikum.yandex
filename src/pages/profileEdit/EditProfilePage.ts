@@ -4,12 +4,15 @@ import Avatar from '../../components/avatar/Avatar';
 import ProfileDataItem from '../../components/profileDataItem/ProfileDataItem';
 import Sidebar from "../../components/sidebar/Sidebar";
 import Form from "../../components/form/Form";
+
+import IProfilePageProps from '../../types/IProfilePageProps';
+
 import {handleValidateField, resetValidateField, validateForm} from "../../utils/validation";
 
 import '../../components/list/list.css';
 
 export default class EditProfilePage extends Block {
-    constructor(props: any = {}) {
+    constructor(props: IProfilePageProps) {
         props.sidebar = new Sidebar({
             isFullSize: false
         });

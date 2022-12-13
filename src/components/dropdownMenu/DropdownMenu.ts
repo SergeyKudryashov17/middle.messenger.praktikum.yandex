@@ -2,15 +2,27 @@ import Block from "../../core/Block";
 
 import './dropdownMenu.css';
 
+type ItemMenu = {
+    className: string;
+    icon: string;
+    label: string;
+}
+
+interface IDropdownMenuProps {
+    items: ItemMenu[],
+    id: string,
+    events?: Record<string, Function>
+}
+
 export default class DropdownMenu extends Block {
     public classShow: string = 'dropdownMenu_show';
 
-    constructor(props: any) {
+    constructor(props: IDropdownMenuProps) {
         super("button", {...props});
     }
 
     render(): string {
-        let items: string = this.props.items.reduce((itemsHTML: string, item: { className: string; icon: string; label: string; }) =>
+        let items: string = this.props.items.reduce((itemsHTML: string, item: ItemMenu) =>
             itemsHTML + `<div class="dropdownMenu__item ${item.className}">
                 <img class="dropdownMenu__icon-item" src="${item.icon}" alt="icon">
                 ${item.label}

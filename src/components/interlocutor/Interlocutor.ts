@@ -2,8 +2,12 @@ import Block from '../../core/Block';
 
 import './interlocutor.css';
 
+interface IInterlocutorProps {
+    name: string
+}
+
 export default class Interlocutor extends Block {
-    constructor(props: any = {}) {
+    constructor(props: IInterlocutorProps) {
         super("div", {...props});
     }
 

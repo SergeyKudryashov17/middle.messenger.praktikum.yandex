@@ -44,6 +44,7 @@ const linkRegistration: Link = new Link({
     }
 });
 
+
 const form: Form = new Form({
     title: 'Вход',
     className: 'form',
@@ -69,6 +70,7 @@ const form: Form = new Form({
         }
     }
 });
+
 
 export const loginPage: LoginPage = new LoginPage({
     title: 'Вход',

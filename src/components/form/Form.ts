@@ -1,13 +1,23 @@
 import Block from '../../core/Block';
 
+interface IFormProps {
+  title?: string,
+  className?: string,
+  fields: Block[],
+  controls: Block[],
+  events?: Record<string, Function>
+}
+
 export default class Form extends Block {
-  constructor(props: any) {
+  fieldsList: string = '';
+  controlsList: string = '';
+
+  constructor(props: IFormProps) {
     props.fieldsList = '';
     props.fields.forEach((component: Block, index: number) => {
       props.fieldsList += `{{{ field${index} }}}`;
       props[`field${index}`] = component;
     });
-    delete props.fields;
 
     props.controlsList = '';
     props.controls.forEach((component: Block, index: number) => {

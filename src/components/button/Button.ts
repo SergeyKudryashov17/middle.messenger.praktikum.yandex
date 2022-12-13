@@ -2,8 +2,17 @@ import Block from "../../core/Block";
 
 import './button.css';
 
+interface IButtonProps {
+    type?: string,
+    className: string,
+    id?: string,
+    label?: string,
+    view?: string,
+    events?: Record<string, Function>
+}
+
 export default class Button extends Block {
-    constructor(props: any) {
+    constructor(props: IButtonProps) {
         super("button", {...props});
     }
 
@@ -20,6 +29,6 @@ export default class Button extends Block {
             <i class="fa ${this.props.className}" type="${typeButton}" id="${this.props.id ?? ''}" aria-hidden="true"></i>
         `;
 
-        return this.props.type === 'icon' ? icon : button;
+        return this.props.view === 'icon' ? icon : button;
     }
 }

@@ -2,8 +2,12 @@ import Block from "../../core/Block";
 
 import './avatar.css';
 
+interface IAvatarProps {
+    url: string
+}
+
 export default class Avatar extends Block {
-    constructor(props: any) {
+    constructor(props: IAvatarProps) {
         super("a", {...props});
     }
 

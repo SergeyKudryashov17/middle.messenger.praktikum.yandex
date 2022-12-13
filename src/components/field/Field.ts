@@ -5,20 +5,41 @@ import ErrorText from "../errorText/ErrorText";
 
 import './field.css';
 
+interface IFieldProps {
+    fieldClass?: string,
+    labelText?: string,
+    labelClass?: string,
+    labelFor?: string,
+    inputType?: string,
+    inputID?: string,
+    inputClass?: string,
+    inputPlaceholder?: string,
+    inputValue?: string,
+    inputName?: string,
+    inputValidateRule?: string,
+    eventsInput?: Record<string, Function>,
+    errorText: string,
+    events?: Record<string, Function>
+}
+
 export default class Field extends Block {
-    constructor(props: any) {
+    labelComponent: Block | string;
+    inputComponent: Block;
+    errorTextComponent: Block | string;
+
+    constructor(props: IFieldProps) {
         props.labelComponent = (props.labelText !== undefined)
-            ? new Label({
-                text: props.labelText,
-                className: props.labelClass,
-                attrFor: props.labelFor
-            }) : '';
+          ? new Label({
+              text: props.labelText,
+              className: props.labelClass,
+              attrFor: props.labelFor
+          }) : '';
 
         props.inputComponent = new Input({
             type: props.inputType,
-            ID: props.inputID,
+            id: props.inputID,
             className: props.inputClass,
-            placeholder: props.inputPlacecholder,
+            placeholder: props.inputPlaceholder,
             value: props.inputValue,
             name: props.inputName,
             validateRule: props.inputValidateRule,
@@ -26,10 +47,10 @@ export default class Field extends Block {
         });
 
         props.errorTextComponent = (props.errorText !== undefined)
-            ? new ErrorText({
-                className: props.className,
-                text: props.errorText
-            }) : '';
+          ? new ErrorText({
+              className: props.className,
+              text: props.errorText
+          }) : '';
 
         super("div", {...props});
     }

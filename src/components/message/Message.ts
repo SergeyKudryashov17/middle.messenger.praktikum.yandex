@@ -2,8 +2,17 @@ import Block from '../../core/Block';
 
 import './message.css';
 
+export interface IMessageProps {
+    isText?: boolean,
+    text?: string[],
+    date: string,
+    fromMe: boolean,
+    src?: string,
+    isRead?: boolean
+}
+
 export default class Message extends Block {
-    constructor(props: any) {
+    constructor(props: IMessageProps) {
         super('div', {...props});
     }
 

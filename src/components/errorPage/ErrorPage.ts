@@ -1,9 +1,18 @@
 import Block from '../../core/Block';
+import Link from "../link/Link";
+
+interface IErrorPageProps {
+    typeBody?: string,
+    title: string,
+    caption: string,
+    link: Link,
+    events?: Record<string, Function>
+}
 
 export default class ErrorPage extends Block {
     typeBody: string;
 
-    constructor(props: any) {
+    constructor(props: IErrorPageProps) {
         super("div", {...props});
     }
 
