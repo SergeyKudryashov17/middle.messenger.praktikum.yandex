@@ -1,0 +1,15 @@
+.label {
+    display: block;
+    font-size: 9px;
+    line-height: 1;
+    color: var(--secondary-text-color);
+}
+
+.label_input-file {
+    font-size: var(--base-size-text);
+    text-decoration: underline;
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 40px;
+    color: var(--main-color);
+}

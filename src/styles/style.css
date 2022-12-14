@@ -1,19 +1,34 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap');
 @import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
+:root {
+    --main-color: #3369f3;
+    --danger-color: #FF2F2F;
+    --base-text-color: #1E1E1E;
+    --bg-color: #EFEFEF;
+    --base-border: 1px solid #EAEAEA;
+    --base-border-radius: 12px;
+    --secondary-text-color: #999999;
+    --base-size-text: 13px;
+    --mini-size-text: 11px;
+    --font-weight-bold: 600;
+    --font-weight-medium: 500;
+    --font-weight-base: 400;
+}
+
 html, body {
     margin: 0;
     padding: 0;
     font-family: Inter;
-    font-weight: 400;
-    font-size: 13px;
-    color: #1E1E1E;
+    font-weight: var(--font-weight-base);
+    font-size: var(--base-size-text);
+    color: var(--base-text-color);
 }
 
 h1 {
     display: block;
     font-size: 60px;
-    font-weight: 500;
+    font-weight: var(--font-weight-medium);
     margin-top: 0;
     margin-bottom: 20px;
 }
@@ -21,7 +36,7 @@ h1 {
 h2 {
     display: block;
     font-size: 30px;
-    font-weight: 500;
+    font-weight: var(--font-weight-medium);
     margin-top: 0;
     margin-bottom: 60px;
 }
@@ -42,7 +57,7 @@ h2 {
     max-width: 1280px;
     max-height: 720px;
     grid-template-columns: 25% 75%;
-    border: 1px solid #EAEAEA;
+    border: var(--base-border);
 }
 .messenger-body_profile {
     grid-template-columns: 80px 1fr;
@@ -67,26 +82,12 @@ h2 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #999999;
+    color: var(--secondary-text-color);
 }
 
-.search-dialog {
-    display: block;
-    width: 100%;
-    max-width: 280px;
-    height: 32px;
-    padding: 0 10px;
-    background: #EFEFEF;
-    border: none;
-    border-radius: 5px;
-    text-align: center;
-    font-family: FontAwesome;
-    font-style: normal;
-    margin-top: 20px;
-    transition: all .2s;
-}
+
 .setting-dialog:hover {
-    color: #3369F3;
+    color: var(--main-color);
 }
 .search-dialog:focus {
     outline: 0;
@@ -95,7 +96,11 @@ h2 {
 .setting-dialog {
     font-size: 20px;
     cursor: pointer;
-    color: #1E1E1E;
+    color: var(--base-text-color);
+}
+.setting-dialog:hover,
+.setting-dialog_active {
+    background-color: #F5F5F5;
 }
 
 .dialog-list {
@@ -105,27 +110,26 @@ h2 {
     overflow-y: auto;
 }
 
-.link {
-    color: #999999;
-    text-decoration: none;
-}
-.link_centered {
-    display: block;
-    text-align: center;
-}
+
 
 .input-message {
-    background: #EFEFEF;
+    background: var(--bg-color);
     border-radius: 25px;
     padding: 10px 15px;
+    border: 1px solif var(--bg-color);
 }
 .input-message:focus {
     outline: 0;
 }
 
 .add-attached-file {
-    font-size: 26px;
-    color: #999999;
+    font-size: 30px;
+    color: var(--secondary-text-color);
+    cursor: pointer;
+}
+.add-attached-file:hover,
+.add-attached-file_active {
+    color: var(--main-color);
 }
 
 .profile-content {
@@ -143,30 +147,19 @@ h2 {
     justify-content: space-between;
 }
 .profile-data__label {
-    color: #1E1E1E;
-    font-size: 13px;
+    color: var(--base-text-color);
+    font-size: var(--base-size-text);
 }
 .profile-data__value {
-    color: #999999;
-    font-size: 13px;
+    color: var(--secondary-text-color);
+    font-size: var(--base-size-text);
 }
 
 .profile-name {
     font-size: 16px;
-    font-weight: 600;
+    font-weight: var(--font-weight-bold);
     text-align: center;
     margin: 20px 0 60px;
-}
-
-.link {
-    color: #3369F3;
-    text-decoration: none;
-}
-.link:hover {
-    text-decoration: underline;
-}
-.link_danger {
-    color: #FF0000;
 }
 
 .load-file-name {
@@ -178,8 +171,8 @@ h2 {
 }
 
 .error-label {
-    color: #FF2F2F;
-    font-size: 11px;
+    color: var(--danger-color);
+    font-size: var(--mini-size-text);
 }
 .error-label_center {
     text-align: center;

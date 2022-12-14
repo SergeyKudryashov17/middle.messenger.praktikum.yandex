@@ -1,5 +1,3 @@
-.message {}
-
 .message_your {
     display: flex;
     justify-content: flex-end;
@@ -13,7 +11,7 @@
     background: #F8F8F8;
     margin-bottom: 10px;
     border: 1px solid #F8F8F8;
-    border-radius: 12px;
+    border-radius: var(--base-border-radius);
 }
 
 .message__body_file {
@@ -37,15 +35,14 @@
     bottom: 10px;
     font-size: 10px;
     line-height: 1;
-    color: #999999;
+    color: var(--secondary-text-color);
 }
 
 .message_read .message__time::before {
-    content: url('/static/icon/read.png');
+    content: url('/src/static/icon/read.png');
     margin-right: 2px;
 }
 
 .message_your .message__body {
     background: #E4EDFD;
 }
-

@@ -1,7 +1,7 @@
 .chat-body {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 60px 1fr 55px;
+    grid-template-rows: 60px 1fr 60px;
     padding: 10px 20px;
 }
 
@@ -9,7 +9,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid #EAEAEA;
+    border-bottom: var(--base-border);
     margin-bottom: 10px;
     padding-bottom: 10px;
 }
@@ -24,7 +24,7 @@
 
 .chat-body__date {
     text-align: center;
-    color: #999999;
+    color: var(--secondary-text-color);
     font-size: 12px;
     margin-bottom: 25px;
 }
@@ -35,7 +35,6 @@
     grid-template-rows: 1fr;
     grid-gap: 0 10px;
     align-items: center;
-    border-top: 1px solid #EAEAEA;
+    border-top: var(--base-border);
     margin-top: 10px;
-    padding-top: 10px;
 }

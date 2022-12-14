@@ -6,7 +6,7 @@
     max-height: 720px;
     height: 100%;
     background-color: #FBFBFB;
-    border-right: 1px solid #EAEAEA;
+    border-right: var(--base-border);
     padding: 20px 0 10px;
     box-sizing: border-box;
 }

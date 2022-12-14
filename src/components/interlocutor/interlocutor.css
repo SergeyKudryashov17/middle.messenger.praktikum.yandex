@@ -7,10 +7,10 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background-color: #EFEFEF;
+    background-color: var(--bg-color);
     margin-right: 10px;
 }
 
 .interlocutor__name {
-    font-weight: 600;
+    font-weight: var(--font-weight-bold);
 }

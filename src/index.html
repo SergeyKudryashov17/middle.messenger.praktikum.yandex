@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>App</title>
+
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="stylesheet" href="components/chat-body/chat-body.css">
+  <link rel="stylesheet" href="components/form/form.css">
+</head>
+  <body>
+    <select id="select-page">
+      <option value="pageLogin">Вход</option>
+      <option value="page404">Ошибка 404</option>
+      <option value="page500">Ошибка 500</option>
+      <option value="chatStart">Чаты</option>
+      <option value="chat">Чат</option>
+      <option value="pageProfile">Профиль</option>
+      <option value="pageProfileEdit">Редактировать профиль</option>
+      <option value="pageEditPassword">Изменить пароль</option>
+      <option value="pageSingin">Регистрация</option>
+    </select>
+    <div id="app"></div>
+    <script type="module" src="./index.ts"></script>
+  </body>
+</html>
