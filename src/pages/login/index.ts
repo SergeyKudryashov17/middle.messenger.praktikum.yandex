@@ -36,12 +36,9 @@ const btnLogIn: Button = new Button({
     label: 'Авторизоваться'
 });
 const linkRegistration: Link = new Link({
-    href: '#',
+    href: '/singin',
     className: 'link_centered',
-    label: 'Нет аккаунта',
-    dataset: {
-        page: 'pageSingin'
-    }
+    label: 'Нет аккаунта'
 });
 
 

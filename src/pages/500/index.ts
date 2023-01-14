@@ -2,7 +2,7 @@ import Link from "../../components/link/Link";
 import ErrorPage from "../../components/errorPage/ErrorPage";
 
 const linkBackChats: Link = new Link({
-    href: '#',
+    href: '/',
     className: '',
     label: 'Назад к чатам',
     dataset: {

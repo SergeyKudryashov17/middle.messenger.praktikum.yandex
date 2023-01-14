@@ -111,7 +111,7 @@ const btnLogIn: Button = new Button({
     label: 'Авторизоваться'
 });
 const linkToCome: Link = new Link({
-    href: '#',
+    href: '/login',
     className: 'link_centered',
     label: 'Войти',
     dataset: {

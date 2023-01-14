@@ -1,7 +1,7 @@
 import Block from "./Block";
 import Route from "./Route";
 
-export default class Router {
+class Router {
   public routes:Route[] = [];
   public history:History = window.history;
   private currentRoute: null = null;
@@ -53,3 +53,5 @@ export default class Router {
     return this.routes.find(route => route.match(pathname));
   }
 }
+
+export default new Router('#app');

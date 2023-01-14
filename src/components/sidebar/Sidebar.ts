@@ -20,7 +20,7 @@ export default class Sidebar extends Block {
         });
 
         props.profileLink = new Link({
-            href: '#',
+            href: '/profile',
             label: 'Профиль >',
             dataset: {
                 page: 'pageProfile'
@@ -28,7 +28,7 @@ export default class Sidebar extends Block {
         });
 
         props.backLink = new Link({
-            href: '#',
+            href: '/',
             className: 'button button_main button_circle link_white',
             label: '<i class="fa fa-arrow-left" aria-hidden="true"></i>',
             dataset: {
