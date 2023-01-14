@@ -21,10 +21,15 @@ export default class Block<P = any> {
     eventBus;
     protected _element: HTMLElement | null = null;
     public children: {[id: string]: Block} = {};
+    public propDisplay: string = 'block';
 
 
     public constructor(tagName:string = "div", propsAndChildren: P = {} as P) {
         const { children, props } = this._getChildren(propsAndChildren);
+
+        if (props.showClass) {
+            this.showClass = props.showClass;
+        }
 
         const eventBus = new EventBus();
         this._meta = {
@@ -201,7 +206,7 @@ export default class Block<P = any> {
     }
 
     show(): void {
-        this.getContent().style.display = "block";
+        this.getContent().style.display = this.propDisplay;
     }
 
     hide(): void {
