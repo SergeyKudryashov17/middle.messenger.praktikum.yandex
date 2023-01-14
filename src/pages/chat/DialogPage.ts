@@ -15,6 +15,7 @@ import attachFileUrl from '../../static/icon/attach-file.svg';
 import attachLocationUrl from '../../static/icon/attach-location.svg';
 
 interface IDialogPageProps {
+    propDisplay?: string,
     emptyChatBody: boolean,
     messagesGroups: IMessagesGroupProps[]
 }

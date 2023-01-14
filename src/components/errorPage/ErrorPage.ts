@@ -6,6 +6,7 @@ interface IErrorPageProps {
     title: string,
     caption: string,
     link: Link,
+    propDisplay?: string,
     events?: Record<string, Function>
 }
 

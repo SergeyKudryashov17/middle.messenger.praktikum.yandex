@@ -1,9 +1,17 @@
 import Block from '../../core/Block';
+import Form from "../../components/form/Form";
 
-export default class LoginPage extends Block {
+interface ISinginPageProps {
+    typeBody?: string,
+    title: string,
+    form: Form,
+    propDisplay: string;
+}
+
+export default class SinginPage extends Block {
     typeBody: string;
 
-    constructor(props: any) {
+    constructor(props: ISinginPageProps) {
         super("div", {...props});
     }
 

@@ -14,5 +14,6 @@ export const pageServerError: ErrorPage = new ErrorPage({
     title: '500',
     typeBody: 'default',
     caption: 'Мы уже фиксим',
-    link: linkBackChats
+    link: linkBackChats,
+    propDisplay: 'flex'
 });

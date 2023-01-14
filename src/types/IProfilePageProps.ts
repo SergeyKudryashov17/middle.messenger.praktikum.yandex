@@ -1,5 +1,6 @@
 export default interface IProfilePageProps {
   typeBody: string,
   userName: string,
-  imageUrl: string
+  imageUrl: string,
+  propDisplay: string
 }

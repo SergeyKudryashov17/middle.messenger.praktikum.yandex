@@ -147,6 +147,7 @@ const form: Form = new Form({
 });
 
 export const singInPage: SinginPage = new SinginPage({
+    propDisplay: 'flex',
     title: 'Регистрация',
     typeBody: 'default',
     form: form

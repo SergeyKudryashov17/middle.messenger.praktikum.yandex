@@ -27,8 +27,8 @@ export default class Block<P = any> {
     public constructor(tagName:string = "div", propsAndChildren: P = {} as P) {
         const { children, props } = this._getChildren(propsAndChildren);
 
-        if (props.showClass) {
-            this.showClass = props.showClass;
+        if (props.propDisplay) {
+            this.propDisplay = props.propDisplay;
         }
 
         const eventBus = new EventBus();

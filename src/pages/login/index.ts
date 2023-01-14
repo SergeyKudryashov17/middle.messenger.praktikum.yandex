@@ -75,5 +75,6 @@ const form: Form = new Form({
 export const loginPage: LoginPage = new LoginPage({
     title: 'Вход',
     typeBody: 'default',
-    form: form
+    form: form,
+    propDisplay: 'flex'
 });

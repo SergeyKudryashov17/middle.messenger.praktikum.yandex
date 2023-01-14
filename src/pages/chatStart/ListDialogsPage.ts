@@ -4,7 +4,9 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import { getListDialogs } from "../../models/dialogsData";
 
 interface IListDialogsPageProps {
-    emptyChatBody: boolean
+    propDisplay?: string,
+    emptyChatBody: boolean,
+    sidebar?: Sidebar
 }
 
 export default class ListDialogsPage extends Block {

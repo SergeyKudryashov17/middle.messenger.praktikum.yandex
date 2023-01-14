@@ -4,7 +4,8 @@ import Form from "../../components/form/Form";
 interface ILoginPageProps {
     typeBody?: string,
     title: string,
-    form: Form
+    form: Form,
+    propDisplay: string;
 }
 
 export default class LoginPage extends Block {

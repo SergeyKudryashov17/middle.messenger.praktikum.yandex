@@ -15,4 +15,5 @@ export const pageNotFound: ErrorPage = new ErrorPage({
     typeBody: "default",
     caption: "Не туда попали",
     link: linkBackChats,
+    propDisplay: 'flex'
 });
