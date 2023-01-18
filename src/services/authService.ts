@@ -10,9 +10,6 @@ class AuthService {
   private api = new AuthAPI('/auth');
 
   async signup(signupData: SignupData) {
-    console.log('method signup');
-    // store.set('user.isLoading', true);
-
     try {
       const response = await this.api.singup(signupData);
       if (apiHasError(response)) {
@@ -22,20 +19,13 @@ class AuthService {
       await this.fetchUser();
       Router.go('/');
     } catch (e) {
-      console.log(e);
       alert ('Error during signing up');
-    } finally {
-      // store.set('user.isLoading', false);
     }
   }
 
   async signin(signinData: SigninData) {
-    console.log('method signin');
     store.set('isLoading', true);
-
-    console.log('authService', signinData);
     const response: null | APIError = await this.api.singin(signinData);
-    console.log(response);
     if (apiHasError(response)) {
       alert(response.reason);
       store.set('isLoading', false);
@@ -61,7 +51,6 @@ class AuthService {
   async logout() {
     try {
       const response = await this.api.logout();
-      console.log(response);
       Router.go('/login');
     } catch (e) {
       alert ('Error during logging out');
