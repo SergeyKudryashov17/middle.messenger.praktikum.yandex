@@ -1,5 +1,7 @@
 import Block from '../../core/Block';
 import Form from "../../components/form/Form";
+import { withStore } from "../../hocs/withStore";
+import { getLoadingState } from "../../utils/getLoadingState";
 
 interface ILoginPageProps {
     typeBody?: string,
@@ -8,7 +10,7 @@ interface ILoginPageProps {
     propDisplay: string;
 }
 
-export default class LoginPage extends Block {
+class LoginPage extends Block {
     private typeBody: string = '';
 
     constructor(props: ILoginPageProps) {
@@ -18,12 +20,24 @@ export default class LoginPage extends Block {
     render() {
         this.typeBody = (this.props.typeBody) ? `messenger-body_${this.props.typeBody}` : '';
 
-        return `
-            <main class="messenger-container">
-                <div class="messenger-body ${this.typeBody}">
-                    {{{ form }}}
-                </div>
-            </main>
-        `;
+        if (this.props.isLoading) {
+            return `
+                <main class="messenger-container">
+                    <div class="messenger-body ${this.typeBody}">
+                        Loading...
+                    </div>
+                </main>
+            `;
+        } else {
+            return `
+                <main class="messenger-container">
+                    <div class="messenger-body ${this.typeBody}">
+                        {{{ form }}}
+                    </div>
+                </main>
+            `;
+        }
     }
 }
+
+export default withStore(getLoadingState)(LoginPage);

@@ -7,6 +7,8 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import IProfilePageProps from '../../types/IProfilePageProps';
 
 import '../../components/list/list.css';
+import Button from "../../components/button/Button";
+import authService from "../../services/authService";
 
 export default class ProfilePage extends Block {
     constructor(props: IProfilePageProps) {
@@ -57,26 +59,30 @@ export default class ProfilePage extends Block {
 
         props.linkChangeData = new Link({
             label: "Изменить данные",
-            href: "/profileEdit",
-            dataset: {
-                page: 'pageProfileEdit'
-            }
+            href: "/profileEdit"
         });
 
         props.linkChangePassword = new Link({
             label: "Изменить пароль",
-            href: "/passwordEdit",
-            dataset: {
-                page: 'pageEditPassword'
-            }
+            href: "/passwordEdit"
         });
 
-        props.linkLogout = new Link({
+        // props.linkLogout = new Link({
+        //     label: "Выйти",
+        //     href: "/login",
+        //     className: "link_danger",
+        //     dataset: {
+        //         page: 'pageLogin'
+        //     }
+        // });
+
+        props.linkLogout = new Button({
             label: "Выйти",
-            href: "/login",
-            className: "link_danger",
-            dataset: {
-                page: 'pageLogin'
+            className: "button_link text-danger",
+            events: {
+                click: () => {
+                    authService.logout();
+                }
             }
         });
 

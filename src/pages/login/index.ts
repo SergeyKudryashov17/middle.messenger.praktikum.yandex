@@ -4,6 +4,9 @@ import LoginPage from "./LoginPage";
 import { handleValidateField, resetValidateField, validateForm } from "../../utils/validation";
 import Button from "../../components/button/Button";
 import Form from "../../components/form/Form";
+import authService from "../../services/authService";
+import { SigninData } from "../../api/types";
+import store from "../../core/Store";
 
 const fieldLogin: Field = new Field({
     labelText: 'Логин',
@@ -36,7 +39,7 @@ const btnLogIn: Button = new Button({
     label: 'Авторизоваться'
 });
 const linkRegistration: Link = new Link({
-    href: '/singin',
+    href: '/signin',
     className: 'link_centered',
     label: 'Нет аккаунта'
 });
@@ -56,13 +59,15 @@ const form: Form = new Form({
 
             const status: boolean = validateForm(fields);
             if (status) {
-                let formData: Record<string, string> = {};
+                let formData: SigninData = {};
                 fields.map(fieldComponent => {
                     const fieldName: string = (fieldComponent.children.inputComponent.getContent() as HTMLInputElement).name;
                     formData[fieldName] = (fieldComponent.children.inputComponent.getContent() as HTMLInputElement).value;
                 });
 
                 console.log(formData);
+
+                authService.signin(formData);
             }
         }
     }

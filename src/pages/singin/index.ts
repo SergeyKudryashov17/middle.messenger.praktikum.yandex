@@ -5,6 +5,7 @@ import Link from "../../components/link/Link";
 import Form from "../../components/form/Form";
 import Button from "../../components/button/Button";
 import SinginPage from "./SinginPage";
+import authService from "../../services/authService";
 
 
 const fieldEmail: Field  = new Field({
@@ -141,6 +142,7 @@ const form: Form = new Form({
                 });
 
                 console.log(formData);
+                authService.signup(formData);
             }
         }
     }
