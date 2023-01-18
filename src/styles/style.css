@@ -177,3 +177,7 @@ h2 {
 .error-label_center {
     text-align: center;
 }
+
+.text-danger {
+    color: var(--danger-color);
+}
