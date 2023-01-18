@@ -1,3 +1,5 @@
+import queryStringify from "../utils/queryStringify";
+
 enum METHODS {
   GET = 'GET',
   POST =  'POST',
@@ -11,56 +13,59 @@ type Options = {
   data?: any
 }
 
-type queryData = {
-  key: string,
-  value: unknown
-}
+export type OptionsWithoutMethod = Omit<Options, 'method'>;
 
-type OptionsWithoutMethod = Omit<Options, 'method'>;
+export class HTTPTransport {
+  static API_URL = 'https://ya-praktikum.tech/api/v2';
+  protected endpoint: string;
 
-type HTTPMethod = (url: string, options?: OptionsWithoutMethod) => Promise<XMLHttpRequest>
-
-class HTTPTransport {
-  get: HTTPMethod = (url, options) => {
-    return this.request(url, {...options, method: METHODS.GET});
+  constructor(endpoint: string) {
+    this.endpoint = `${HTTPTransport.API_URL}${endpoint}`;
   }
 
-  put: HTTPMethod = (url, options) => {
-    return this.request(url, {...options, method: METHODS.PUT});
+  public get<Response>(path: string): Promise<Response> {
+    return this.request<Response>(this.endpoint + path);
   }
 
-  post: HTTPMethod = (url, options) => {
-    return this.request(url, {...options, method: METHODS.POST});
+  public put<Response = void>(path: string, data: unknown): Promise<Response> {
+    return this.request<Response>(this.endpoint + path, {method: METHODS.PUT, data});
   }
 
-  delete: HTTPMethod = (url, options) => {
-    return this.request(url, {...options, method: METHODS.DELETE});
+  public post<Response = void>(path: string, data?: unknown): Promise<Response> {
+    return this.request<Response>(this.endpoint + path, {method: METHODS.POST, data});
   }
 
-  patch: HTTPMethod = (url, options) => {
-    return this.request(url, {...options, method: METHODS.PATCH});
+  public delete<Response>(path: string): Promise<Response> {
+    return this.request<Response>(this.endpoint + path, { method: METHODS.DELETE });
   }
 
-  request(url: string, options: Options = { method: METHODS.GET }, timeout: number = 5000): Promise<XMLHttpRequest> {
+  public patch<Response = void>(path: string, data: unknown): Promise<Response> {
+    return this.request<Response>(this.endpoint + path, {method: METHODS.PATCH, data});
+  }
+
+  private request<Response>(url: string, options: Options = { method: METHODS.GET }, timeout: number = 5000): Promise<Response> {
     const { method, data } = options;
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
 
-      if (method === METHODS.GET) {
-        url += HTTPTransport.queryStringify(data);
+      if (method === METHODS.GET && data) {
+        url += queryStringify(data);
       }
 
       xhr.open(method, url);
 
       xhr.onload = function() {
-        resolve(xhr);
+        resolve(xhr.response);
       }
 
       xhr.timeout = timeout;
       xhr.onabort = reject;
       xhr.onerror = reject;
       xhr.ontimeout = reject;
+
+      xhr.withCredentials = true;
+      xhr.responseType = 'json';
 
       if (method === METHODS.GET || !data) {
         xhr.send();
@@ -69,15 +74,5 @@ class HTTPTransport {
         xhr.send(JSON.stringify(data));
       }
     });
-  }
-
-  static queryStringify(data: queryData[]) {
-    return Object.entries(data).reduce((result, item, index, array) => {
-      result += `${item[0]}=${item[1]}`;
-      if (index !== array.length - 1) {
-        result += '&';
-      }
-      return result;
-    }, '?');
   }
 }
