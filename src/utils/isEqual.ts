@@ -36,6 +36,9 @@ function isArrayOrObject(value: unknown): value is [] | PlainObject {
  * @return boolean - результат сравнения
  */
 export default function isEqual(lhs: PlainObject, rhs: PlainObject) {
+  if (!isPlainObject(lhs) || !isPlainObject(rhs)) {
+    return false;
+  }
   if (Object.keys(lhs).length !== Object.keys(rhs).length) {
     return false;
   }
