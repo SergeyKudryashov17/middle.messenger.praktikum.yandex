@@ -1,5 +1,5 @@
 import { HTTPTransport } from "../core/request";
-import { SignupData, SigninData, UserData, APIError } from "./types";
+import { IProfileData, SigninData, UserData, APIError } from "./types";
 
 export default class AuthAPI {
   protected http: HTTPTransport
@@ -8,12 +8,11 @@ export default class AuthAPI {
     this.http = new HTTPTransport(endpoint);
   }
 
-  public singup(data: SignupData) {
+  public singup(data: IProfileData) {
     return this.http.post('/signup', data);
   }
 
   public singin(data: SigninData): Promise<null | APIError> {
-    console.log('authApi', data);
     return this.http.post('/signin', data);
   }
 

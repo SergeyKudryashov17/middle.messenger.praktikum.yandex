@@ -26,14 +26,12 @@ class Router {
     window.onpopstate = (event: Event) => {
       this.onRoute(event.currentTarget.location.pathname);
     }
-    console.log(window.location.pathname);
     this.onRoute(window.location.pathname);
   }
 
   private onRoute(pathname: string) {
     const route = this.getRoute(pathname);
-
-    console.log(route);
+    console.log('route', route);
 
     if (!route) return;
 
@@ -45,6 +43,7 @@ class Router {
   }
 
   go(pathname: string) {
+    console.log('go to' + pathname);
     this.history.pushState({}, "", pathname);
     this.onRoute(pathname);
   }

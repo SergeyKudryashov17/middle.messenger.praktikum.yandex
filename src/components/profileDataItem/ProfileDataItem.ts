@@ -8,6 +8,7 @@ interface IProfileDataItem {
     label: string,
     isEditable?: boolean,
     fieldClass?: string,
+    inputID?: string,
     inputName?: string,
     typeValue?: string,
     value: string,
@@ -20,6 +21,7 @@ export default class ProfileDataItem extends Block {
         if (props.isEditable) {
             props.field = new Field({
                 fieldClass: props.fieldClass,
+                inputID: props.inputID,
                 inputName: props.inputName,
                 inputType: props.typeValue,
                 inputValue: props.value,

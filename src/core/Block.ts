@@ -92,6 +92,7 @@ export default class Block<P = any> {
 
     // Может переопределять пользователь, необязательно трогать
     componentDidUpdate(oldProps: P, newProps: P) {
+        console.log(newProps);
         return true;
     }
 
@@ -108,12 +109,14 @@ export default class Block<P = any> {
     }
 
     _render(): void {
+        console.log('render', this);
         const fragment: DocumentFragment = this._compile();
 
         this._removeEvents();
 
         const newElement: HTMLElement = fragment.firstElementChild as HTMLElement;
 
+        console.log(newElement);
         this._element.replaceWith(newElement);
         this._element = newElement;
 

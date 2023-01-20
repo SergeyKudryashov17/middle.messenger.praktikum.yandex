@@ -2,7 +2,7 @@ export type APIError = {
   reason: string;
 };
 
-export interface SignupData {
+export interface IProfileData {
   first_name: string;
   second_name: string;
   login: string;
@@ -25,4 +25,37 @@ export interface UserData {
   email: string,
   phone: string,
   avatar: string
+}
+
+export interface IPasswordData {
+  oldPassword: string,
+  newPassword: string
+}
+
+export interface IRequestSearchUser {
+  login: string
+}
+
+export interface IRequestChat {
+  offset: number,
+  limit: number,
+  title: string
+}
+
+export interface IChat {
+  id: number,
+  title: string,
+  avatar: string,
+  unread_count: number,
+  last_message: IMessage
+}
+
+export interface IMessage {
+  user: IProfileData,
+  time: string,
+  content: string
+}
+
+export interface IRequestNewChat {
+  title: string
 }

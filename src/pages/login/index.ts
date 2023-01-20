@@ -1,12 +1,18 @@
+import Block from '../../core/Block';
+import Form from "../../components/form/Form";
+import { withStore } from "../../hocs/withStore";
+import { getLoadingState } from "../../utils/getLoadingState";
 import Field from "../../components/field/Field";
-import Link from "../../components/link/Link";
-import LoginPage from "./LoginPage";
 import { handleValidateField, resetValidateField, validateForm } from "../../utils/validation";
 import Button from "../../components/button/Button";
-import Form from "../../components/form/Form";
-import authService from "../../services/authService";
+import Link from "../../components/link/Link";
 import { SigninData } from "../../api/types";
-import store from "../../core/Store";
+import authService from "../../services/authService";
+
+type LoginPageProps = {
+    form: Form,
+    propDisplay: string;
+}
 
 const fieldLogin: Field = new Field({
     labelText: 'Логин',
@@ -30,9 +36,7 @@ const fieldPassword: Field = new Field({
         blur: () => handleValidateField(fieldPassword)
     }
 });
-
-const fields = [fieldLogin, fieldPassword];
-
+const fields: Field[] = [fieldLogin, fieldPassword];
 const btnLogIn: Button = new Button({
     type: 'submit',
     className: 'button_main button_full-width button_centered',
@@ -43,8 +47,6 @@ const linkRegistration: Link = new Link({
     className: 'link_centered',
     label: 'Нет аккаунта'
 });
-
-
 const form: Form = new Form({
     title: 'Вход',
     className: 'form',
@@ -74,9 +76,24 @@ const form: Form = new Form({
 });
 
 
-export const loginPage: LoginPage = new LoginPage({
-    title: 'Вход',
-    typeBody: 'default',
-    form: form,
-    propDisplay: 'flex'
-});
+class LoginPage extends Block {
+    constructor(props: LoginPageProps) {
+        console.log(props);
+        props.propDisplay = 'flex';
+        props.form = form;
+
+        super("div", { ...props});
+    }
+
+    render() {
+        return `
+            <main class="messenger-container">
+                <div class="messenger-body messenger-body_default">
+                    {{{ form }}}
+                </div>
+            </main>
+        `;
+    }
+}
+
+export default LoginPage;

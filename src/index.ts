@@ -1,35 +1,35 @@
 import Router from "./core/Router";
 
-import { pageNotFound } from './pages/404/';
-import { pageServerError } from './pages/500/';
-import { listDialogsPage } from './pages/chat/';
-import { listDialogsPageStart } from './pages/chatStart/';
-import { loginPage } from './pages/login/';
-import { profilePage } from './pages/profile/';
-import { editProfilePage } from './pages/profileEdit/';
-import { editProfilePasswordPage } from './pages/profileEditPassword/';
-import { singInPage } from './pages/singin/';
+import PageNotFound from './pages/404/';
+import PageServerError from './pages/500/';
+import DialogPage from './pages/chat/';
+import ListDialogsPageStart from './pages/chatStart/';
+import LoginPage from './pages/login/';
+import ProfilePage from './pages/profile/';
+import EditProfilePage from './pages/profileEdit/';
+import EditPasswordPage from './pages/profileEditPassword/';
+import SigninPage from './pages/singin/';
 import { APIError, UserData } from "./api/types";
 import authService from "./services/authService";
 import { apiHasError } from "./utils/apiHasError";
 import { getRouteData, listRoutes, RouteData } from "./core/listRoutes";
 
 document.addEventListener('DOMContentLoaded', async () => {
+  console.log('DOMContentLoaded');
+
   Router
-    .use(listRoutes.base.path, listDialogsPageStart)
-    .use(listRoutes.signin.path, singInPage)
-    .use(listRoutes.pageNotFound.path, pageNotFound)
-    .use(listRoutes.pageError.path, pageServerError)
-    .use(listRoutes.login.path, loginPage)
-    .use(listRoutes.dialog.path, listDialogsPage)
-    .use(listRoutes.profile.path, profilePage)
-    .use(listRoutes.profileEdit.path, editProfilePage)
-    .use(listRoutes.passwordEdit.path, editProfilePasswordPage);
+    .use(listRoutes.base.path, ListDialogsPageStart)
+    .use(listRoutes.signin.path, SigninPage)
+    .use(listRoutes.pageNotFound.path, PageNotFound)
+    .use(listRoutes.pageError.path, PageServerError)
+    .use(listRoutes.login.path, LoginPage)
+    .use(listRoutes.dialog.path, DialogPage)
+    .use(listRoutes.profile.path, ProfilePage)
+    .use(listRoutes.profileEdit.path, EditProfilePage)
+    .use(listRoutes.passwordEdit.path, EditPasswordPage);
 
   const responseUser: UserData | APIError = await authService.fetchUser();
   Router.start();
-
-  console.log(listDialogsPageStart);
 
   if (apiHasError(responseUser)) {
     Router.go(listRoutes.login.path);

@@ -1,23 +1,24 @@
 import AuthAPI from "../api/AuthAPI";
-import { APIError, SignupData, SigninData, UserData } from "../api/types";
+import { APIError, IProfileData, SigninData, UserData } from "../api/types";
 import { apiHasError } from "../utils/apiHasError";
 import store from "../core/Store";
 import Router from "../core/Router";
 import isEqual from "../utils/isEqual";
+import { listRoutes } from "../core/listRoutes";
 
 
 class AuthService {
   private api = new AuthAPI('/auth');
 
-  async signup(signupData: SignupData) {
+  async signup(IProfileData: IProfileData) {
     try {
-      const response = await this.api.singup(signupData);
+      const response = await this.api.singup(IProfileData);
       if (apiHasError(response)) {
         alert(response.reason);
         return;
       }
       await this.fetchUser();
-      Router.go('/');
+      Router.go(listRoutes.base.path);
     } catch (e) {
       alert ('Error during signing up');
     }
@@ -32,26 +33,16 @@ class AuthService {
       throw new Error(response.reason);
     }
 
-    const responseUser: UserData | APIError = await this.fetchUser();
-    if (apiHasError(responseUser)) {
-      alert(responseUser.reason);
-      store.set('isLoading', false);
-      throw new Error(responseUser.reason);
-    }
+    await this.fetchUser();
 
-    const userState = store.getState().user;
-    store.set('isLoading', false);
-    if (!userState || !isEqual(userState, responseUser)) {
-      store.set('user', responseUser);
-    }
-
-    Router.go('/');
+    Router.go(listRoutes.base.path);
+    console.log(store.getState());
   }
 
   async logout() {
     try {
-      const response = await this.api.logout();
-      Router.go('/login');
+      await this.api.logout();
+      Router.go(listRoutes.login.path);
     } catch (e) {
       alert ('Error during logging out');
     }
@@ -59,10 +50,21 @@ class AuthService {
 
   async fetchUser(): Promise<UserData | APIError> {
     store.set('isLoading', true);
-    const response: UserData | APIError = await this.api.getUser();
-    store.set('isLoading', false)
+    const responseUser: UserData | APIError = await this.api.getUser();
+    store.set('isLoading', false);
 
-    return response;
+    if (apiHasError(responseUser)) {
+      alert(responseUser.reason);
+      console.error(responseUser.reason);
+      return responseUser;
+    }
+
+    const userState = store.getState().user;
+    if (!userState || !isEqual(userState, responseUser)) {
+      store.set('user', responseUser);
+    }
+
+    return responseUser;
   }
  }
 

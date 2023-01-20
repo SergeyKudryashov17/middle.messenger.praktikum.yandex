@@ -141,20 +141,6 @@ h2 {
     margin: 0 auto;
 }
 
-.profile-data {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.profile-data__label {
-    color: var(--base-text-color);
-    font-size: var(--base-size-text);
-}
-.profile-data__value {
-    color: var(--secondary-text-color);
-    font-size: var(--base-size-text);
-}
-
 .profile-name {
     font-size: 16px;
     font-weight: var(--font-weight-bold);

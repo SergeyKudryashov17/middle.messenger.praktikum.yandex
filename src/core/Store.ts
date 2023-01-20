@@ -10,8 +10,9 @@ export class Store extends EventBus {
 
   public set(keypath: string, data: unknown) {
     set(this.state, keypath, data);
-    console.log(this.getState());
     this.emit(StoreEvents.Updated, this.getState());
+
+    console.log('Обновленный store', this.state);
   }
 
   public getState() {

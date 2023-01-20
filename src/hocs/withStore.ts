@@ -1,8 +1,9 @@
 import store, { StoreEvents } from "../core/Store";
 import isEqual from "../utils/isEqual";
+import Block from "../core/Block";
 
 export function withStore(mapStateToProps: (state: any)=> any) {
-  return function wrap(Component) {
+  return function wrap(Component: typeof Block) {
     let currentState = null;
 
     return class WithStore extends Component {
@@ -16,10 +17,14 @@ export function withStore(mapStateToProps: (state: any)=> any) {
           const state = store.getState();
           const propsFromState = mapStateToProps(state);
 
-          if (isEqual(currentState, propsFromState)) {
-            return;
-          }
-
+          // console.log('текущее состояние', currentState);
+          // console.log('новое состояние', propsFromState);
+          // console.log('сравнение состояний', isEqual(currentState, propsFromState));
+          // if (isEqual(currentState, propsFromState)) {
+          //   return;
+          // }
+          //
+          console.log('new props', propsFromState);
           this.setProps({ ...propsFromState });
         })
       }

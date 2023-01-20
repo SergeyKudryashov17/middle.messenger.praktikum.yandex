@@ -1,12 +1,17 @@
-import Block from "../../core/Block";
-import { handleValidateField, resetValidateField, validateForm, checkPasswordMatch } from '../../utils/validation';
-import Field from "../../components/field/Field";
-import Link from "../../components/link/Link";
+import Block from '../../core/Block';
 import Form from "../../components/form/Form";
+import Field from "../../components/field/Field";
+import { checkPasswordMatch, handleValidateField, resetValidateField, validateForm } from "../../utils/validation";
 import Button from "../../components/button/Button";
-import SinginPage from "./SinginPage";
+import Link from "../../components/link/Link";
 import authService from "../../services/authService";
+import { withStore } from "../../hocs/withStore";
+import { getLoadingState } from "../../utils/getLoadingState";
 
+type SigninPageProps = {
+    form: Form,
+    propDisplay: string;
+}
 
 const fieldEmail: Field  = new Field({
     labelText: 'Почта',
@@ -85,8 +90,8 @@ const fieldPasswordRepeat: Field = new Field({
         blur: () => {
             if (!handleValidateField(fieldPasswordRepeat)) return;
             const error: string = (!checkPasswordMatch(fieldPassword, fieldPasswordRepeat))
-                ? 'Пароли не совпадают'
-                : '';
+              ? 'Пароли не совпадают'
+              : '';
             const errorComponent: Block = fieldPasswordRepeat.children.errorTextComponent;
             errorComponent.setProps({
                 className: (error !== '') ? 'error-label_show' : '',
@@ -96,7 +101,7 @@ const fieldPasswordRepeat: Field = new Field({
     }
 });
 
-let fields = [
+const fields: Field[] = [
     fieldEmail,
     fieldLogin,
     fieldFName,
@@ -148,9 +153,23 @@ const form: Form = new Form({
     }
 });
 
-export const singInPage: SinginPage = new SinginPage({
-    propDisplay: 'flex',
-    title: 'Регистрация',
-    typeBody: 'default',
-    form: form
-});
+class SigninPage extends Block {
+    constructor(props: SigninPageProps) {
+        props.form = form;
+        props.propDisplay = 'flex';
+
+        super("div", {...props});
+    }
+
+    render(): string {
+        return `
+            <main class="messenger-container">
+                <div class="messenger-body messenger-body_default">
+                    {{{ form }}}
+                </div>
+            </main>
+        `;
+    }
+}
+
+export default SigninPage;

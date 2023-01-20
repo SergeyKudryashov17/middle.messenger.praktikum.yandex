@@ -4,6 +4,7 @@ import './message.css';
 
 export interface IMessageProps {
     isText?: boolean,
+    isImage?: boolean,
     text?: string[],
     date: string,
     fromMe: boolean,

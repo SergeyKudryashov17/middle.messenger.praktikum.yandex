@@ -3,11 +3,11 @@ import Block from "./Block";
 
 export default class Route {
   private pathname: string;
-  private blockClass: Block;
+  private blockClass: typeof Block;
   private block: Block | null;
   private props: Record<string, any>;
 
-  constructor(pathname: string, view: Block, props: Record<string, any>) {
+  constructor(pathname: string, view: typeof Block, props: Record<string, any>) {
     this.pathname = pathname;
     this.blockClass = view;
     this.block = null;
@@ -34,7 +34,7 @@ export default class Route {
 
   render() {
     if (!this.block) {
-      this.block = this.blockClass;
+      this.block = new this.blockClass({});
       renderDOM(this.props.rootQuery, this.block as Block);
     }
 
