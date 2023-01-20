@@ -108,6 +108,35 @@ class ProfilePage extends Block {
         super("div", {...props});
     }
 
+    componentDidUpdate(oldProps, newProps): boolean {
+        const oldUserState = oldProps.userState;
+        const newUserState = newProps.userState;
+
+        if (oldUserState.avatar !== newUserState.avatar) {
+            this.children.userAvatar.setProps({ url: `https://ya-praktikum.tech/api/v2/resources${newUserState.avatar}` });
+        }
+        if (oldUserState.email !== newUserState.email) {
+            this.children.profileItemEmail.setProps({ value: newUserState.email || '' });
+        }
+        if (oldUserState.login !== newUserState.login) {
+            this.children.profileItemLogin.setProps({ value: newUserState.login || '' });
+        }
+        if (oldUserState.first_name !== newUserState.first_name) {
+            this.children.profileItemFName.setProps({ value: newUserState.first_name || '' });
+        }
+        if (oldUserState.second_name !== newUserState.second_name) {
+            this.children.profileItemSName.setProps({ value: newUserState.second_name || '' });
+        }
+        if (oldUserState.display_name !== newUserState.display_name) {
+            this.children.profileItemChatName.setProps({ value: newUserState.display_name || '' });
+        }
+        if (oldUserState.phone !== newUserState.phone) {
+            this.children.profileItemPhone.setProps({ value: newUserState.phone || '' });
+        }
+
+        return true;
+    }
+
     render(): string {
         return `
             <main class="messenger-container">

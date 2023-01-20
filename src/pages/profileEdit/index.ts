@@ -34,7 +34,6 @@ type ProfilePageProps = {
 class EditProfilePage extends Block {
     constructor(props: ProfilePageProps) {
         const userState: UserData = props.userState;
-        console.log(userState);
 
         props.propDisplay = 'flex';
 
@@ -193,8 +192,18 @@ class EditProfilePage extends Block {
         super("div", {...props});
     }
 
+    componentDidUpdate(oldProps, newProps): boolean {
+        const oldUserState = oldProps.userState;
+        const newUserState = newProps.userState;
+
+        if (oldUserState.avatar !== newUserState.avatar) {
+            this.children.userAvatar.setProps({ url: `https://ya-praktikum.tech/api/v2/resources${newUserState.avatar}` });
+        }
+
+        return true;
+    }
+
     render(): string {
-        console.log('render EditProfilePage');
         return `
             <main class="messenger-container">
                 <div class="messenger-body messenger-body_profile">

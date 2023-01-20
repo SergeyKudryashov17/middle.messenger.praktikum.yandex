@@ -55,7 +55,7 @@ export default class Block<P = any> {
         eventBus.emit(Block.EVENTS.INIT);
     }
 
-    _registerEvents(eventBus) {
+    _registerEvents(eventBus: EventBus) {
         eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
@@ -82,17 +82,14 @@ export default class Block<P = any> {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
     }
 
-    _componentDidUpdate(oldProps: P, newProps: P) {
-        const response:Boolean = this.componentDidUpdate(oldProps, newProps);
-        if (!response) {
-            return;
+    private _componentDidUpdate(oldProps: P, newProps: P) {
+        if (this.componentDidUpdate(oldProps, newProps)) {
+            this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
         }
-        this._render();
     }
 
     // Может переопределять пользователь, необязательно трогать
-    componentDidUpdate(oldProps: P, newProps: P) {
-        console.log(newProps);
+    componentDidUpdate(oldProps: P, newProps: P): boolean {
         return true;
     }
 
@@ -104,20 +101,18 @@ export default class Block<P = any> {
         Object.assign(this.props, nextProps);
     };
 
-    get element(): HTMLElement {
+    get element(): HTMLElement | null {
         return this._element;
     }
 
     _render(): void {
-        console.log('render', this);
         const fragment: DocumentFragment = this._compile();
 
         this._removeEvents();
 
         const newElement: HTMLElement = fragment.firstElementChild as HTMLElement;
 
-        console.log(newElement);
-        this._element.replaceWith(newElement);
+        this._element?.replaceWith(newElement);
         this._element = newElement;
 
         this._element.dataset.id = this._id;
@@ -130,7 +125,7 @@ export default class Block<P = any> {
         return '';
     }
 
-    getContent(): HTMLElement {
+    getContent(): HTMLElement | null {
         return this.element;
     }
 
@@ -138,7 +133,7 @@ export default class Block<P = any> {
         const {events = {}} = this.props;
 
         Object.keys(events).forEach(eventName => {
-            this._element.addEventListener(eventName, events[eventName]);
+            this._element?.addEventListener(eventName, events[eventName]);
         });
     }
 
@@ -146,7 +141,7 @@ export default class Block<P = any> {
         const {events = {}} = this.props;
 
         Object.keys(events).forEach(eventName => {
-            this._element.removeEventListener(eventName, events[eventName]);
+            this._element?.removeEventListener(eventName, events[eventName]);
         });
     }
 
@@ -161,8 +156,9 @@ export default class Block<P = any> {
                 return typeof value === 'function' ? value.bind(target) : value;
             },
             set(target: Record<string, unknown>, prop: string, value) {
+                const oldTarget = {...target};
                 target[prop] = value;
-                self.eventBus().emit(Block.EVENTS.FLOW_CDU, {...target}, target);
+                self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
                 return true;
             },
             deleteProperty() {
