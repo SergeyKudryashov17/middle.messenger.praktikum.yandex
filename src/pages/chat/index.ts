@@ -5,6 +5,7 @@ import Button from "../../components/button/Button";
 import DropdownMenu from "../../components/dropdownMenu/DropdownMenu";
 import Input from '../../components/input/Input';
 import MessagesGroup, { IMessagesGroupProps } from "../../components/messages-group/MessagesGroup";
+import ChatService from '../../services/chatService';
 import { validate } from '../../utils/validation';
 import { getListDialogs } from "../../models/dialogsData";
 
@@ -14,9 +15,18 @@ import attachImgIconUrl from '../../static/icon/attach-image.svg';
 import attachFileUrl from '../../static/icon/attach-file.svg';
 import attachLocationUrl from '../../static/icon/attach-location.svg';
 import imageUrl from "../../static/img/image.png";
+import store from "../../core/Store";
+import { withStore } from "../../hocs/withStore";
+import { getChatsState } from "../../utils/getChatsState";
+import { FullUserData, IShortDataChat } from "../../api/types";
+import * as console from "console";
+import isEqual from "../../utils/isEqual";
+import ModalAddUser from "../../components/modalAddUser";
+import ModalDeleteUsers from "../../components/modalDeleteUsers";
 
 type DialogPageProps = {
     propDisplay?: string,
+    selectedChat: IShortDataChat,
     messagesGroups: IMessagesGroupProps[],
     messagesGroupsLabels: string,
     sidebar: Sidebar,
@@ -27,12 +37,14 @@ type DialogPageProps = {
     settingsDialogBtn: Button,
     sendMessageBtn: Button,
     attachedBtn: Button,
-
+    modalAddUser: ModalAddUser,
+    modalDeleteUsers: ModalDeleteUsers
 }
 
 class DialogPage extends Block {
     constructor(props: DialogPageProps) {
         props.propDisplay = 'flex';
+
         props.messagesGroups = [
             {
                 "date": "19 июня",
@@ -75,9 +87,7 @@ class DialogPage extends Block {
             dialogList: getListDialogs()
         });
 
-        props.interlocutor = new Interlocutor({
-            name: 'Тест'
-        });
+        props.interlocutor = new Interlocutor({});
 
         props.settingsDialogMenu = new DropdownMenu({
             id: 'setting-dialog-menu',
@@ -85,12 +95,26 @@ class DialogPage extends Block {
                 {
                     label: "Добавить пользователя",
                     className: "open-invite-modal",
-                    icon: addIconUrl
+                    icon: addIconUrl,
+                    events: {
+                        click: () => props.modalAddUser.openModal()
+                    }
                 },
                 {
                     label: "Удалить пользователя",
                     className: "open-delete-modal",
-                    icon: removeIconUrl
+                    icon: removeIconUrl,
+                    events: {
+                        click: async () => {
+                            const currentChatID = this.props.selectedChat.id;
+                            const chatUsers = await ChatService.getChatsUsers(currentChatID);
+                            console.log(chatUsers);
+                            if (chatUsers) {
+                                this.children.modalDeleteUsers.setProps({ listChatUsers: chatUsers });
+                            }
+                            props.modalDeleteUsers.openModal();
+                        }
+                    }
                 }
             ]
         });
@@ -127,11 +151,11 @@ class DialogPage extends Block {
             view: 'icon',
             events: {
                 click: (event: Event) => {
-                    const btnElem: HTMLElement = props.settingsDialogBtn.getContent();
+                    const btnElem: HTMLElement | null = props.settingsDialogBtn.getContent();
                     const settingMenu: DropdownMenu = props.settingsDialogMenu;
 
-                    btnElem.classList.toggle('setting-dialog_active');
-                    btnElem.classList.contains('setting-dialog_active')
+                    btnElem?.classList.toggle('setting-dialog_active');
+                    btnElem?.classList.contains('setting-dialog_active')
                       ? settingMenu.open(event)
                       : settingMenu.close();
                 }
@@ -143,7 +167,7 @@ class DialogPage extends Block {
             label: '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
             events: {
                 click: () => {
-                    const messageText: string = props.inputMessage.getContent().value;
+                    const messageText: string = (props.inputMessage.getContent() as HTMLInputElement).value;
                     const validateStatus: string = validate('', messageText);
 
                     if (validateStatus !== '') {
@@ -164,45 +188,65 @@ class DialogPage extends Block {
             className: 'fa-paperclip fa-flip-vertical add-attached-file',
             events: {
                 click: (event: Event) => {
-                    const attachBtn: HTMLElement = props.attachedBtn.getContent();
+                    const attachBtn: HTMLElement | null = props.attachedBtn.getContent();
                     const attachMenu: DropdownMenu = props.attachMenu;
 
-                    attachBtn.classList.toggle('add-attached-file_active');
-                    attachBtn.classList.contains('add-attached-file_active')
+                    attachBtn?.classList.toggle('add-attached-file_active');
+                    attachBtn?.classList.contains('add-attached-file_active')
                       ? attachMenu.open(event)
                       : attachMenu.close();
                 }
             }
         });
 
-        super("div", {...props});
+        props.modalAddUser = new ModalAddUser({
+            modalID: 'modalAddUser'
+        });
+
+        props.modalDeleteUsers = new ModalDeleteUsers({
+            modalID: 'modalDeleteUsers'
+        });
+
+        super("div", { ...props });
+    }
+
+    async componentDidMount() {
+        store.set('chats', undefined);
+        await ChatService.getListChats();
     }
 
     render(): string {
+        const chatBodyEmpty = `<div class="empty-chat-warning">Выберите чат чтобы отправить сообщение</div>`;
+        const chatBody = `
+            <div class="chat-body__header">
+                {{{ interlocutor }}}
+                {{{ settingsDialogBtn }}}
+                {{{ settingsDialogMenu }}}
+            </div>
+            <div class="chat-body__list">
+                ${this.props.messagesGroupsLabels}
+            </div>
+            <div class="chat-body__footer">
+                {{{ attachedBtn }}}
+                {{{ attachMenu }}}
+                {{{ inputMessage }}}
+                {{{ sendMessageBtn }}}
+            </div>
+        `;
+
         return `
             <main class="messenger-container">
                 <div class="messenger-body">
                     {{{ sidebar }}}
                     <div class="chat-body">
-                        <div class="chat-body__header">
-                            {{{ interlocutor }}}
-                            {{{ settingsDialogBtn }}}
-                            {{{ settingsDialogMenu }}}
-                        </div>
-                        <div class="chat-body__list">
-                            ${this.props.messagesGroupsLabels}
-                        </div>
-                        <div class="chat-body__footer">
-                            {{{ attachedBtn }}}
-                            {{{ attachMenu }}}
-                            {{{ inputMessage }}}
-                            {{{ sendMessageBtn }}}
-                        </div>
+                        ${this.props.selectedChat === undefined ? chatBodyEmpty : chatBody}
                     </div>
+                    {{{ modalAddUser }}}
+                    {{{ modalDeleteUsers }}}
                 </div>
             </main>
         `;
     }
 }
 
-export default DialogPage;
+export default withStore(getChatsState)(DialogPage);;

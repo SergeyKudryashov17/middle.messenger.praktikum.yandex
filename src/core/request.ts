@@ -35,8 +35,8 @@ export class HTTPTransport {
     return this.request<Response>(this.endpoint + path, {method: METHODS.POST, data});
   }
 
-  public delete<Response>(path: string): Promise<Response> {
-    return this.request<Response>(this.endpoint + path, { method: METHODS.DELETE });
+  public delete<Response>(path: string, data?: unknown): Promise<Response> {
+    return this.request<Response>(this.endpoint + path, { method: METHODS.DELETE, data });
   }
 
   public patch<Response = void>(path: string, data: unknown): Promise<Response> {

@@ -4,6 +4,7 @@ import Label from "../label/Label";
 import ErrorText from "../errorText/ErrorText";
 
 import './field.css';
+import * as console from "console";
 
 interface IFieldProps {
     fieldClass?: string,
@@ -53,6 +54,11 @@ export default class Field extends Block {
           }) : '';
 
         super("div", {...props});
+    }
+
+    componentDidUpdate(oldProps: any, newProps: any): boolean {
+        this.children.inputComponent.setProps({value: newProps.inputValue});
+        return true;
     }
 
     render(): string {

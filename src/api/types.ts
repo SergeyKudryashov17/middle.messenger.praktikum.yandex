@@ -27,6 +27,10 @@ export interface UserData {
   avatar: string
 }
 
+export interface FullUserData extends UserData {
+  role: string
+}
+
 export interface IPasswordData {
   oldPassword: string,
   newPassword: string
@@ -42,10 +46,47 @@ export interface IRequestChat {
   title: string
 }
 
+export interface IAdditParamUsersChat {
+  offset?: number,
+  limit?: number,
+  name?: string,
+  email?: string
+}
+
+export interface IChatID {
+  chatId: number
+}
+
+export interface IRequestChatUsers {
+  users: number[],
+  chatId: number
+}
+
+export interface IDeleteUser {
+  id: number,
+  role: string
+}
+
+export interface IResponseDeleteChat {
+  userId: number,
+  result: IShortDataChat
+}
+
+export interface ITokenChat {
+  token: string
+}
+
+export interface IShortDataChat {
+  id: number,
+  title: string,
+  avatar: string
+}
+
 export interface IChat {
   id: number,
   title: string,
   avatar: string,
+  created_by: number,
   unread_count: number,
   last_message: IMessage
 }
@@ -59,3 +100,4 @@ export interface IMessage {
 export interface IRequestNewChat {
   title: string
 }
+

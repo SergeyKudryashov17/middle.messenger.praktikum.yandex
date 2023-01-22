@@ -41,6 +41,10 @@ h2 {
     margin-bottom: 60px;
 }
 
+[type="button"] {
+    cursor: pointer;
+}
+
 .messenger-container {
     display: flex;
     align-items: center;
@@ -70,7 +74,9 @@ h2 {
 }
 
 .messenger-controls {
-    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .chat-body {
@@ -102,15 +108,6 @@ h2 {
 .setting-dialog_active {
     background-color: #F5F5F5;
 }
-
-.dialog-list {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow-y: auto;
-}
-
-
 
 .input-message {
     background: var(--bg-color);
@@ -166,4 +163,12 @@ h2 {
 
 .text-danger {
     color: var(--danger-color);
+}
+
+.text-main {
+    color: var(--main-color);
+}
+
+.list-users {
+    margin-bottom: 10px;
 }

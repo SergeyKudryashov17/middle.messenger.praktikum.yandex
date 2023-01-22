@@ -37,51 +37,51 @@ class ProfilePage extends Block {
         console.log('ProfilePage', userState);
 
         props.propDisplay = 'flex';
-        props.userName = userState.first_name;
+        props.userName = userState?.first_name || "";
 
         props.sidebar = new Sidebar({
             isFullSize: false
         });
 
         props.userAvatar = new Avatar({
-            url: `https://ya-praktikum.tech/api/v2/resources${userState.avatar}` || imageUrl,
+            url: userState?.avatar ? `https://ya-praktikum.tech/api/v2/resources${userState?.avatar}` : imageUrl,
             isEdit: false
         });
 
         props.profileItemEmail = new ProfileDataItem({
             label: "Почта",
             isEditable: false,
-            value: userState.email || '',
+            value: userState?.email || '',
             typeValue: "email"
         });
         props.profileItemLogin = new ProfileDataItem({
             label: "Логин",
             isEditable: false,
-            value: userState.login || '',
+            value: userState?.login || '',
             typeValue: "text"
         });
         props.profileItemFName = new ProfileDataItem({
             label: "Имя",
             isEditable: false,
-            value: userState.first_name || '',
+            value: userState?.first_name || '',
             typeValue: "text"
         });
         props.profileItemSName = new ProfileDataItem({
             label: "Фамилия",
             isEditable: false,
-            value: userState.second_name || '',
+            value: userState?.second_name || '',
             typeValue: "text"
         });
         props.profileItemChatName = new ProfileDataItem({
             label: "Имя в чате",
             isEditable: false,
-            value: userState.display_name || '',
+            value: userState?.display_name || '',
             typeValue: "text"
         });
         props.profileItemPhone = new ProfileDataItem({
             label: "Телефон",
             isEditable: false,
-            value: userState.phone,
+            value: userState?.phone,
             typeValue: "text"
         });
 
@@ -113,25 +113,27 @@ class ProfilePage extends Block {
         const newUserState = newProps.userState;
 
         if (oldUserState.avatar !== newUserState.avatar) {
-            this.children.userAvatar.setProps({ url: `https://ya-praktikum.tech/api/v2/resources${newUserState.avatar}` });
+            this.children.userAvatar.setProps({
+                url: newUserState?.avatar ? `https://ya-praktikum.tech/api/v2/resources${newUserState.avatar}` : imageUrl
+            });
         }
         if (oldUserState.email !== newUserState.email) {
-            this.children.profileItemEmail.setProps({ value: newUserState.email || '' });
+            this.children.profileItemEmail.setProps({ value: newUserState?.email || '' });
         }
         if (oldUserState.login !== newUserState.login) {
-            this.children.profileItemLogin.setProps({ value: newUserState.login || '' });
+            this.children.profileItemLogin.setProps({ value: newUserState?.login || '' });
         }
         if (oldUserState.first_name !== newUserState.first_name) {
-            this.children.profileItemFName.setProps({ value: newUserState.first_name || '' });
+            this.children.profileItemFName.setProps({ value: newUserState?.first_name || '' });
         }
         if (oldUserState.second_name !== newUserState.second_name) {
-            this.children.profileItemSName.setProps({ value: newUserState.second_name || '' });
+            this.children.profileItemSName.setProps({ value: newUserState?.second_name || '' });
         }
         if (oldUserState.display_name !== newUserState.display_name) {
-            this.children.profileItemChatName.setProps({ value: newUserState.display_name || '' });
+            this.children.profileItemChatName.setProps({ value: newUserState?.display_name || '' });
         }
         if (oldUserState.phone !== newUserState.phone) {
-            this.children.profileItemPhone.setProps({ value: newUserState.phone || '' });
+            this.children.profileItemPhone.setProps({ value: newUserState?.phone || '' });
         }
 
         return true;

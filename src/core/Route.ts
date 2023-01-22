@@ -36,9 +36,9 @@ export default class Route {
     if (!this.block) {
       this.block = new this.blockClass({});
       renderDOM(this.props.rootQuery, this.block as Block);
+      return;
     }
 
     renderDOM(this.props.rootQuery, this.block as Block);
-    // this.block.show();
   }
 }

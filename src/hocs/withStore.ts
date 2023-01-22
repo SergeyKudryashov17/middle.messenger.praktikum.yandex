@@ -15,6 +15,7 @@ export function withStore(mapStateToProps: (state: any)=> any) {
         super({ ...props, ...currentState });
 
         store.on(StoreEvents.Updated, () => {
+          console.log('event store update', this, store.getState());
           const state = store.getState();
           const propsFromState = mapStateToProps(state);
 

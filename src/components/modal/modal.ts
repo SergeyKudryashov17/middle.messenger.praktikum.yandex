@@ -1,17 +1,25 @@
-export default class Modal {
-    public node: HTMLElement | null = null;
+import Block from "../../core/Block";
 
-    constructor(modalID: string) {
-        this.node = document.querySelector(`#${modalID}`);
-        this.node.addEventListener('click', (event) => this.handlerClickBackdrop(event));
+export type ModalProps = {
+    modalID: string,
+    title: string
+}
+
+export default class Modal extends Block {
+    public template: string = ;
+
+    constructor(props: ModalProps) {
+        // this.node = document.querySelector(`#${modalID}`);
+        // this.node?.addEventListener('click', (event) => this.handlerClickBackdrop(event));
+        super('div', {...props});
     }
 
-    open(): void {
-        this.node.classList.remove('modal_hide');
+    openModal(): void {
+        this.getContent()?.classList.remove('modal_hide');
     }
 
-    close(): void {
-        this.node.classList.add('modal_hide');
+    closeModal(): void {
+        this.getContent()?.classList.add('modal_hide');
     }
 
     emit(handlersList:
@@ -22,13 +30,13 @@ export default class Modal {
         }]
     ): void {
         handlersList.forEach(handler => {
-            let target: HTMLElement = this.node.querySelector(handler.elemSelector);
-            target.addEventListener(handler.type, handler.func);
+            let target: HTMLElement | null | undefined = this.node?.querySelector(handler.elemSelector);
+            target?.addEventListener(handler.type, handler.func);
         });
     }
 
     handlerClickBackdrop(event: Event): void {
         if (!(event.target instanceof HTMLElement) || event.target.closest('.modal__window')) return;
-        this.close();
+        this.closeModal();
     }
 }

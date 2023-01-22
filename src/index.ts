@@ -3,7 +3,6 @@ import Router from "./core/Router";
 import PageNotFound from './pages/404/';
 import PageServerError from './pages/500/';
 import DialogPage from './pages/chat/';
-import ListDialogsPageStart from './pages/chatStart/';
 import LoginPage from './pages/login/';
 import ProfilePage from './pages/profile/';
 import EditProfilePage from './pages/profileEdit/';
@@ -15,15 +14,12 @@ import { apiHasError } from "./utils/apiHasError";
 import { getRouteData, listRoutes, RouteData } from "./core/listRoutes";
 
 document.addEventListener('DOMContentLoaded', async () => {
-  console.log('DOMContentLoaded');
-
   Router
-    .use(listRoutes.base.path, ListDialogsPageStart)
+    .use(listRoutes.base.path, DialogPage)
     .use(listRoutes.signin.path, SigninPage)
     .use(listRoutes.pageNotFound.path, PageNotFound)
     .use(listRoutes.pageError.path, PageServerError)
     .use(listRoutes.login.path, LoginPage)
-    .use(listRoutes.dialog.path, DialogPage)
     .use(listRoutes.profile.path, ProfilePage)
     .use(listRoutes.profileEdit.path, EditProfilePage)
     .use(listRoutes.passwordEdit.path, EditPasswordPage);

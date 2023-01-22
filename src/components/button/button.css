@@ -13,6 +13,10 @@
     font-size: var(--base-size-text);
 }
 
+.button_small {
+    padding: 6px 12px;
+}
+
 .button_full-width {
     width: 100%;
 }
@@ -33,6 +37,16 @@
     padding: 0;
 }
 
+.button_danger {
+    background-color: var(--danger-color);
+    color: #fff;
+}
+
+.button_icon {
+    padding: 0;
+    background: transparent;
+}
+
 .button_link {
     padding: 0;
     background: transparent;
@@ -43,4 +57,9 @@
 
 .button_link:hover {
     text-decoration: underline;
+}
+
+.button_new-chat {
+    color: var(--main-color);
+    font-size: 24px;
 }
