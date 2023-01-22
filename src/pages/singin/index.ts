@@ -5,8 +5,7 @@ import { checkPasswordMatch, handleValidateField, resetValidateField, validateFo
 import Button from "../../components/button/Button";
 import Link from "../../components/link/Link";
 import authService from "../../services/authService";
-import { withStore } from "../../hocs/withStore";
-import { getLoadingState } from "../../utils/getLoadingState";
+import { IProfileData } from "../../api/types";
 
 type SigninPageProps = {
     form: Form,
@@ -139,14 +138,13 @@ const form: Form = new Form({
 
             const status: boolean = validateForm(fields);
             if (status) {
-                let formData: Record<string, string> = {};
+                let formData: IProfileData  = {};
                 fields.map(fieldComponent => {
                     const fieldName: string = (fieldComponent.children.inputComponent.getContent() as HTMLInputElement).name;
                     const fieldValue: string = (fieldComponent.children.inputComponent.getContent() as HTMLInputElement).value;
                     formData[fieldName] = fieldValue;
                 });
 
-                console.log(formData);
                 authService.signup(formData);
             }
         }

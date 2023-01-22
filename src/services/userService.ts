@@ -7,13 +7,12 @@ import store from "../core/Store";
 import cloneDeep from "../utils/cloneDeep";
 import isEqual from "../utils/isEqual";
 import AuthService from "./authService";
-import * as console from "console";
 
 class UserService {
   private api = new UserAPI('/user');
 
   async changeProfile(profileData: IProfileData) {
-    const previousProfileState = cloneDeep(store.getState().user);
+    let previousProfileState = cloneDeep(store.getState().user as UserData);
     delete previousProfileState.id;
     delete previousProfileState.avatar;
 

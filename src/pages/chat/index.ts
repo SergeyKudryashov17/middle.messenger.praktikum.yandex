@@ -210,7 +210,6 @@ class DialogPage extends Block {
             chatList.innerHTML = '';
         }
 
-        console.log(this.props.user);
         messages.forEach((message: IFullMessage, index: number) => {
             let label = `message${index}`;
             this.children[label] = new Message({ ...message, currentUserID: this.props?.user?.id});

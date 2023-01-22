@@ -33,7 +33,6 @@ type ProfilePageProps = {
 class ProfilePage extends Block {
     constructor(props: ProfilePageProps) {
         const userState: UserData = props.userState;
-        console.log('ProfilePage', userState);
 
         props.propDisplay = 'flex';
         props.userName = userState?.first_name || "";

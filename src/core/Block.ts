@@ -56,7 +56,7 @@ export default class Block<P = any> {
         eventBus.emit(Block.EVENTS.INIT);
     }
 
-    _registerEvents(eventBus: EventBus) {
+    private _registerEvents(eventBus: EventBus) {
         eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
@@ -64,7 +64,7 @@ export default class Block<P = any> {
         eventBus.on(Block.EVENTS.FLOW_CREADY, this._componentReady.bind(this));
     }
 
-    _createResources() {
+    private _createResources() {
         const { tagName } = this._meta;
         this._element = this._createDocumentElement(tagName);
     }
@@ -74,7 +74,7 @@ export default class Block<P = any> {
         this.eventBus().emit(Block.EVENTS.FLOW_RENDER, this.props);
     }
 
-    _componentDidMount() {
+    private _componentDidMount() {
         this.componentDidMount();
     }
 
@@ -117,7 +117,7 @@ export default class Block<P = any> {
         return this._element;
     }
 
-    _render(): void {
+    private _render(): void {
         const fragment: DocumentFragment = this._compile();
 
         this._removeEvents();
@@ -143,7 +143,7 @@ export default class Block<P = any> {
         return this.element;
     }
 
-    _addEvents(): void {
+    private _addEvents(): void {
         const {events = {}} = this.props;
 
         Object.keys(events).forEach(eventName => {
@@ -151,7 +151,7 @@ export default class Block<P = any> {
         });
     }
 
-    _removeEvents(): void {
+    private _removeEvents(): void {
         const {events = {}} = this.props;
 
         Object.keys(events).forEach(eventName => {
@@ -159,7 +159,7 @@ export default class Block<P = any> {
         });
     }
 
-    _makePropsProxy(props: P): any {
+    private _makePropsProxy(props: P): any {
         // Можно и так передать this
         // Такой способ больше не применяется с приходом ES6+
         const self = this;
@@ -181,12 +181,12 @@ export default class Block<P = any> {
         });
     }
 
-    _createDocumentElement(tagName: string): HTMLElement {
+    private _createDocumentElement(tagName: string): HTMLElement {
         // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
         return document.createElement(tagName);
     }
 
-    _getChildren(propsAndChildren: any): {children: any, props: any} {
+    private _getChildren(propsAndChildren: any): {children: any, props: any} {
         const children: Record<string, unknown> = {};
         const props: Record<string, unknown> = {};
 
@@ -201,7 +201,7 @@ export default class Block<P = any> {
         return { children, props };
     }
 
-    _compile(): DocumentFragment {
+    private _compile(): DocumentFragment {
         const fragment = document.createElement('template');
         const block = this.render();
 
@@ -217,17 +217,17 @@ export default class Block<P = any> {
             const stub = fragment.content.querySelector(`[data-id="${component._id}"]`);
             if (!stub) return;
 
-            stub.replaceWith(component.getContent());
+            stub.replaceWith(component.getContent() as HTMLElement);
         });
 
         return fragment.content;
     }
 
     show(): void {
-        this.getContent().style.display = this.propDisplay;
+        (this.getContent() as HTMLElement ).style.display = this.propDisplay;
     }
 
     hide(): void {
-        this.getContent().style.display = "none";
+        (this.getContent() as HTMLElement ).style.display = "none";
     }
 }

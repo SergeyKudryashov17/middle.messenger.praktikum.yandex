@@ -6,7 +6,7 @@ export default function renderDOM(selector: string, block: Block): HTMLElement |
     if (!root) return null;
 
     root.innerHTML = '';
-    root.appendChild(block.getContent());
+    root.appendChild(block.getContent() as HTMLElement);
 
     block.dispatchComponentDidMount();
 

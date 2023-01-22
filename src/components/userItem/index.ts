@@ -5,8 +5,12 @@ import ChatService from "../../services/chatService";
 
 import "./userItem.css";
 
+interface IUserItemProps extends FullUserData {
+  button?: Button
+}
+
 export default class userItem extends Block {
-  constructor(props) {
+  constructor(props: IUserItemProps) {
     props.button = new Button({
       className: 'user-item__button button_danger button_small',
       label: 'Удалить',

@@ -1,9 +1,9 @@
-import { UserData } from "../api/types";
+import { IState, UserData } from "../api/types";
 
 type userState = {
-  user: UserData
+  userState: UserData
 }
 
-export const getUserState = (state): userState => {
-  return { userState: state.user };
+export const getUserState = (state: IState): userState => {
+  return { userState: { ...state.user } as UserData };
 };

@@ -61,7 +61,9 @@ export default class WSTransport extends EventBus {
   }
 
   close() {
-    clearInterval(this.pingInterval);
+    if (this.pingInterval !== null) {
+      clearInterval(this.pingInterval);
+    }
     this.socket?.close();
   }
 }

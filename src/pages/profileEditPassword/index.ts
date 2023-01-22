@@ -10,7 +10,9 @@ import UserService from "../../services/userService";
 import '../../components/list/list.css';
 import Form from "../../components/form/Form";
 import imageUrl from "../../static/icon/Union.png";
-import { IPasswordData } from "../../api/types";
+import { IPasswordData, UserData } from "../../api/types";
+import { withStore } from "../../hocs/withStore";
+import { getUserState } from "../../utils/getUserState";
 
 type EditPasswordPageProps = {
     propDisplay: string,
@@ -22,20 +24,23 @@ type EditPasswordPageProps = {
     profileItemNewPasswordRepeat: ProfileDataItem,
     fieldList: ProfileDataItem[],
     btnSave: Button,
-    form: Form
+    form: Form,
+    userState: UserData
 }
 
-export default class EditPasswordPage extends Block {
+class EditPasswordPage extends Block {
     constructor(props: EditPasswordPageProps) {
+        const userState: UserData = props.userState;
         props.propDisplay = 'flex';
-        props.userName = 'Иван';
+        props.userName = userState.first_name;
 
         props.sidebar = new Sidebar({
             isFullSize: false
         });
 
         props.userAvatar = new Avatar({
-            url: imageUrl
+            url: `https://ya-praktikum.tech/api/v2/resources${userState.avatar}` || imageUrl,
+            isEdit: false
         });
 
         props.profileItemOldPassword = new ProfileDataItem({
@@ -132,7 +137,6 @@ export default class EditPasswordPage extends Block {
                         oldPassword: (document.querySelector('#oldPassword') as HTMLInputElement).value,
                         newPassword: (document.querySelector('#newPassword') as HTMLInputElement).value
                     };
-                    console.log(passwordRequest);
 
                     await UserService.changePassword(passwordRequest);
                 }
@@ -157,5 +161,7 @@ export default class EditPasswordPage extends Block {
         `;
     }
 }
+
+export default withStore(getUserState)(EditPasswordPage);
 
 

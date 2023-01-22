@@ -7,7 +7,7 @@ import {
   IChatID,
   IDeleteUser,
   IRequestChatUsers,
-  IRequestNewChat, ITokenChat
+  IRequestNewChat
 } from "../api/types";
 import { apiHasError } from "../utils/apiHasError";
 
@@ -31,7 +31,7 @@ class ChatService {
     }
   }
 
-  public async createChat(request: IRequestNewChat) {
+  public async createChat(request: IRequestNewChat): Promise<void> {
     try {
       const response = await this.api.createChat(request);
       if (apiHasError(response)) {
@@ -69,10 +69,10 @@ class ChatService {
       return false;
     }
 
-    const currentChatID = store.getState().selectedChat.id;
-    const request = {
+    const currentChatID = store.getState()?.selectedChat?.id;
+    const request: IRequestChatUsers = {
       users: [userData.id],
-      chatId: currentChatID
+      chatId: currentChatID as number
     }
 
     try {
@@ -96,7 +96,7 @@ class ChatService {
         throw Error(response.reason);
       }
 
-      return response.token;
+      return response?.token;
     } catch (e) {
       alert('Произошла ошибка при получении токена чата');
     }
