@@ -4,13 +4,17 @@ import './message.css';
 import { IFullMessage } from "../../api/types";
 import getShortDate from "../../utils/getShortDate";
 
+interface IMessageComponentProps extends IFullMessage {
+    currentUserID: number
+}
+
 export default class Message extends Block {
-    constructor(props: IFullMessage) {
+    constructor(props: IMessageComponentProps) {
         super('div', {...props});
     }
 
     render(): string {
-        const isMyMessage: Boolean = true;
+        const isMyMessage: Boolean = this.props.currentUserID === this.props.user_id;
         const isRead: Boolean = false;
         const date = getShortDate(this.props.time);
 

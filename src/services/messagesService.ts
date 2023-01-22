@@ -46,10 +46,10 @@ class MessagesService {
 
     switch (type) {
       case 'message':
-        store.set(`messages.${chatID}`, [...oldMessages, message]);
+        store.set(`messages.${chatID}`, [message, ...oldMessages]);
         break;
       case 'messages':
-        store.set(`messages.${chatID}`, [...oldMessages, ...(message as IFullMessage[] )]);
+        store.set(`messages.${chatID}`, [...(message as IFullMessage[] ), ...oldMessages]);
         break;
     }
 
@@ -80,6 +80,10 @@ class MessagesService {
       type: 'message',
       content
     });
+  }
+
+  closeAll() {
+    Object.values(this.transports).forEach(transport => transport.close())
   }
 }
 

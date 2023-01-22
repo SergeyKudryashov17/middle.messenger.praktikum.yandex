@@ -1,7 +1,5 @@
 import Block from '../../core/Block';
 import Form from "../../components/form/Form";
-import { withStore } from "../../hocs/withStore";
-import { getLoadingState } from "../../utils/getLoadingState";
 import Field from "../../components/field/Field";
 import { handleValidateField, resetValidateField, validateForm } from "../../utils/validation";
 import Button from "../../components/button/Button";
@@ -78,7 +76,6 @@ const form: Form = new Form({
 
 class LoginPage extends Block {
     constructor(props: LoginPageProps) {
-        console.log(props);
         props.propDisplay = 'flex';
         props.form = form;
 

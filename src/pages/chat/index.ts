@@ -4,23 +4,25 @@ import Interlocutor from "../../components/interlocutor/Interlocutor";
 import Button from "../../components/button/Button";
 import DropdownMenu from "../../components/dropdownMenu/DropdownMenu";
 import Input from '../../components/input/Input';
-import MessagesGroup, { IMessagesGroupProps } from "../../components/messages-group/MessagesGroup";
 import ChatService from '../../services/chatService';
+import ModalAddUser from "../../components/modalAddUser";
+import ModalDeleteUsers from "../../components/modalDeleteUsers";
+import MessagesService from "../../services/messagesService";
+import Message from "../../components/message/Message";
+
 import { validate } from '../../utils/validation';
+import { withStore } from "../../hocs/withStore";
+import { getMainState } from "../../utils/getMainState";
+import isEqual from "../../utils/isEqual";
+
+import { IFullMessage, IShortDataChat } from "../../api/types";
+import { IMessagesGroupProps } from "../../components/messages-group/MessagesGroup";
 
 import addIconUrl from '../../static/icon/add-icon.svg';
 import removeIconUrl from '../../static/icon/remove-icon.svg';
 import attachImgIconUrl from '../../static/icon/attach-image.svg';
 import attachFileUrl from '../../static/icon/attach-file.svg';
 import attachLocationUrl from '../../static/icon/attach-location.svg';
-import { withStore } from "../../hocs/withStore";
-import { getChatsState } from "../../utils/getChatsState";
-import { IFullMessage, IShortDataChat } from "../../api/types";
-import isEqual from "../../utils/isEqual";
-import ModalAddUser from "../../components/modalAddUser";
-import ModalDeleteUsers from "../../components/modalDeleteUsers";
-import MessagesService from "../../services/messagesService";
-import Message from "../../components/message/Message";
 
 type DialogPageProps = {
     propDisplay?: string,
@@ -44,13 +46,6 @@ class DialogPage extends Block {
 
     constructor(props: DialogPageProps) {
         props.propDisplay = 'flex';
-
-        props.messagesGroupsLabels = '';
-        props.messages?.forEach((group, index) => {
-            let label = `messagesGroup${index}`;
-            props[label] = new MessagesGroup(group);
-            props.messagesGroupsLabels += `{{{ ${label} }}}`;
-        });
 
         props.sidebar = new Sidebar({
             isFullSize: true
@@ -134,7 +129,7 @@ class DialogPage extends Block {
             className: 'button button_circle button_main',
             label: '<i class="fa fa-arrow-right" aria-hidden="true"></i>',
             events: {
-                click: () => {
+                click: async () => {
                     const messageText: string = (props.inputMessage.getContent() as HTMLInputElement).value;
                     const validateStatus: string = validate('', messageText);
 
@@ -144,7 +139,7 @@ class DialogPage extends Block {
                         const currentChatID = this.props.selectedChat.id;
 
                         try {
-                            MessagesService.sendMessage(currentChatID, messageText);
+                            await MessagesService.sendMessage(currentChatID, messageText);
                             (props.inputMessage.getContent() as HTMLInputElement).value = '';
                         } catch (e) {
                             alert('Произошла ошибка при отправке сообщения. Попробуйте позже');
@@ -186,31 +181,41 @@ class DialogPage extends Block {
     }
 
     componentDidUpdate(oldProps: any, newProps: any): boolean {
-        // Если изменились chats - перерисовать список чатов
-        // Если изменились messages - перерисовать список сообщений
+        const chatID = newProps.selectedChat?.id;
 
-        // Если изменился selectedChat - перерисовать список сообщений
-        if (!isEqual(oldProps.selectedChat, newProps.selectedChat)) {
-            const chatID = newProps.selectedChat?.id;
-            if (chatID === undefined) {
-                return false;
-            }
+        if (!isEqual(oldProps.messages[chatID], newProps.messages[chatID]) && chatID !== undefined) {
+            this.renderMessages(newProps.messages[chatID]);
+            return true;
+        }
 
-            const chatList = this.getContent()?.querySelector('.chat-body');
-            if (chatList) {
-                chatList.innerHTML = '';
-            }
-
-            newProps.messages[chatID].forEach((message: IFullMessage, index: number) => {
-                let label = `message${index}`;
-                this.children[label] = new Message(message);
-                this.messagesLabels += `{{{ ${label} }}}`;
-            });
-
+        if (!isEqual(oldProps.selectedChat, newProps.selectedChat) && chatID !== undefined) {
+            this.renderMessages(newProps.messages[chatID]);
             return true;
         }
 
         return false;
+    }
+
+    componentReady(): void {
+        const chatList = this.getContent()?.querySelector('.chat-body__list');
+        if (chatList) {
+            chatList.scrollTop = chatList.scrollHeight;
+        }
+    }
+
+    renderMessages(messages: IFullMessage[]): void {
+        this.messagesLabels = '';
+        const chatList = this.getContent()?.querySelector('.chat-body__list') as HTMLElement;
+        if (chatList) {
+            chatList.innerHTML = '';
+        }
+
+        console.log(this.props.user);
+        messages.forEach((message: IFullMessage, index: number) => {
+            let label = `message${index}`;
+            this.children[label] = new Message({ ...message, currentUserID: this.props?.user?.id});
+            this.messagesLabels = `{{{ ${label} }}}` + this.messagesLabels;
+        });
     }
 
     render(): string {
@@ -237,7 +242,7 @@ class DialogPage extends Block {
                 <div class="messenger-body">
                     {{{ sidebar }}}
                     <div class="chat-body">
-                        ${this.props.selectedChat === undefined ? chatBodyEmpty : chatBody}
+                        ${this.props.selectedChat.id === undefined ? chatBodyEmpty : chatBody}
                     </div>
                     {{{ modalAddUser }}}
                     {{{ modalDeleteUsers }}}
@@ -247,4 +252,4 @@ class DialogPage extends Block {
     }
 }
 
-export default withStore(getChatsState)(DialogPage);;
+export default withStore(getMainState)(DialogPage);;

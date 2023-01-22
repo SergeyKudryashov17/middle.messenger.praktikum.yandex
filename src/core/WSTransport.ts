@@ -8,6 +8,7 @@ export enum SocketEvents {
 export default class WSTransport extends EventBus {
   private socket: WebSocket | null = null;
   private url: string;
+  private pingInterval: number | null = null;
 
   constructor(url: string) {
     super();
@@ -52,10 +53,15 @@ export default class WSTransport extends EventBus {
   }
 
   private setupPinPong() {
-    setInterval(() => {
+    this.pingInterval = setInterval(() => {
       this.send({
         type: 'ping'
       });
-    }, 3000);
+    }, 5000);
+  }
+
+  close() {
+    clearInterval(this.pingInterval);
+    this.socket?.close();
   }
 }

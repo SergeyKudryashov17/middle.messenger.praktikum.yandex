@@ -8,10 +8,9 @@ import ProfilePage from './pages/profile/';
 import EditProfilePage from './pages/profileEdit/';
 import EditPasswordPage from './pages/profileEditPassword/';
 import SigninPage from './pages/singin/';
-import { APIError, UserData } from "./api/types";
 import authService from "./services/authService";
-import { apiHasError } from "./utils/apiHasError";
 import { getRouteData, listRoutes, RouteData } from "./core/listRoutes";
+import store from "./core/Store";
 
 document.addEventListener('DOMContentLoaded', async () => {
   Router
@@ -24,12 +23,16 @@ document.addEventListener('DOMContentLoaded', async () => {
     .use(listRoutes.profileEdit.path, EditProfilePage)
     .use(listRoutes.passwordEdit.path, EditPasswordPage);
 
-  const responseUser: UserData | APIError = await authService.fetchUser();
-  Router.start();
 
-  if (apiHasError(responseUser)) {
-    Router.go(listRoutes.login.path);
-    return;
+  try {
+    await authService.fetchUser();
+    Router.start();
+  } catch (e) {
+    Router.start(listRoutes.login.path);
+  }
+
+  if (window.location.pathname === listRoutes.login.path && store.getState().user) {
+    Router.go(listRoutes.base.path);
   }
 
   const routeData: RouteData | undefined = getRouteData(window.location.pathname);

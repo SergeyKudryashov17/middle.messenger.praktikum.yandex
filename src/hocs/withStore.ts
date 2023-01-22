@@ -5,7 +5,7 @@ import cloneDeep from "../utils/cloneDeep";
 
 export function withStore(mapStateToProps: (state: any)=> any) {
   return function wrap(Component: typeof Block) {
-    let currentState = null;
+    let currentState: unknown = null;
 
     return class WithStore extends Component {
       constructor(props) {
@@ -22,8 +22,8 @@ export function withStore(mapStateToProps: (state: any)=> any) {
             return;
           }
 
-          console.log(this, currentState, propsFromState);
           this.setProps({ ...propsFromState });
+          currentState = propsFromState;
         })
       }
     }

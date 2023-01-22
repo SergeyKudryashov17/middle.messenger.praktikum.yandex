@@ -23,6 +23,16 @@ export class Store extends EventBus {
   public getState() {
     return this.state;
   }
+
+  public clear() {
+    this.state = {
+      user: undefined,
+      selectedChat: undefined,
+      isLoading: undefined,
+      messages: undefined,
+      chats: undefined
+    }
+  }
 }
 
 const store = new Store();

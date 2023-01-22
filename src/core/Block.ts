@@ -17,7 +17,8 @@ export default class Block<P = any> {
         INIT: "init",
         FLOW_CDM: "flow:component-did-mount",
         FLOW_CDU: 'flow:component-did-update',
-        FLOW_RENDER: "flow:render"
+        FLOW_RENDER: "flow:render",
+        FLOW_CREADY: "flow:component-ready"
     } as const;
 
     private readonly _meta: BlockMeta;
@@ -60,6 +61,7 @@ export default class Block<P = any> {
         eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
         eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
+        eventBus.on(Block.EVENTS.FLOW_CREADY, this._componentReady.bind(this));
     }
 
     _createResources() {
@@ -81,6 +83,16 @@ export default class Block<P = any> {
     dispatchComponentDidMount() {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
     }
+
+    dispatchComponentReady() {
+        this.eventBus().emit(Block.EVENTS.FLOW_CREADY);
+    }
+
+    private _componentReady() {
+        this.componentReady();
+    }
+
+    componentReady() {}
 
     private _componentDidUpdate(oldProps: P, newProps: P) {
         if (this.componentDidUpdate(oldProps, newProps)) {
@@ -118,6 +130,8 @@ export default class Block<P = any> {
         this._element.dataset.id = this._id;
 
         this._addEvents();
+
+        this.dispatchComponentReady();
     }
 
     // Может переопределять пользователь, необязательно трогать

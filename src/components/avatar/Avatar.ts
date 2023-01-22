@@ -1,8 +1,9 @@
 import Block from "../../core/Block";
-
-import './avatar.css';
 import Input from "../input/Input";
 import Label from "../label/Label";
+
+import imageUrl from '../../static/icon/Union.png';
+import './avatar.css';
 
 interface IAvatarProps {
     isEdit?: boolean,
@@ -29,10 +30,13 @@ export default class Avatar extends Block {
     }
 
     render(): string {
+        const avatarSrc = this.props.url || imageUrl;
+        const avatarClass = this.props.url !== '' ? 'avatar__img' : '';
+
         if (this.props.isEdit) {
             return `
                 <div class="avatar avatar_big avatar_centered avatar_edit">
-                    <img class="avatar__img" src="${this.props.url}" alt="avatar" class="">
+                    <img class="${avatarClass}" src="${avatarSrc}" alt="avatar" class="">
                     {{{ inputImg }}}
                     {{{ inputLabel }}}
                 </div>
@@ -40,7 +44,7 @@ export default class Avatar extends Block {
         } else {
             return `
                 <div class="avatar avatar_big avatar_centered">
-                    <img class="avatar__img" src="${this.props.url}" alt="avatar" class="">
+                    <img class="${avatarClass}" src="${avatarSrc}" alt="avatar" class="">
                 </div>
             `;
         }

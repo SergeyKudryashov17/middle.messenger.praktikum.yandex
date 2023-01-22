@@ -10,9 +10,8 @@ import { withStore } from "../../hocs/withStore";
 import '../../components/list/list.css';
 
 import authService from "../../services/authService";
-
-import imageUrl from '../../static/icon/Union.png';
 import { UserData } from "../../api/types";
+import isEqual from "../../utils/isEqual";
 
 type ProfilePageProps = {
     propDisplay: string,
@@ -44,7 +43,7 @@ class ProfilePage extends Block {
         });
 
         props.userAvatar = new Avatar({
-            url: userState?.avatar ? `https://ya-praktikum.tech/api/v2/resources${userState?.avatar}` : imageUrl,
+            url: userState?.avatar ? `https://ya-praktikum.tech/api/v2/resources${userState?.avatar}` : '',
             isEdit: false
         });
 
@@ -112,27 +111,15 @@ class ProfilePage extends Block {
         const oldUserState = oldProps.userState;
         const newUserState = newProps.userState;
 
-        if (oldUserState.avatar !== newUserState.avatar) {
+        if (!isEqual(oldUserState, newUserState)) {
             this.children.userAvatar.setProps({
-                url: newUserState?.avatar ? `https://ya-praktikum.tech/api/v2/resources${newUserState.avatar}` : imageUrl
+                url: newUserState?.avatar ? `https://ya-praktikum.tech/api/v2/resources${newUserState.avatar}` : ''
             });
-        }
-        if (oldUserState.email !== newUserState.email) {
             this.children.profileItemEmail.setProps({ value: newUserState?.email || '' });
-        }
-        if (oldUserState.login !== newUserState.login) {
             this.children.profileItemLogin.setProps({ value: newUserState?.login || '' });
-        }
-        if (oldUserState.first_name !== newUserState.first_name) {
             this.children.profileItemFName.setProps({ value: newUserState?.first_name || '' });
-        }
-        if (oldUserState.second_name !== newUserState.second_name) {
             this.children.profileItemSName.setProps({ value: newUserState?.second_name || '' });
-        }
-        if (oldUserState.display_name !== newUserState.display_name) {
             this.children.profileItemChatName.setProps({ value: newUserState?.display_name || '' });
-        }
-        if (oldUserState.phone !== newUserState.phone) {
             this.children.profileItemPhone.setProps({ value: newUserState?.phone || '' });
         }
 

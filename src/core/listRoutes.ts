@@ -24,12 +24,8 @@ export const listRoutes: TListRoutes = {
   },
   login: {
     path: '/login',
-    isProtected: true
+    isProtected: false
   },
-  // dialog: {
-  //   path: '/dialog',
-  //   isProtected: false
-  // },
   profile: {
     path: '/profile',
     isProtected: false

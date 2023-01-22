@@ -5,6 +5,7 @@ import store from "../core/Store";
 import Router from "../core/Router";
 import isEqual from "../utils/isEqual";
 import { listRoutes } from "../core/listRoutes";
+import MessagesService from "./messagesService";
 
 
 class AuthService {
@@ -36,35 +37,33 @@ class AuthService {
     await this.fetchUser();
 
     Router.go(listRoutes.base.path);
-    console.log(store.getState());
   }
 
   async logout() {
     try {
       await this.api.logout();
+      MessagesService.closeAll();
       Router.go(listRoutes.login.path);
+      store.clear();
     } catch (e) {
       alert ('Error during logging out');
     }
   }
 
-  async fetchUser(): Promise<UserData | APIError> {
+  async fetchUser(): Promise<void> {
     store.set('isLoading', true);
     const responseUser: UserData | APIError = await this.api.getUser();
     store.set('isLoading', false);
 
     if (apiHasError(responseUser)) {
-      alert(responseUser.reason);
       console.error(responseUser.reason);
-      return responseUser;
+      throw new Error(responseUser.reason);
     }
 
     const userState = store.getState().user;
     if (!userState || !isEqual(userState, responseUser)) {
       store.set('user', responseUser);
     }
-
-    return responseUser;
   }
  }
 

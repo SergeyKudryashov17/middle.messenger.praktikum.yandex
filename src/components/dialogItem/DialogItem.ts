@@ -2,8 +2,10 @@ import Block from '../../core/Block';
 import Badge from "../badge/Badge";
 import store from "../../core/Store";
 
-import './dialogItem.css';
+import getShortDate from "../../utils/getShortDate";
 import { IChat, IShortDataChat } from "../../api/types";
+
+import './dialogItem.css';
 
 interface IDialogItemProps extends IChat {
   unreadMessageCounter?: Badge | null,
@@ -26,7 +28,6 @@ export default class DialogItem extends Block {
           title: props.title,
           avatar: props.avatar
         };
-        console.log('new selected chat', selectedChat);
         store.set('selectedChat', selectedChat);
       }
     }
@@ -35,8 +36,7 @@ export default class DialogItem extends Block {
   }
 
   render(): string {
-    // const messageAuthorLogin = this.props.last_message.user.login;
-    const isMyMessage: Boolean = false;
+    const time = this.props.last_message?.time ? getShortDate(this.props.last_message?.time) : "";
 
     return `
         <li class="dialog-list__item" data-chat-id="${this.props.id}">
@@ -44,10 +44,9 @@ export default class DialogItem extends Block {
                 <div class="dialog__interlocutor-photo"></div>
                 <div class="dialog__title">
                     <div class="dialog__interlocutor-name">${this.props.title}</div>
-                    <div class="dialog__time">${this.props.last_message?.time || ""}</div>
+                    <div class="dialog__time">${time}</div>
                 </div>
                 <div class="dialog__message-preview">
-                    ${ (isMyMessage) ? 'Вы' : '' }
                     ${this.props.last_message?.content || "Пусто"}
                 </div>
                 <div class="dialog__unread-badge">
