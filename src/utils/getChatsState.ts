@@ -1,13 +1,15 @@
-import { IChat } from "../api/types";
+import { IChat, IFullMessage, IShortDataChat, IState } from "../api/types";
 
 type TChatsState = {
-  selectedChat: number | undefined,
-  chatState: IChat
+  selectedChat: IShortDataChat | undefined,
+  chatState: IChat[],
+  messages: Record<number, IFullMessage[]> | undefined
 }
 
-export const getChatsState = (state): TChatsState => {
+export const getChatsState = (state: IState): TChatsState => {
   return {
     selectedChat: state.selectedChat,
-    chatState: state.chats
+    chatState: state.chats,
+    messages: state.messages
   }
 };

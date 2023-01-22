@@ -1,16 +1,15 @@
 import Block from '../../core/Block';
-import DialogList, { dialogsData } from "../dialogList/DialogList";
+import DialogList from "../dialogList/DialogList";
 import Input from "../input/Input";
 import Link from "../link/Link";
 
 import './sidebar.css';
-import { getChatsState } from "../../utils/getChatsState";
+import { getChatListsState } from "../../utils/getChatListsState";
 import { withStore } from "../../hocs/withStore";
 import { IChat } from "../../api/types";
 import isEqual from "../../utils/isEqual";
 import Button from "../button/Button";
 import ModalNewChat from "../modalNewChat";
-import * as console from "console";
 
 interface ISidebar {
     isFullSize: boolean,
@@ -63,22 +62,22 @@ class Sidebar extends Block {
     }
 
     componentDidUpdate(oldProps: any, newProps: any): boolean {
-        if (!isEqual(oldProps.chatState, newProps.chatState)) {
+        if (!isEqual({ chatState: oldProps.chatState }, { chatState: newProps.chatState })) {
             if (!newProps.chatState) {
                 return false;
             }
             this.children.dialogListComponent = new DialogList({
                 dialogsData: newProps.chatState
             });
+
+            return true;
         }
 
-        return true;
+        return false;
     }
 
     render(): string {
         const isFullSize: Boolean = Boolean(this.props.isFullSize);
-
-        console.log(this.children.modalNewChat);
 
         const sidebarHead: string = `
             <div class="sidebar__head">
@@ -102,4 +101,4 @@ class Sidebar extends Block {
     }
 }
 
-export default withStore(getChatsState)(Sidebar);
+export default withStore(getChatListsState)(Sidebar);

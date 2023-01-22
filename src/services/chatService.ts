@@ -1,8 +1,15 @@
 import ChatAPI from "../api/ChatAPI";
 import store from "../core/Store";
-import { FullUserData, IAdditParamUsersChat, IDeleteUser, IRequestChatUsers, IRequestNewChat } from "../api/types";
+import MessageService from "../services/messagesService";
+import {
+  FullUserData,
+  IAdditParamUsersChat,
+  IChatID,
+  IDeleteUser,
+  IRequestChatUsers,
+  IRequestNewChat, ITokenChat
+} from "../api/types";
 import { apiHasError } from "../utils/apiHasError";
-import * as console from "console";
 
 class ChatService {
   private api = new ChatAPI('/chats');
@@ -10,8 +17,15 @@ class ChatService {
   public async getListChats() {
     try {
       const response = await this.api.getChats();
+
+      const promises = response?.map(chat => MessageService.connect(chat.id));
+      if (promises !== undefined) {
+        await Promise.all(promises);
+      }
+
       store.set('chats', response);
     } catch (e) {
+      console.error(e);
       alert('Произошла ошибка при получении чатов');
       store.set('chats', []);
     }
@@ -67,6 +81,24 @@ class ChatService {
     } catch (e) {
       console.error(e);
       alert('Произошла ошибка при удалении');
+    }
+  }
+
+  public async getChatToken(chatID: number): Promise<string | null | undefined> {
+    const request: IChatID = {
+      id: chatID
+    }
+
+    try {
+      const response = await this.api.getChatToken(request);
+      if (apiHasError(response)) {
+        console.error(response.reason);
+        throw Error(response.reason);
+      }
+
+      return response.token;
+    } catch (e) {
+      alert('Произошла ошибка при получении токена чата');
     }
   }
 }

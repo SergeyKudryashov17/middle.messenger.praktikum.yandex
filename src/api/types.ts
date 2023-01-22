@@ -1,3 +1,11 @@
+export interface IState {
+  user: UserData | undefined,
+  selectedChat: IShortDataChat | undefined,
+  isLoading: boolean | undefined,
+  messages: Record<number, IFullMessage[]> | undefined,
+  chats: IChat[] | undefined
+}
+
 export type APIError = {
   reason: string;
 };
@@ -54,7 +62,7 @@ export interface IAdditParamUsersChat {
 }
 
 export interface IChatID {
-  chatId: number
+  id: number
 }
 
 export interface IRequestChatUsers {
@@ -82,10 +90,7 @@ export interface IShortDataChat {
   avatar: string
 }
 
-export interface IChat {
-  id: number,
-  title: string,
-  avatar: string,
+export interface IChat extends IShortDataChat {
   created_by: number,
   unread_count: number,
   last_message: IMessage
@@ -101,3 +106,10 @@ export interface IRequestNewChat {
   title: string
 }
 
+export interface IFullMessage {
+  chat_id: number,
+  time: string,
+  type: string,
+  user_id: string,
+  content: string
+}

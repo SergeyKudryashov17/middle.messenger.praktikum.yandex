@@ -7,27 +7,25 @@ import Input from '../../components/input/Input';
 import MessagesGroup, { IMessagesGroupProps } from "../../components/messages-group/MessagesGroup";
 import ChatService from '../../services/chatService';
 import { validate } from '../../utils/validation';
-import { getListDialogs } from "../../models/dialogsData";
 
 import addIconUrl from '../../static/icon/add-icon.svg';
 import removeIconUrl from '../../static/icon/remove-icon.svg';
 import attachImgIconUrl from '../../static/icon/attach-image.svg';
 import attachFileUrl from '../../static/icon/attach-file.svg';
 import attachLocationUrl from '../../static/icon/attach-location.svg';
-import imageUrl from "../../static/img/image.png";
-import store from "../../core/Store";
 import { withStore } from "../../hocs/withStore";
 import { getChatsState } from "../../utils/getChatsState";
-import { FullUserData, IShortDataChat } from "../../api/types";
-import * as console from "console";
+import { IFullMessage, IShortDataChat } from "../../api/types";
 import isEqual from "../../utils/isEqual";
 import ModalAddUser from "../../components/modalAddUser";
 import ModalDeleteUsers from "../../components/modalDeleteUsers";
+import MessagesService from "../../services/messagesService";
+import Message from "../../components/message/Message";
 
 type DialogPageProps = {
     propDisplay?: string,
     selectedChat: IShortDataChat,
-    messagesGroups: IMessagesGroupProps[],
+    messages?: IMessagesGroupProps[],
     messagesGroupsLabels: string,
     sidebar: Sidebar,
     interlocutor: Interlocutor,
@@ -42,49 +40,20 @@ type DialogPageProps = {
 }
 
 class DialogPage extends Block {
+    private messagesLabels: string = '';
+
     constructor(props: DialogPageProps) {
         props.propDisplay = 'flex';
 
-        props.messagesGroups = [
-            {
-                "date": "19 июня",
-                "messages": [
-                    {
-                        "isText": true,
-                        "text": [
-                            "Привет! Смотри, тут всплыл интересный кусок лунной космической истории — НАСА в какой-то момент попросила Хассельблад адаптировать модель SWC для полетов на Луну. Сейчас мы все знаем что астронавты летали с моделью 500 EL — и к слову говоря, все тушки этих камер все еще находятся на поверхности Луны, так как астронавты с собой забрали только кассеты с пленкой.",
-                            "Хассельблад в итоге адаптировал SWC для космоса, но что-то пошло не так и на ракету они так никогда и не попали. Всего их было произведено 25 штук, одну из них недавно продали на аукционе за 45000 евро."
-                        ],
-                        "date": "11:26",
-                        "fromMe": false
-                    },
-                    {
-                        "isImage": true,
-                        "src": imageUrl,
-                        "date": "11:56",
-                        "fromMe": false
-                    },
-                    {
-                        "isText": true,
-                        "text": ["Круто!"],
-                        "date": "12:00",
-                        "fromMe": true,
-                        "isRead": true
-                    }
-                ]
-            }
-        ];
-
         props.messagesGroupsLabels = '';
-        props.messagesGroups.forEach((group, index) => {
+        props.messages?.forEach((group, index) => {
             let label = `messagesGroup${index}`;
             props[label] = new MessagesGroup(group);
             props.messagesGroupsLabels += `{{{ ${label} }}}`;
         });
 
         props.sidebar = new Sidebar({
-            isFullSize: true,
-            dialogList: getListDialogs()
+            isFullSize: true
         });
 
         props.interlocutor = new Interlocutor({});
@@ -108,7 +77,6 @@ class DialogPage extends Block {
                         click: async () => {
                             const currentChatID = this.props.selectedChat.id;
                             const chatUsers = await ChatService.getChatsUsers(currentChatID);
-                            console.log(chatUsers);
                             if (chatUsers) {
                                 this.children.modalDeleteUsers.setProps({ listChatUsers: chatUsers });
                             }
@@ -173,11 +141,14 @@ class DialogPage extends Block {
                     if (validateStatus !== '') {
                         alert(validateStatus);
                     } else {
-                        const response = {
-                            message: messageText
-                        };
+                        const currentChatID = this.props.selectedChat.id;
 
-                        console.log(response);
+                        try {
+                            MessagesService.sendMessage(currentChatID, messageText);
+                            (props.inputMessage.getContent() as HTMLInputElement).value = '';
+                        } catch (e) {
+                            alert('Произошла ошибка при отправке сообщения. Попробуйте позже');
+                        }
                     }
                 }
             }
@@ -211,8 +182,35 @@ class DialogPage extends Block {
     }
 
     async componentDidMount() {
-        store.set('chats', undefined);
         await ChatService.getListChats();
+    }
+
+    componentDidUpdate(oldProps: any, newProps: any): boolean {
+        // Если изменились chats - перерисовать список чатов
+        // Если изменились messages - перерисовать список сообщений
+
+        // Если изменился selectedChat - перерисовать список сообщений
+        if (!isEqual(oldProps.selectedChat, newProps.selectedChat)) {
+            const chatID = newProps.selectedChat?.id;
+            if (chatID === undefined) {
+                return false;
+            }
+
+            const chatList = this.getContent()?.querySelector('.chat-body');
+            if (chatList) {
+                chatList.innerHTML = '';
+            }
+
+            newProps.messages[chatID].forEach((message: IFullMessage, index: number) => {
+                let label = `message${index}`;
+                this.children[label] = new Message(message);
+                this.messagesLabels += `{{{ ${label} }}}`;
+            });
+
+            return true;
+        }
+
+        return false;
     }
 
     render(): string {
@@ -224,7 +222,7 @@ class DialogPage extends Block {
                 {{{ settingsDialogMenu }}}
             </div>
             <div class="chat-body__list">
-                ${this.props.messagesGroupsLabels}
+                ${this.messagesLabels}
             </div>
             <div class="chat-body__footer">
                 {{{ attachedBtn }}}

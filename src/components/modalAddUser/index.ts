@@ -26,7 +26,6 @@ type ModalAddUserProps = {
 
 class ModalAddUser extends Block {
   constructor(props: ModalAddUserProps) {
-    console.log(props);
     props.title = 'Добавить пользователя';
 
     props.field = new Field({

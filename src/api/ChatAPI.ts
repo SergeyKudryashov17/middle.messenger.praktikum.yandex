@@ -16,7 +16,7 @@ export default class ChatAPI {
     this.http = new HTTPTransport(endpoint);
   }
 
-  public getChats(request?: IRequestChat): Promise<IChat | null> {
+  public getChats(request?: IRequestChat): Promise<IChat[] | null> {
     return this.http.get('', request);
   }
 
@@ -36,8 +36,8 @@ export default class ChatAPI {
     return this.http.delete('/users', request);
   }
 
-  public getChatToken(request: IChatID): Promise<ITokenChat[] | null> {
-    return this.http.post(`/token/${request.chatId}`);
+  public getChatToken(request: IChatID): Promise<ITokenChat | null> {
+    return this.http.post(`/token/${request.id}`);
   }
 
   public getChatUsers(chatID: string, additParams: IAdditParamUsersChat): Promise<FullUserData[] | null> {

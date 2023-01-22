@@ -4,7 +4,6 @@ import store from "../../core/Store";
 
 import './dialogItem.css';
 import { IChat, IShortDataChat } from "../../api/types";
-import * as console from "console";
 
 interface IDialogItemProps extends IChat {
   unreadMessageCounter?: Badge | null,
@@ -27,7 +26,7 @@ export default class DialogItem extends Block {
           title: props.title,
           avatar: props.avatar
         };
-        console.log(selectedChat);
+        console.log('new selected chat', selectedChat);
         store.set('selectedChat', selectedChat);
       }
     }

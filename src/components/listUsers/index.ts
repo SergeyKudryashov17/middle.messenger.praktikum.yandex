@@ -2,7 +2,6 @@ import Block from "../../core/Block";
 import { FullUserData } from "../../api/types";
 import userItem from "../userItem";
 import isEqual from "../../utils/isEqual";
-import * as console from "console";
 
 type ListUsersProps = {
   listItemsLabels?: string,
@@ -22,15 +21,12 @@ export default class ListUsers extends Block {
       if (newProps.listChatUsers?.length === 0) {
         this.listItemsLabels = '';
         this.children = {};
-        this.getContent().innerHTML = '';
-        console.log(this);
+        (this.getContent() as HTMLElement).innerHTML = '';
       }else {
         newProps.listChatUsers?.forEach((user: FullUserData, index: number) => {
           const label = `itemUser${index}`;
           this.children[label] = new userItem(user);
           this.listItemsLabels += `{{{ ${label} }}}`;
-          console.log(this.listItemsLabels);
-          console.log(this.children);
         });
       }
       return true;

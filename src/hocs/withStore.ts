@@ -9,13 +9,12 @@ export function withStore(mapStateToProps: (state: any)=> any) {
 
     return class WithStore extends Component {
       constructor(props) {
-        const state = cloneDeep(store.getState());
-        currentState = mapStateToProps(state);
+        // const state = cloneDeep();
+        currentState = mapStateToProps(store.getState());
 
         super({ ...props, ...currentState });
 
         store.on(StoreEvents.Updated, () => {
-          console.log('event store update', this, store.getState());
           const state = store.getState();
           const propsFromState = mapStateToProps(state);
 
@@ -23,6 +22,7 @@ export function withStore(mapStateToProps: (state: any)=> any) {
             return;
           }
 
+          console.log(this, currentState, propsFromState);
           this.setProps({ ...propsFromState });
         })
       }
