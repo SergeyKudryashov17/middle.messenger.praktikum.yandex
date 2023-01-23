@@ -1,0 +1,11 @@
+.user-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: var(--base-border);
+    padding: 5px 0;
+}
+
+.user-item__name {
+    font-weight: 600;
+}

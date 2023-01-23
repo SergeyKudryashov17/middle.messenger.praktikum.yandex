@@ -25,10 +25,7 @@
 
 }
 
-.avatar_profile:hover {
-    cursor: pointer;
-}
-.avatar_profile:hover::after {
+.avatar_edit:hover::after {
     position: absolute;
     top: 0;
     left: 0;
@@ -42,4 +39,17 @@
     color: #FFF;
     content: 'Поменять аватар';
     line-height: 1;
+    z-index: 1;
+}
+
+.avatar__img {
+    width: 100%;
+}
+.avatar__label {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 2;
+    border-radius: 50%;
+    cursor: pointer;
 }

@@ -82,7 +82,7 @@ export function validate(type: string = '', value: string): string {
 
 export function handleValidateField(fieldComponent: Block): boolean {
     const inputValue = (fieldComponent.children.inputComponent.getContent() as HTMLInputElement).value;
-    const validateRule = fieldComponent.children.inputComponent.getContent().getAttribute('validateRule') || '';
+    const validateRule = (fieldComponent.children.inputComponent.getContent() as HTMLInputElement).getAttribute('validateRule') || '';
 
     let error = validate(validateRule, inputValue);
     const errorComponent = fieldComponent.children.errorTextComponent;
@@ -110,6 +110,7 @@ export function resetValidateField(fieldComponent: Block): void {
 }
 
 export function validateForm(listFields: Block[]): boolean {
+    console.log(listFields);
    return listFields.reduce((flag: boolean, component: Block) => {
        const errorTextNode: HTMLElement = component.children.errorTextComponent.getContent();
        let status: boolean = (errorTextNode.textContent !== '') ? false : handleValidateField(component);

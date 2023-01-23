@@ -1,18 +1,27 @@
 import Link from "../../components/link/Link";
 import ErrorPage from "../../components/errorPage/ErrorPage";
 
-const linkBackChats: Link = new Link({
-    href: "#",
-    className: "",
-    label: "Назад к чатам",
-    dataset: {
-        page: 'chatStart'
-    }
-});
+type PageNotFoundProps = {
+    title: string,
+    caption: string,
+    propDisplay: string,
+    link: Link
+}
 
-export const pageNotFound: ErrorPage = new ErrorPage({
-    title: "404",
-    typeBody: "default",
-    caption: "Не туда попали",
-    link: linkBackChats,
-});
+export default class PageNotFound extends ErrorPage {
+    constructor(props: PageNotFoundProps) {
+        props.title = '404';
+        props.caption = 'Не туда попали';
+        props.propDisplay = 'flex';
+        props.link = new Link({
+            href: "/",
+            className: "",
+            label: "Назад к чатам",
+            dataset: {
+                page: 'chatStart'
+            }
+        });
+
+        super({ ...props });
+    }
+}

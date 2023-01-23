@@ -1,18 +1,31 @@
 import Block from "../../core/Block";
+import { PropsWithRouter, withRouter } from '../../hocs/withRouter';
 
 import './link.css';
 import '../button/button.css';
 
-interface ILinkProps {
+
+interface ILinkProps extends PropsWithRouter {
     href: string,
     label: string,
     className?: string
-    dataset?: Record<string, string>
+    dataset?: Record<string, string>,
+    events?: Record<string, Function>
 }
 
-export default class Link extends Block {
+class BaseLink extends Block<ILinkProps> {
     constructor(props: ILinkProps) {
-        super("a", {...props});
+        super("a", {
+            ...props,
+            events: {
+                click: (event: Event) => this.navigate(event)
+            }
+        });
+    }
+
+    navigate(event: Event) {
+        event.preventDefault();
+        this.props.router.go(this.props.href);
     }
 
     render(): string {
@@ -24,3 +37,5 @@ export default class Link extends Block {
         return `<a href="{{href}}" class="link {{className}}" ${dataAttributes}>${this.props.label}</a>`;
     }
 }
+
+export default withRouter(BaseLink);

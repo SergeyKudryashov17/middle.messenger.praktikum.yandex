@@ -41,6 +41,10 @@ h2 {
     margin-bottom: 60px;
 }
 
+[type="button"] {
+    cursor: pointer;
+}
+
 .messenger-container {
     display: flex;
     align-items: center;
@@ -70,7 +74,9 @@ h2 {
 }
 
 .messenger-controls {
-    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .chat-body {
@@ -103,15 +109,6 @@ h2 {
     background-color: #F5F5F5;
 }
 
-.dialog-list {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow-y: auto;
-}
-
-
-
 .input-message {
     background: var(--bg-color);
     border-radius: 25px;
@@ -141,20 +138,6 @@ h2 {
     margin: 0 auto;
 }
 
-.profile-data {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.profile-data__label {
-    color: var(--base-text-color);
-    font-size: var(--base-size-text);
-}
-.profile-data__value {
-    color: var(--secondary-text-color);
-    font-size: var(--base-size-text);
-}
-
 .profile-name {
     font-size: 16px;
     font-weight: var(--font-weight-bold);
@@ -176,4 +159,16 @@ h2 {
 }
 .error-label_center {
     text-align: center;
+}
+
+.text-danger {
+    color: var(--danger-color);
+}
+
+.text-main {
+    color: var(--main-color);
+}
+
+.list-users {
+    margin-bottom: 10px;
 }

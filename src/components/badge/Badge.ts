@@ -3,7 +3,7 @@ import Block from '../../core/Block';
 import './badge.css';
 
 interface IBadgeProps {
-    value: string,
+    value: number,
     events?: Record<string, Function>
 }
 

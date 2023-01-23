@@ -1,9 +1,16 @@
+import Block from '../../core/Block';
+import Form from "../../components/form/Form";
 import Field from "../../components/field/Field";
-import Link from "../../components/link/Link";
-import LoginPage from "./LoginPage";
 import { handleValidateField, resetValidateField, validateForm } from "../../utils/validation";
 import Button from "../../components/button/Button";
-import Form from "../../components/form/Form";
+import Link from "../../components/link/Link";
+import { SigninData } from "../../api/types";
+import authService from "../../services/authService";
+
+type LoginPageProps = {
+    form: Form,
+    propDisplay: string;
+}
 
 const fieldLogin: Field = new Field({
     labelText: 'Логин',
@@ -27,24 +34,17 @@ const fieldPassword: Field = new Field({
         blur: () => handleValidateField(fieldPassword)
     }
 });
-
-const fields = [fieldLogin, fieldPassword];
-
+const fields: Field[] = [fieldLogin, fieldPassword];
 const btnLogIn: Button = new Button({
     type: 'submit',
     className: 'button_main button_full-width button_centered',
     label: 'Авторизоваться'
 });
 const linkRegistration: Link = new Link({
-    href: '#',
+    href: '/signin',
     className: 'link_centered',
-    label: 'Нет аккаунта',
-    dataset: {
-        page: 'pageSingin'
-    }
+    label: 'Нет аккаунта'
 });
-
-
 const form: Form = new Form({
     title: 'Вход',
     className: 'form',
@@ -59,21 +59,38 @@ const form: Form = new Form({
 
             const status: boolean = validateForm(fields);
             if (status) {
-                let formData: Record<string, string> = {};
+                let formData: SigninData = {};
                 fields.map(fieldComponent => {
                     const fieldName: string = (fieldComponent.children.inputComponent.getContent() as HTMLInputElement).name;
                     formData[fieldName] = (fieldComponent.children.inputComponent.getContent() as HTMLInputElement).value;
                 });
 
                 console.log(formData);
+
+                authService.signin(formData);
             }
         }
     }
 });
 
 
-export const loginPage: LoginPage = new LoginPage({
-    title: 'Вход',
-    typeBody: 'default',
-    form: form
-});
+class LoginPage extends Block {
+    constructor(props: LoginPageProps) {
+        props.propDisplay = 'flex';
+        props.form = form;
+
+        super("div", { ...props});
+    }
+
+    render() {
+        return `
+            <main class="messenger-container">
+                <div class="messenger-body messenger-body_default">
+                    {{{ form }}}
+                </div>
+            </main>
+        `;
+    }
+}
+
+export default LoginPage;

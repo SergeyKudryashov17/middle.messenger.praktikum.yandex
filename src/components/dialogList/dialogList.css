@@ -1,0 +1,20 @@
+.dialog-list {
+    height: 100%;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+}
+
+.dialog-list__item {
+    border-bottom: var(--base-border);
+}
+.dialog-list__item:first-child {
+    border-top: var(--base-border);
+}
+
+.dialog-list__loader {
+    margin-top: 10px;
+    text-align: center;
+    color: var(--main-color);
+}
