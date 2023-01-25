@@ -13,7 +13,7 @@ interface ILinkProps extends PropsWithRouter {
     events?: Record<string, Function>
 }
 
-class BaseLink extends Block<ILinkProps> {
+export class BaseLink extends Block<ILinkProps> {
     constructor(props: ILinkProps) {
         super("a", {
             ...props,

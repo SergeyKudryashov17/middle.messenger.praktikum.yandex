@@ -1,13 +1,17 @@
 import renderDOM from "./renderDOM";
 import Block from "./Block";
 
+export interface BlockConstructable<P = any> {
+  new(props: P): Block<P>;
+}
+
 export default class Route {
   private pathname: string;
-  private blockClass: typeof Block;
+  private blockClass: BlockConstructable;
   private block: Block | null;
   private props: Record<string, any>;
 
-  constructor(pathname: string, view: typeof Block, props: Record<string, any>) {
+  constructor(pathname: string, view: BlockConstructable, props: Record<string, any>) {
     this.pathname = pathname;
     this.blockClass = view;
     this.block = null;
@@ -22,10 +26,8 @@ export default class Route {
   }
 
 
-  leave() {
-    if (this.block) {
-      this.block.hide();
-    }
+  leave(): void {
+    this.block = null;
   }
 
   match(pathname: string) {

@@ -7,11 +7,6 @@ type BlockMeta = {
     props: any
 }
 
-export interface BlockClass<P> extends Function {
-    new (props: P): Block<P>;
-    componentName?: string;
-}
-
 export default class Block<P = any> {
     static EVENTS = {
         INIT: "init",
@@ -30,7 +25,7 @@ export default class Block<P = any> {
     public propDisplay: string = 'block';
 
 
-    public constructor(tagName:string = "div", propsAndChildren: P = {} as P) {
+    public constructor(tagName:string = "div", propsAndChildren: P) {
         const { children, props } = this._getChildren(propsAndChildren);
 
         if (props.propDisplay) {
@@ -45,7 +40,7 @@ export default class Block<P = any> {
 
         this._id = makeUUID();
 
-        this.props = this._makePropsProxy({ ...props, __id: this._id });
+        this.props = this._makePropsProxy({ ...props, __id: this._id }) as P;
 
         this.eventBus = () => eventBus;
 
@@ -105,12 +100,12 @@ export default class Block<P = any> {
         return true;
     }
 
-    setProps = (nextProps: P) => {
+    setProps = (nextProps: Partial<P>) => {
         if (!nextProps) {
             return;
         }
 
-        Object.assign(this.props, nextProps);
+        Object.assign(this.props as {}, nextProps);
     };
 
     get element(): HTMLElement | null {
@@ -159,17 +154,17 @@ export default class Block<P = any> {
         });
     }
 
-    private _makePropsProxy(props: P): any {
+    private _makePropsProxy(props: P) {
         // Можно и так передать this
         // Такой способ больше не применяется с приходом ES6+
         const self = this;
 
         return new Proxy(props as object, {
-            get(target: Record<string, unknown>, prop: string) {
+            get(target: Record<string, any>, prop: string) {
                 const value = target[prop];
                 return typeof value === 'function' ? value.bind(target) : value;
             },
-            set(target: Record<string, unknown>, prop: string, value) {
+            set(target: Record<string, any>, prop: string, value) {
                 const oldTarget = {...target};
                 target[prop] = value;
                 self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);

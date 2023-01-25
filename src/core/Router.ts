@@ -1,10 +1,9 @@
-import Block from "./Block";
-import Route from "./Route";
+import Route, { BlockConstructable } from "./Route";
 
 class Router {
   public routes:Route[] = [];
   public history:History = window.history;
-  private currentRoute: null = null;
+  private currentRoute: Route | null = null;
   private static instance: Router;
   private rootQuery: string;
 
@@ -16,19 +15,25 @@ class Router {
     Router.instance = this;
   }
 
-  use(pathname: string, block: Block): Router {
+  public use(pathname: string, block: BlockConstructable): Router {
     const route: Route = new Route(pathname, block, {rootQuery: this.rootQuery});
     this.routes.push(route);
     return this;
   }
 
-  start(pathname: string = '') {
+  public start(pathname: string = '') {
     window.onpopstate = (event: Event) => {
-      this.onRoute(event.currentTarget.location.pathname);
+      const target = event.currentTarget as Window;
+      this.onRoute(target.location.pathname);
     }
 
     const path: string = pathname === '' ? window.location.pathname : pathname;
     this.onRoute(path);
+  }
+
+  public reset() {
+    this.routes = [];
+    this.currentRoute = null;
   }
 
   private onRoute(pathname: string) {
@@ -36,19 +41,27 @@ class Router {
 
     if (!route) return;
 
-    if (this.currentRoute) {
+    if (this.currentRoute && this.currentRoute !== route) {
       this.currentRoute.leave();
     }
 
     route.render();
   }
 
-  go(pathname: string) {
+  public go(pathname: string) {
     this.history.pushState({}, "", pathname);
     this.onRoute(pathname);
   }
 
-  getRoute(pathname: string) {
+  public back() {
+    this.history.back();
+  }
+
+  public forward() {
+    this.history.forward();
+  }
+
+  public getRoute(pathname: string) {
     return this.routes.find(route => route.match(pathname));
   }
 }
