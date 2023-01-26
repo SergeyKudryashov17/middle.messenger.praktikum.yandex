@@ -7,7 +7,7 @@ type BlockMeta = {
     props: any
 }
 
-export default class Block<P = any> {
+export default class Block<P extends Record<string, any> = any> {
     static EVENTS = {
         INIT: "init",
         FLOW_CDM: "flow:component-did-mount",
@@ -96,7 +96,7 @@ export default class Block<P = any> {
     }
 
     // Может переопределять пользователь, необязательно трогать
-    componentDidUpdate(oldProps: P, newProps: P): boolean {
+    componentDidUpdate(_oldProps: P, _newProps: P): boolean {
         return true;
     }
 
@@ -122,7 +122,9 @@ export default class Block<P = any> {
         this._element?.replaceWith(newElement);
         this._element = newElement;
 
-        this._element.dataset.id = this._id;
+        if (this._element?.dataset) {
+            this._element.dataset.id = this._id;
+        }
 
         this._addEvents();
 
@@ -200,7 +202,7 @@ export default class Block<P = any> {
         const fragment = document.createElement('template');
         const block = this.render();
 
-        const propsAndStubs = { ...this.props };
+        const propsAndStubs: any = { ...this.props };
         Object.entries(this.children).forEach(([key, child]) => {
             propsAndStubs[key] = `<div data-id="${child._id}"></div>`
         });

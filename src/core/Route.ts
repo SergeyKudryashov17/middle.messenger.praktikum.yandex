@@ -1,7 +1,7 @@
 import renderDOM from "./renderDOM";
 import Block from "./Block";
 
-export interface BlockConstructable<P = any> {
+export interface BlockConstructable<P extends Record<string, any> = any> {
   new(props: P): Block<P>;
 }
 

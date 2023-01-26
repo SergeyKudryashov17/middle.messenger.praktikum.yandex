@@ -2,6 +2,7 @@ import Router from "../core/Router";
 import Block from "../core/Block";
 
 export function withRouter(Component: any) {
+  // @ts-ignore
   type Props = typeof Component extends typeof Block<infer P> ? P : any;
 
   return class WithRouter extends Component {

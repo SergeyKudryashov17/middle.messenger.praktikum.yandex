@@ -8,3 +8,7 @@ global.window = dom.window;
 global.document = dom.window.document;
 global.DocumentFragment = dom.window.DocumentFragment;
 
+require.extensions['.css'] = function () {
+  module.exports = () => ({});
+}
+
