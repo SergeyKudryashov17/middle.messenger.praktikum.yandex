@@ -10,7 +10,8 @@
     "eslint-fix": "eslint \"**/*.ts\" --fix",
     "dev": "webpack serve",
     "build": "webpack",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "precommit": "npm run test"
   },
   "repository": {
     "type": "git",

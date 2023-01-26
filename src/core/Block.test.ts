@@ -18,7 +18,7 @@ const { default: Block } = proxyquire("./Block", {
     },
 }) as { default: typeof BlockType };
 
-describe.only("Тестирование базового класса Block.ts", () => {
+describe("Тестирование базового класса Block.ts", () => {
     class ComponentMock extends Block {}
 
     it("Срабатывание события init жизненного цикла компонента", () => {

@@ -18,7 +18,7 @@ describe("Router test", () => {
     });
 
     it("Router start", () => {
-        expect(1).to.eq(1);
+        expect(1).to.eq(0);
     });
 
     it("forward", () => {

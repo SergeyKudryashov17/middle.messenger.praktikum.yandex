@@ -61,7 +61,10 @@ class DialogPage extends Block {
                     className: "open-invite-modal",
                     icon: addIconUrl,
                     events: {
-                        click: () => this.props.modalAddUser.openModal(),
+                        click: () => {
+                            // @ts-ignore
+                            props.modalAddUser.openModal()
+                        },
                     },
                 },
                 {
