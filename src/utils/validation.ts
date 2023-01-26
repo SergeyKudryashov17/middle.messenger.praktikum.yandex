@@ -110,10 +110,9 @@ export function resetValidateField(fieldComponent: Block): void {
 }
 
 export function validateForm(listFields: Block[]): boolean {
-    console.log(listFields);
    return listFields.reduce((flag: boolean, component: Block) => {
-       const errorTextNode: HTMLElement = component.children.errorTextComponent.getContent();
-       let status: boolean = (errorTextNode.textContent !== '') ? false : handleValidateField(component);
+       const errorTextNode: HTMLElement | null = component.children.errorTextComponent.getContent();
+       let status: boolean = (errorTextNode?.textContent !== '') ? false : handleValidateField(component);
        return flag && status;
    }, true);
 }

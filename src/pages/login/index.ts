@@ -40,7 +40,7 @@ const btnLogIn: Button = new Button({
     className: 'button_main button_full-width button_centered',
     label: 'Авторизоваться'
 });
-const linkRegistration: Link = new Link({
+const linkRegistration: Block = new Link({
     href: '/signin',
     className: 'link_centered',
     label: 'Нет аккаунта'
@@ -59,13 +59,10 @@ const form: Form = new Form({
 
             const status: boolean = validateForm(fields);
             if (status) {
-                let formData: SigninData = {};
-                fields.map(fieldComponent => {
-                    const fieldName: string = (fieldComponent.children.inputComponent.getContent() as HTMLInputElement).name;
-                    formData[fieldName] = (fieldComponent.children.inputComponent.getContent() as HTMLInputElement).value;
-                });
-
-                console.log(formData);
+                let formData: SigninData = {
+                    login: (fieldLogin.children.inputComponent.getContent() as HTMLInputElement).value,
+                    password: (fieldPassword.children.inputComponent.getContent() as HTMLInputElement).value
+                };
 
                 authService.signin(formData);
             }

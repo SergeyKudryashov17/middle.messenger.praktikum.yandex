@@ -38,6 +38,7 @@ class Router {
 
   private onRoute(pathname: string) {
     const route = this.getRoute(pathname);
+    console.log(route);
 
     if (!route) return;
 

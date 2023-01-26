@@ -4,7 +4,6 @@ import Label from "../label/Label";
 import ErrorText from "../errorText/ErrorText";
 
 import './field.css';
-import * as console from "console";
 
 interface IFieldProps {
     fieldClass?: string,
@@ -20,14 +19,14 @@ interface IFieldProps {
     inputValidateRule?: string,
     eventsInput?: Record<string, Function>,
     errorText: string,
-    events?: Record<string, Function>
+    events?: Record<string, Function>,
+    labelComponent?: Label | "",
+    inputComponent?: Input | "",
+    errorTextComponent?: ErrorText | "",
+    className?: string
 }
 
 export default class Field extends Block {
-    labelComponent: Block | string;
-    inputComponent: Block;
-    errorTextComponent: Block | string;
-
     constructor(props: IFieldProps) {
         props.labelComponent = (props.labelText !== undefined)
           ? new Label({
@@ -56,7 +55,7 @@ export default class Field extends Block {
         super("div", {...props});
     }
 
-    componentDidUpdate(oldProps: any, newProps: any): boolean {
+    componentDidUpdate(_oldProps: any, newProps: any): boolean {
         this.children.inputComponent.setProps({value: newProps.inputValue});
         return true;
     }

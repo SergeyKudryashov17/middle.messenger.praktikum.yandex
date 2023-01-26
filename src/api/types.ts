@@ -1,9 +1,9 @@
 export interface IState {
-  user: UserData | undefined,
-  selectedChat: IShortDataChat | undefined,
-  isLoading: boolean | undefined,
-  messages: Record<number, IFullMessage[]> | undefined,
-  chats: IChat[] | undefined
+  user?: UserData,
+  selectedChat?: IShortDataChat,
+  isLoading?: boolean,
+  messages?: Record<number, IFullMessage[]>,
+  chats?: IChat[]
 }
 
 export type APIError = {

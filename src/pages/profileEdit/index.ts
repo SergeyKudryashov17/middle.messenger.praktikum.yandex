@@ -17,7 +17,7 @@ import UserService from "../../services/userService";
 
 type ProfilePageProps = {
     propDisplay: string,
-    sidebar: Sidebar,
+    sidebar: Block,
     userAvatar: Avatar,
     profileItemEmail: ProfileDataItem,
     profileItemLogin: ProfileDataItem,
@@ -47,11 +47,12 @@ class EditProfilePage extends Block {
             events: {
                 change: async (event: Event) => {
                     event.stopPropagation();
-                    const fileAvatar = event.target.files[0];
+
+                    const input = event.target as HTMLInputElement;
+                    const fileAvatar = input.files![0];
                     const request = new FormData();
                     request.append('avatar', fileAvatar);
-                    const response = await UserService.changeAvatar(request);
-                    console.log(response);
+                    await UserService.changeAvatar(request);
                 }
             }
         });
@@ -179,7 +180,7 @@ class EditProfilePage extends Block {
                         return;
                     }
 
-                    let userData = {};
+                    let userData: any = {};
                     Array.from(document.querySelectorAll('.profile-data .input')).map((input: HTMLInputElement) => {
                         userData[input.name] = input.value;
                     });
@@ -192,7 +193,7 @@ class EditProfilePage extends Block {
         super("div", {...props});
     }
 
-    componentDidUpdate(oldProps, newProps): boolean {
+    componentDidUpdate(oldProps: any, newProps: any): boolean {
         const oldUserState = oldProps.userState;
         const newUserState = newProps.userState;
 

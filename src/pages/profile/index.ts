@@ -16,7 +16,7 @@ import isEqual from "../../utils/isEqual";
 type ProfilePageProps = {
     propDisplay: string,
     userName: string,
-    sidebar: Sidebar,
+    sidebar: Block,
     userAvatar: Avatar,
     profileItemEmail: ProfileDataItem,
     profileItemLogin: ProfileDataItem,
@@ -24,9 +24,9 @@ type ProfilePageProps = {
     profileItemSName: ProfileDataItem,
     profileItemChatName: ProfileDataItem,
     profileItemPhone: ProfileDataItem,
-    linkChangeData: Link,
-    linkChangePassword: Link,
-    linkLogout: Link,
+    linkChangeData: Block,
+    linkChangePassword: Block,
+    linkLogout: Block,
     userState: UserData
 }
 
@@ -106,7 +106,7 @@ class ProfilePage extends Block {
         super("div", {...props});
     }
 
-    componentDidUpdate(oldProps, newProps): boolean {
+    componentDidUpdate(oldProps: any, newProps: any): boolean {
         const oldUserState = oldProps.userState;
         const newUserState = newProps.userState;
 

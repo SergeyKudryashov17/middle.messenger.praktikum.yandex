@@ -17,7 +17,7 @@ import { getUserState } from "../../utils/getUserState";
 type EditPasswordPageProps = {
     propDisplay: string,
     userName: string,
-    sidebar: Sidebar,
+    sidebar: Block,
     userAvatar: Avatar,
     profileItemOldPassword: ProfileDataItem,
     profileItemNewPassword: ProfileDataItem,

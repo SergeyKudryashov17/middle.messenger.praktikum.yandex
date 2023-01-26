@@ -4,7 +4,6 @@ import { apiHasError } from "../utils/apiHasError";
 import { listRoutes } from "../core/listRoutes";
 import Router from "../core/Router";
 import store from "../core/Store";
-import cloneDeep from "../utils/cloneDeep";
 import isEqual from "../utils/isEqual";
 import AuthService from "./authService";
 
@@ -12,7 +11,13 @@ class UserService {
   private api = new UserAPI('/user');
 
   async changeProfile(profileData: IProfileData) {
-    let previousProfileState = cloneDeep(store.getState().user as UserData);
+    let previousProfileState: Record<string, string> = {};
+    Object.entries(store.getState().user as UserData).forEach(([key, value]) => {
+      if (key !== 'id' && key !== 'avatar') {
+        previousProfileState[key] = value;
+      }
+    })
+
     delete previousProfileState.id;
     delete previousProfileState.avatar;
 

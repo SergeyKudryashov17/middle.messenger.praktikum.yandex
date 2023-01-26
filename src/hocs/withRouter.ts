@@ -1,9 +1,9 @@
 import Router from "../core/Router";
 import Block from "../core/Block";
+import { BlockConstructable } from "./types";
 
-export function withRouter(Component: any) {
-  // @ts-ignore
-  type Props = typeof Component extends typeof Block<infer P> ? P : any;
+export function withRouter(Component: BlockConstructable) {
+  type Props = typeof Component extends typeof Block<infer P extends Record<string, any>> ? P : any;
 
   return class WithRouter extends Component {
     constructor(props: Props & PropsWithRouter) {

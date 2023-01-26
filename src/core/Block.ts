@@ -77,10 +77,26 @@ export default class Block<P extends Record<string, any> = any> {
 
     dispatchComponentDidMount() {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+
+        Object.values(this.children).forEach(child => {
+            if (Array.isArray(child)) {
+                child.forEach(ch => ch.dispatchComponentDidMount());
+            } else {
+                child.dispatchComponentDidMount();
+            }
+        });
     }
 
     dispatchComponentReady() {
         this.eventBus().emit(Block.EVENTS.FLOW_CREADY);
+
+        Object.values(this.children).forEach(child => {
+            if (Array.isArray(child)) {
+                child.forEach(ch => ch.dispatchComponentReady());
+            } else {
+                child.dispatchComponentReady();
+            }
+        });
     }
 
     private _componentReady() {
@@ -100,7 +116,7 @@ export default class Block<P extends Record<string, any> = any> {
         return true;
     }
 
-    setProps = (nextProps: Partial<P>) => {
+    setProps = (nextProps: P) => {
         if (!nextProps) {
             return;
         }
@@ -188,8 +204,10 @@ export default class Block<P extends Record<string, any> = any> {
         const props: Record<string, unknown> = {};
 
         Object.entries(propsAndChildren).forEach(([key, value]) => {
-            if (value instanceof Block) {
-                children[key] = value;
+            if (Array.isArray(value) && value.length > 0 && value.every(v => v instanceof Block)) {
+                children[key as string] = value;
+            } else if (value instanceof Block) {
+                children[key as string] = value;
             } else {
                 props[key] = value;
             }
@@ -199,22 +217,39 @@ export default class Block<P extends Record<string, any> = any> {
     }
 
     private _compile(): DocumentFragment {
-        const fragment = document.createElement('template');
-        const block = this.render();
-
         const propsAndStubs: any = { ...this.props };
-        Object.entries(this.children).forEach(([key, child]) => {
-            propsAndStubs[key] = `<div data-id="${child._id}"></div>`
+        Object.entries(this.children).forEach(([name, component]) => {
+            if (Array.isArray(component)) {
+                propsAndStubs[name] = component.map(child => `<div data-id="${child._id}"></div>`)
+            } else {
+                propsAndStubs[name] = `<div data-id="${component._id}"></div>`;
+            }
         });
 
+        const block = this.render();
         const tmpl = Handlebars.compile(block);
+
+        const fragment = document.createElement('template');
         fragment.innerHTML = tmpl({...propsAndStubs});
 
-        Object.values(this.children).forEach(component => {
+        const replaceStub = (component: Block) => {
             const stub = fragment.content.querySelector(`[data-id="${component._id}"]`);
-            if (!stub) return;
 
-            stub.replaceWith(component.getContent() as HTMLElement);
+            if (!stub) {
+                return;
+            }
+
+            component.getContent()?.append(...Array.from(stub.childNodes));
+
+            stub.replaceWith(component.getContent()!);
+        }
+
+        Object.entries(this.children).forEach(([_, component]) => {
+            if (Array.isArray(component)) {
+                component.forEach(replaceStub);
+            } else {
+                replaceStub(component);
+            }
         });
 
         return fragment.content;

@@ -16,7 +16,6 @@ import { getMainState } from "../../utils/getMainState";
 import isEqual from "../../utils/isEqual";
 
 import { IFullMessage, IShortDataChat } from "../../api/types";
-import { IMessagesGroupProps } from "../../components/messages-group/MessagesGroup";
 
 import addIconUrl from '../../static/icon/add-icon.svg';
 import removeIconUrl from '../../static/icon/remove-icon.svg';
@@ -25,28 +24,29 @@ import attachFileUrl from '../../static/icon/attach-file.svg';
 import attachLocationUrl from '../../static/icon/attach-location.svg';
 
 type DialogPageProps = {
-    propDisplay?: string,
-    selectedChat: IShortDataChat,
-    messages?: IMessagesGroupProps[],
+    propDisplay: string,
     messagesGroupsLabels: string,
-    sidebar: Sidebar,
-    interlocutor: Interlocutor,
+    sidebar: Block,
+    interlocutor: Block,
     settingsDialogMenu: DropdownMenu,
     attachMenu: DropdownMenu,
     inputMessage: Input,
     settingsDialogBtn: Button,
     sendMessageBtn: Button,
     attachedBtn: Button,
-    modalAddUser: ModalAddUser,
+    modalAddUser: Block,
     modalDeleteUsers: ModalDeleteUsers
+}
+
+type DialogPageState = {
+    selectedChat: IShortDataChat,
+    messages?: IFullMessage[],
 }
 
 class DialogPage extends Block {
     private messagesLabels: string = '';
 
-    constructor(props: DialogPageProps) {
-        props.propDisplay = 'flex';
-
+    constructor(props: DialogPageProps & DialogPageState) {
         props.sidebar = new Sidebar({
             isFullSize: true
         });
@@ -61,7 +61,7 @@ class DialogPage extends Block {
                     className: "open-invite-modal",
                     icon: addIconUrl,
                     events: {
-                        click: () => props.modalAddUser.openModal()
+                        click: () => this.props.modalAddUser.openModal()
                     }
                 },
                 {
@@ -174,6 +174,8 @@ class DialogPage extends Block {
         });
 
         super("div", { ...props });
+
+        this.propDisplay = 'flex';
     }
 
     async componentDidMount() {

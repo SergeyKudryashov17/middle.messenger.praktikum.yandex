@@ -115,7 +115,7 @@ const btnLogIn: Button = new Button({
     className: 'button_main button_full-width button_centered',
     label: 'Авторизоваться'
 });
-const linkToCome: Link = new Link({
+const linkToCome: Block = new Link({
     href: '/login',
     className: 'link_centered',
     label: 'Войти',
@@ -133,19 +133,21 @@ const form: Form = new Form({
         linkToCome
     ],
     events: {
-        submit: (event: Event) => {
+        submit: async (event: Event) => {
             event.preventDefault();
 
             const status: boolean = validateForm(fields);
             if (status) {
-                let formData: IProfileData  = {};
-                fields.map(fieldComponent => {
-                    const fieldName: string = (fieldComponent.children.inputComponent.getContent() as HTMLInputElement).name;
-                    const fieldValue: string = (fieldComponent.children.inputComponent.getContent() as HTMLInputElement).value;
-                    formData[fieldName] = fieldValue;
-                });
+                let formData: IProfileData  = {
+                    first_name: (fieldFName.children.inputComponent.getContent() as HTMLInputElement).value,
+                    second_name: (fieldSName.children.inputComponent.getContent() as HTMLInputElement).value,
+                    login: (fieldLogin.children.inputComponent.getContent() as HTMLInputElement).value,
+                    email: (fieldEmail.children.inputComponent.getContent() as HTMLInputElement).value,
+                    password: (fieldPassword.children.inputComponent.getContent() as HTMLInputElement).value,
+                    phone: (fieldPhone.children.inputComponent.getContent() as HTMLInputElement).value
+                };
 
-                authService.signup(formData);
+                await authService.signup(formData);
             }
         }
     }

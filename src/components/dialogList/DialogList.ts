@@ -19,16 +19,15 @@ interface IDialogListProps {
     dialogsData: dialogsData[],
     chatState?: IChat[],
     userState?: UserData,
+    dialogsComponents?: DialogItem[]
     dialogComponentsLabels: string
 }
 
 class DialogList extends Block {
     constructor(props: IDialogListProps) {
-        props.dialogComponentsLabels = '';
-        props.chatState?.forEach((data: IChat, index: number) => {
-            const componentLabel = `dialog${index}`;
-            props.dialogComponentsLabels += `{{{ ${componentLabel} }}}`;
-            props[componentLabel] = new DialogItem(data);
+        props.dialogsComponents = [];
+        props.chatState?.forEach((data: IChat) => {
+            props.dialogsComponents?.push(new DialogItem(data));
         });
 
         super("div", {...props});
@@ -41,9 +40,15 @@ class DialogList extends Block {
           </div>
         `;
 
+        const listDialogs = `
+            {{#each dialogsComponents}}
+              {{{this}}}
+            {{/each}}`;
+
         this.dispatchComponentDidMount();
+
         return `<ul class="dialog-list">
-                  ${this.props.chatState === undefined ? loader : this.props.dialogComponentsLabels}
+                  ${this.props.chatState === undefined ? loader : listDialogs}
                 </ul>`;
     }
 }

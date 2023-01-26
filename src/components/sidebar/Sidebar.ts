@@ -11,14 +11,14 @@ import isEqual from "../../utils/isEqual";
 import Button from "../button/Button";
 import ModalNewChat from "../modalNewChat";
 
-interface ISidebar {
+export interface ISidebar {
     isFullSize: boolean,
     btnNewChat?: Button,
     chatState?: IChat[],
     search?: Input,
-    profileLink?: Link,
-    backLink?: Link,
-    dialogListComponent?: DialogList | null,
+    profileLink?: Block,
+    backLink?: Block,
+    dialogListComponent?: Block | string | undefined,
     modalNewChat?: ModalNewChat
 }
 

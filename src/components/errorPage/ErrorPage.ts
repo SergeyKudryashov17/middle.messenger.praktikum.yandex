@@ -1,10 +1,9 @@
 import Block from '../../core/Block';
-import Link from "../link/Link";
 
 interface IErrorPageProps {
     title: string,
     caption: string,
-    link: Link,
+    link?: Block,
     propDisplay?: string,
     events?: Record<string, Function>
 }

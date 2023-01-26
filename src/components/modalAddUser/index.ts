@@ -11,7 +11,6 @@ import '../modal/modal.css';
 import { handleValidateField, resetValidateField, validateForm } from "../../utils/validation";
 import { getChatsState } from "../../utils/getChatsState";
 import { IChat, IShortDataChat } from "../../api/types";
-import * as console from "console";
 
 type ModalAddUserProps = {
   modalID: string,

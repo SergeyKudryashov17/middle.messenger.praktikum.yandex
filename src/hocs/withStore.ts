@@ -1,21 +1,21 @@
 import store, { StoreEvents } from "../core/Store";
-import isEqual from "../utils/isEqual";
-import Block from "../core/Block";
+import isEqual, { PlainObject } from "../utils/isEqual";
 import { IState } from "../api/types";
+import { BlockConstructable } from "./types";
 
-export function withStore<SP>(mapStateToProps: (state: IState) => SP) {
-  return function wrap<P>(Component: typeof Block<SP & P>) {
+export function withStore(mapStateToProps: (state: IState) => any) {
+  return function wrap(Component: BlockConstructable) {
 
     return class WithStore extends Component {
-      constructor(props: Omit<P, keyof SP>) {
+      constructor(props: any) {
         let previousState = mapStateToProps(store.getState());
 
-        super({ ...(props as P), ...previousState });
+        super({ ...props, ...previousState });
 
         store.on(StoreEvents.Updated, () => {
           const propsFromState = mapStateToProps(store.getState());
 
-          if (isEqual(previousState, propsFromState)) {
+          if (isEqual(previousState as PlainObject, propsFromState as PlainObject)) {
             return;
           }
 

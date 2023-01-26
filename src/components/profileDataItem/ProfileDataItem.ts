@@ -13,7 +13,8 @@ interface IProfileDataItem {
     typeValue?: string,
     value: string,
     validateRule?: string,
-    eventsField?: Record<string, Function>
+    eventsField?: Record<string, Function>,
+    field?: Field
 }
 
 export default class ProfileDataItem extends Block {

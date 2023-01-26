@@ -1,11 +1,12 @@
 import Link from "../../components/link/Link";
 import ErrorPage from "../../components/errorPage/ErrorPage";
+import Block from "../../core/Block";
 
 type PageServerErrorProps = {
     title: string,
     caption: string,
     propDisplay: string,
-    link: Link
+    link: Block
 }
 
 class PageServerError extends ErrorPage {

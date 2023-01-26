@@ -3,16 +3,8 @@ import Field from "../field/Field";
 import Form from "../form/Form";
 import Block from "../../core/Block";
 
-import { withStore } from "../../hocs/withStore";
-import UserService from "../../services/userService";
-import ChatService from "../../services/chatService";
-
 import '../modal/modal.css';
-import { handleValidateField, resetValidateField, validateForm } from "../../utils/validation";
-import { getChatsState } from "../../utils/getChatsState";
 import { FullUserData, IChat, IShortDataChat } from "../../api/types";
-import * as console from "console";
-import userItem from "../userItem";
 import isEqual from "../../utils/isEqual";
 import ListUsers from "../listUsers";
 

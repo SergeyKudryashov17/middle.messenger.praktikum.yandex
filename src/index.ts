@@ -1,4 +1,6 @@
 import Router from "./core/Router";
+import { getRouteData, listRoutes, RouteData } from "./core/listRoutes";
+import store from "./core/Store";
 
 import PageNotFound from './pages/404/';
 import PageServerError from './pages/500/';
@@ -9,8 +11,10 @@ import EditProfilePage from './pages/profileEdit/';
 import EditPasswordPage from './pages/profileEditPassword/';
 import SigninPage from './pages/singin/';
 import authService from "./services/authService";
-import { getRouteData, listRoutes, RouteData } from "./core/listRoutes";
-import store from "./core/Store";
+
+import "./styles/style.css";
+import "./components/chat-body/chat-body.css";
+import "./components/form/form.css";
 
 document.addEventListener('DOMContentLoaded', async () => {
   Router
@@ -28,6 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     await authService.fetchUser();
     Router.start();
   } catch (e) {
+    console.error(e);
     Router.start(listRoutes.login.path);
   }
 

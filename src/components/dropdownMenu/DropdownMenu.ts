@@ -11,7 +11,7 @@ type ItemMenu = {
 }
 
 interface IDropdownMenuProps {
-    itemsLabels?: string,
+    itemsComponents?: dropdownMenuItem[]
     items: ItemMenu[],
     id: string,
     events?: Record<string, Function>
@@ -21,16 +21,16 @@ export default class DropdownMenu extends Block {
     public classShow: string = 'dropdownMenu_show';
 
     constructor(props: IDropdownMenuProps) {
-        props.itemsLabels = '';
-        props.items.forEach((item, index) => {
-            const label: string = `menuItem${index}`;
-            props[label] = new dropdownMenuItem({
-                icon: item.icon,
-                label: item.label,
-                className: item.className,
-                events: item?.events
-            });
-            props.itemsLabels += `{{{ ${label} }}}`;
+        props.itemsComponents = [];
+        props.items.forEach((item) => {
+            props.itemsComponents?.push(
+                new dropdownMenuItem({
+                    icon: item.icon,
+                    label: item.label,
+                    className: item.className,
+                    events: item?.events
+                })
+            );
         });
 
         super("button", {...props});
@@ -41,7 +41,9 @@ export default class DropdownMenu extends Block {
 
         return `
             <div class="dropdownMenu" id="${this.props.id}">
-                ${this.props.itemsLabels}
+                {{#each itemsComponents}}
+                  {{{this}}}
+                {{/each}}
             </div>
         `;
     }

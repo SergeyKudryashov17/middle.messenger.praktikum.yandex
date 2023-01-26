@@ -13,7 +13,7 @@ export function merge(lhs: Indexed, rhs: Indexed): Indexed {
     }
 
     try {
-      if (rhs[p].constructor === Object) {
+      if (rhs[p]?.constructor === Object) {
         rhs[p] = merge(lhs[p] as Indexed, rhs[p] as Indexed);
       } else {
         lhs[p] = rhs[p];

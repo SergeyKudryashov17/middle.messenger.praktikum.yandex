@@ -9,22 +9,7 @@ interface IFormProps {
 }
 
 export default class Form extends Block {
-  fieldsList: string = '';
-  controlsList: string = '';
-
   constructor(props: IFormProps) {
-    props.fieldsList = '';
-    props.fields.forEach((component: Block, index: number) => {
-      props.fieldsList += `{{{ field${index} }}}`;
-      props[`field${index}`] = component;
-    });
-
-    props.controlsList = '';
-    props.controls.forEach((component: Block, index: number) => {
-      props.controlsList += `{{{ control${index} }}}`;
-      props[`control${index}`] = component;
-    });
-
     super("form", { ...props});
   }
 
@@ -35,10 +20,14 @@ export default class Form extends Block {
       <form class="${this.props.className}">
         ${title}
         <div class="form__fields">
-          ${this.props.fieldsList}
+          {{#each fields}}
+            {{{this}}}
+          {{/each}}
         </div>
         <div class="form__footer">
-          ${this.props.controlsList}
+          {{#each controls}}
+            {{{this}}}
+          {{/each}}
         </div>
       </form>
     `;
