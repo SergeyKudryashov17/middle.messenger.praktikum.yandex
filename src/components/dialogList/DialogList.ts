@@ -1,26 +1,26 @@
-import Block from '../../core/Block';
+import Block from "../../core/Block";
 import DialogItem from "../dialogItem/DialogItem";
 import { getChatsState } from "../../utils/getChatsState";
 import { withStore } from "../../hocs/withStore";
 
-import './dialogList.css';
+import "./dialogList.css";
 import { IChat, UserData } from "../../api/types";
 
 export type dialogsData = {
-    name: string,
-    time: string,
-    isMyMessage: boolean,
-    preview: string,
-    unread: number
-}
+    name: string;
+    time: string;
+    isMyMessage: boolean;
+    preview: string;
+    unread: number;
+};
 
 interface IDialogListProps {
-    isLoading?: boolean,
-    dialogsData: dialogsData[],
-    chatState?: IChat[],
-    userState?: UserData,
-    dialogsComponents?: DialogItem[]
-    dialogComponentsLabels: string
+    isLoading?: boolean;
+    dialogsData: dialogsData[];
+    chatState?: IChat[];
+    userState?: UserData;
+    dialogsComponents?: DialogItem[];
+    dialogComponentsLabels: string;
 }
 
 class DialogList extends Block {
@@ -30,7 +30,7 @@ class DialogList extends Block {
             props.dialogsComponents?.push(new DialogItem(data));
         });
 
-        super("div", {...props});
+        super("div", { ...props });
     }
 
     render(): string {

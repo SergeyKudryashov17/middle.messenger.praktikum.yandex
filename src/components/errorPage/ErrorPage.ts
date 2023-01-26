@@ -1,22 +1,22 @@
-import Block from '../../core/Block';
+import Block from "../../core/Block";
 
 interface IErrorPageProps {
-    title: string,
-    caption: string,
-    link?: Block,
-    propDisplay?: string,
-    events?: Record<string, Function>
+    title: string;
+    caption: string;
+    link?: Block;
+    propDisplay?: string;
+    events?: Record<string, Function>;
 }
 
 export default class ErrorPage extends Block {
     typeBody: string;
 
     constructor(props: IErrorPageProps) {
-        super("div", {...props});
+        super("div", { ...props });
     }
 
     render(): string {
-        this.typeBody = (this.props.typeBody) ? `messenger-body_${this.props.typeBody}` : '';
+        this.typeBody = this.props.typeBody ? `messenger-body_${this.props.typeBody}` : "";
 
         return `
             <main class="messenger-container">

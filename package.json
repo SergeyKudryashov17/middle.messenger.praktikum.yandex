@@ -5,7 +5,9 @@
   "scripts": {
     "test": "mocha --require ts-node/register require ./mochaSetup.js './src/**/*.test.ts'",
     "stylelint": "stylelint \"**/*.css\"",
+    "stylelint-fix": "stylelint \"**/*.css\" --fix",
     "eslint": "eslint \"**/*.ts\"",
+    "eslint-fix": "eslint \"**/*.ts\" --fix",
     "dev": "webpack serve",
     "build": "webpack",
     "start": "node src/server.js"

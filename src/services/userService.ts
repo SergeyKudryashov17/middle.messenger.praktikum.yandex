@@ -8,76 +8,76 @@ import isEqual from "../utils/isEqual";
 import AuthService from "./authService";
 
 class UserService {
-  private api = new UserAPI('/user');
+    private api = new UserAPI("/user");
 
-  async changeProfile(profileData: IProfileData) {
-    let previousProfileState: Record<string, string> = {};
-    Object.entries(store.getState().user as UserData).forEach(([key, value]) => {
-      if (key !== 'id' && key !== 'avatar') {
-        previousProfileState[key] = value;
-      }
-    })
+    async changeProfile(profileData: IProfileData) {
+        const previousProfileState: Record<string, string> = {};
+        Object.entries(store.getState().user as UserData).forEach(([key, value]) => {
+            if (key !== "id" && key !== "avatar") {
+                previousProfileState[key] = value;
+            }
+        });
 
-    delete previousProfileState.id;
-    delete previousProfileState.avatar;
+        delete previousProfileState.id;
+        delete previousProfileState.avatar;
 
-    if (isEqual(previousProfileState, profileData)) {
-      alert('Данные не нуждаются в обновлении');
-      Router.go(listRoutes.profile.path);
-      return;
+        if (isEqual(previousProfileState, profileData)) {
+            alert("Данные не нуждаются в обновлении");
+            Router.go(listRoutes.profile.path);
+            return;
+        }
+
+        const response: UserData | APIError = await this.api.changeProfile(profileData);
+        if (apiHasError(response)) {
+            alert(response.reason);
+            throw Error(response.reason);
+        }
+
+        store.set("user", response);
+        alert("Профиль успешно изменен");
+        Router.go(listRoutes.profile.path);
     }
 
-    const response: UserData | APIError = await this.api.changeProfile(profileData);
-    if (apiHasError(response)) {
-      alert(response.reason);
-      throw Error(response.reason);
+    async changeAvatar(file: FormData) {
+        const response: UserData | APIError = await this.api.changeAvatar(file);
+        if (apiHasError(response)) {
+            alert(response.reason);
+            throw Error(response.reason);
+        }
+
+        store.set("user", response);
     }
 
-    store.set('user', response);
-    alert('Профиль успешно изменен');
-    Router.go(listRoutes.profile.path);
-  }
+    async changePassword(passwordData: IPasswordData) {
+        const response: null | APIError = await this.api.changePassword(passwordData);
+        if (apiHasError(response)) {
+            alert(response.reason);
+            throw Error(response.reason);
+        }
 
-  async changeAvatar(file: FormData) {
-    const response: UserData | APIError = await this.api.changeAvatar(file);
-    if (apiHasError(response)) {
-      alert(response.reason);
-      throw Error(response.reason);
+        alert("Пароль успешно изменен");
+        await AuthService.logout();
     }
 
-    store.set('user', response);
-  }
+    async getUser(userID: number): Promise<UserData> {
+        const response: UserData | APIError = await this.api.getUser(userID);
+        if (apiHasError(response)) {
+            alert(response.reason);
+            throw Error(response.reason);
+        }
 
-  async changePassword(passwordData: IPasswordData) {
-    const response: null | APIError = await this.api.changePassword(passwordData);
-    if (apiHasError(response)) {
-      alert(response.reason);
-      throw Error(response.reason);
+        return response;
     }
 
-    alert('Пароль успешно изменен');
-    await AuthService.logout();
-  }
+    async searchUser(requestUser: IRequestSearchUser): Promise<UserData[]> {
+        const response: UserData[] | APIError = await this.api.searchUser(requestUser);
+        if (apiHasError(response)) {
+            alert(response.reason);
+            throw Error(response.reason);
+        }
 
-  async getUser(userID: number): Promise<UserData> {
-    const response: UserData | APIError = await this.api.getUser(userID);
-    if (apiHasError(response)) {
-      alert(response.reason);
-      throw Error(response.reason);
+        return response;
     }
-
-    return response;
-  }
-
-  async searchUser(requestUser: IRequestSearchUser): Promise<UserData[]> {
-    const response: UserData[] | APIError = await this.api.searchUser(requestUser);
-    if (apiHasError(response)) {
-      alert(response.reason);
-      throw Error(response.reason);
-    }
-
-    return response;
-  }
 }
 
 export default new UserService();

@@ -1,31 +1,36 @@
-import Handlebars from 'handlebars';
-import EventBus from './EventBus';
-import {v4 as makeUUID} from 'uuid';
+import Handlebars from "handlebars";
+import { v4 as makeUUID } from "uuid";
+import EventBus from "./EventBus";
 
 type BlockMeta = {
-    tagName: string,
-    props: any
-}
+    tagName: string;
+    props: any;
+};
 
 export default class Block<P extends Record<string, any> = any> {
     static EVENTS = {
         INIT: "init",
         FLOW_CDM: "flow:component-did-mount",
-        FLOW_CDU: 'flow:component-did-update',
+        FLOW_CDU: "flow:component-did-update",
         FLOW_RENDER: "flow:render",
-        FLOW_CREADY: "flow:component-ready"
+        FLOW_CREADY: "flow:component-ready",
     } as const;
 
     private readonly _meta: BlockMeta;
+
     public _id;
+
     protected readonly props: P;
+
     eventBus;
+
     protected _element: HTMLElement | null = null;
-    public children: {[id: string]: Block} = {};
-    public propDisplay: string = 'block';
 
+    public children: { [id: string]: Block } = {};
 
-    public constructor(tagName:string = "div", propsAndChildren: P) {
+    public propDisplay: string = "block";
+
+    public constructor(tagName: string = "div", propsAndChildren: P) {
         const { children, props } = this._getChildren(propsAndChildren);
 
         if (props.propDisplay) {
@@ -35,7 +40,7 @@ export default class Block<P extends Record<string, any> = any> {
         const eventBus = new EventBus();
         this._meta = {
             tagName,
-            props
+            props,
         };
 
         this._id = makeUUID();
@@ -78,9 +83,9 @@ export default class Block<P extends Record<string, any> = any> {
     dispatchComponentDidMount() {
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
 
-        Object.values(this.children).forEach(child => {
+        Object.values(this.children).forEach((child) => {
             if (Array.isArray(child)) {
-                child.forEach(ch => ch.dispatchComponentDidMount());
+                child.forEach((ch) => ch.dispatchComponentDidMount());
             } else {
                 child.dispatchComponentDidMount();
             }
@@ -90,9 +95,9 @@ export default class Block<P extends Record<string, any> = any> {
     dispatchComponentReady() {
         this.eventBus().emit(Block.EVENTS.FLOW_CREADY);
 
-        Object.values(this.children).forEach(child => {
+        Object.values(this.children).forEach((child) => {
             if (Array.isArray(child)) {
-                child.forEach(ch => ch.dispatchComponentReady());
+                child.forEach((ch) => ch.dispatchComponentReady());
             } else {
                 child.dispatchComponentReady();
             }
@@ -149,7 +154,7 @@ export default class Block<P extends Record<string, any> = any> {
 
     // Может переопределять пользователь, необязательно трогать
     render(): string {
-        return '';
+        return "";
     }
 
     getContent(): HTMLElement | null {
@@ -157,17 +162,17 @@ export default class Block<P extends Record<string, any> = any> {
     }
 
     private _addEvents(): void {
-        const {events = {}} = this.props;
+        const { events = {} } = this.props;
 
-        Object.keys(events).forEach(eventName => {
+        Object.keys(events).forEach((eventName) => {
             this._element?.addEventListener(eventName, events[eventName]);
         });
     }
 
     private _removeEvents(): void {
-        const {events = {}} = this.props;
+        const { events = {} } = this.props;
 
-        Object.keys(events).forEach(eventName => {
+        Object.keys(events).forEach((eventName) => {
             this._element?.removeEventListener(eventName, events[eventName]);
         });
     }
@@ -180,17 +185,17 @@ export default class Block<P extends Record<string, any> = any> {
         return new Proxy(props as object, {
             get(target: Record<string, any>, prop: string) {
                 const value = target[prop];
-                return typeof value === 'function' ? value.bind(target) : value;
+                return typeof value === "function" ? value.bind(target) : value;
             },
             set(target: Record<string, any>, prop: string, value) {
-                const oldTarget = {...target};
+                const oldTarget = { ...target };
                 target[prop] = value;
                 self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldTarget, target);
                 return true;
             },
             deleteProperty() {
-                throw new Error('Нет доступа');
-            }
+                throw new Error("Нет доступа");
+            },
         });
     }
 
@@ -199,12 +204,12 @@ export default class Block<P extends Record<string, any> = any> {
         return document.createElement(tagName);
     }
 
-    private _getChildren(propsAndChildren: any): {children: any, props: any} {
+    private _getChildren(propsAndChildren: any): { children: any; props: any } {
         const children: Record<string, unknown> = {};
         const props: Record<string, unknown> = {};
 
         Object.entries(propsAndChildren).forEach(([key, value]) => {
-            if (Array.isArray(value) && value.length > 0 && value.every(v => v instanceof Block)) {
+            if (Array.isArray(value) && value.length > 0 && value.every((v) => v instanceof Block)) {
                 children[key as string] = value;
             } else if (value instanceof Block) {
                 children[key as string] = value;
@@ -220,7 +225,7 @@ export default class Block<P extends Record<string, any> = any> {
         const propsAndStubs: any = { ...this.props };
         Object.entries(this.children).forEach(([name, component]) => {
             if (Array.isArray(component)) {
-                propsAndStubs[name] = component.map(child => `<div data-id="${child._id}"></div>`)
+                propsAndStubs[name] = component.map((child) => `<div data-id="${child._id}"></div>`);
             } else {
                 propsAndStubs[name] = `<div data-id="${component._id}"></div>`;
             }
@@ -229,8 +234,8 @@ export default class Block<P extends Record<string, any> = any> {
         const block = this.render();
         const tmpl = Handlebars.compile(block);
 
-        const fragment = document.createElement('template');
-        fragment.innerHTML = tmpl({...propsAndStubs});
+        const fragment = document.createElement("template");
+        fragment.innerHTML = tmpl({ ...propsAndStubs });
 
         const replaceStub = (component: Block) => {
             const stub = fragment.content.querySelector(`[data-id="${component._id}"]`);
@@ -242,7 +247,7 @@ export default class Block<P extends Record<string, any> = any> {
             component.getContent()?.append(...Array.from(stub.childNodes));
 
             stub.replaceWith(component.getContent()!);
-        }
+        };
 
         Object.entries(this.children).forEach(([_, component]) => {
             if (Array.isArray(component)) {
@@ -256,10 +261,10 @@ export default class Block<P extends Record<string, any> = any> {
     }
 
     show(): void {
-        (this.getContent() as HTMLElement ).style.display = this.propDisplay;
+        (this.getContent() as HTMLElement).style.display = this.propDisplay;
     }
 
     hide(): void {
-        (this.getContent() as HTMLElement ).style.display = "none";
+        (this.getContent() as HTMLElement).style.display = "none";
     }
 }

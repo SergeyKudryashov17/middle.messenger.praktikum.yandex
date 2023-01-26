@@ -1,16 +1,15 @@
 import Block from "../../core/Block";
-import { PropsWithRouter, withRouter } from '../../hocs/withRouter';
+import { PropsWithRouter, withRouter } from "../../hocs/withRouter";
 
-import './link.css';
-import '../button/button.css';
-
+import "./link.css";
+import "../button/button.css";
 
 interface ILinkProps extends PropsWithRouter {
-    href: string,
-    label: string,
-    className?: string
-    dataset?: Record<string, string>,
-    events?: Record<string, Function>
+    href: string;
+    label: string;
+    className?: string;
+    dataset?: Record<string, string>;
+    events?: Record<string, Function>;
 }
 
 export class BaseLink extends Block<ILinkProps> {
@@ -18,8 +17,8 @@ export class BaseLink extends Block<ILinkProps> {
         super("a", {
             ...props,
             events: {
-                click: (event: Event) => this.navigate(event)
-            }
+                click: (event: Event) => this.navigate(event),
+            },
         });
     }
 
@@ -29,8 +28,8 @@ export class BaseLink extends Block<ILinkProps> {
     }
 
     render(): string {
-        let dataAttributes: string = '';
-        for (let keyAttr in this.props.dataset) {
+        let dataAttributes: string = "";
+        for (const keyAttr in this.props.dataset) {
             dataAttributes += `data-${keyAttr}="${this.props.dataset[keyAttr]}" `;
         }
 

@@ -1,22 +1,22 @@
-import Block from '../../core/Block';
+import Block from "../../core/Block";
 
 interface IFormProps {
-  title?: string,
-  className?: string,
-  fields: Block[],
-  controls: Block[],
-  events?: Record<string, Function>
+    title?: string;
+    className?: string;
+    fields: Block[];
+    controls: Block[];
+    events?: Record<string, Function>;
 }
 
 export default class Form extends Block {
-  constructor(props: IFormProps) {
-    super("form", { ...props});
-  }
+    constructor(props: IFormProps) {
+        super("form", { ...props });
+    }
 
-  render() {
-    const title = this.props.title ? `<div class="form__title">${this.props.title}</div>` : '';
+    render() {
+        const title = this.props.title ? `<div class="form__title">${this.props.title}</div>` : "";
 
-    return `
+        return `
       <form class="${this.props.className}">
         ${title}
         <div class="form__fields">
@@ -31,5 +31,5 @@ export default class Form extends Block {
         </div>
       </form>
     `;
-  }
+    }
 }

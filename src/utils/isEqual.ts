@@ -1,5 +1,5 @@
 export type PlainObject<T = any> = {
-  [k in string]: T;
+    [k in string]: T;
 };
 
 /**
@@ -7,10 +7,12 @@ export type PlainObject<T = any> = {
  * @param value - переменная
  */
 function isPlainObject(value: unknown): value is PlainObject {
-  return typeof value === 'object'
-    && value !== null
-    && value.constructor === Object
-    && Object.prototype.toString.call(value) === '[object Object]';
+    return (
+        typeof value === "object" &&
+        value !== null &&
+        value.constructor === Object &&
+        Object.prototype.toString.call(value) === "[object Object]"
+    );
 }
 
 /**
@@ -18,7 +20,7 @@ function isPlainObject(value: unknown): value is PlainObject {
  * @param value - переменная
  */
 function isArray(value: unknown): value is [] {
-  return Array.isArray(value);
+    return Array.isArray(value);
 }
 
 /**
@@ -26,7 +28,7 @@ function isArray(value: unknown): value is [] {
  * @param value - переменная
  */
 function isArrayOrObject(value: unknown): value is [] | PlainObject {
-  return isPlainObject(value) || isArray(value);
+    return isPlainObject(value) || isArray(value);
 }
 
 /**
@@ -36,26 +38,26 @@ function isArrayOrObject(value: unknown): value is [] | PlainObject {
  * @return boolean - результат сравнения
  */
 export default function isEqual(lhs: PlainObject, rhs: PlainObject) {
-  if (!isArrayOrObject(lhs) || !isArrayOrObject(rhs)) {
-    return lhs === rhs;
-  }
-  if (Object.keys(lhs).length !== Object.keys(rhs).length) {
-    return false;
-  }
-
-  for (const [key, value] of Object.entries(lhs)) {
-    const rightValue = (rhs as PlainObject)[key];
-    if (isArrayOrObject(value) && isArrayOrObject(rightValue)) {
-      if (isEqual(value, rightValue)) {
-        continue;
-      }
-      return false;
+    if (!isArrayOrObject(lhs) || !isArrayOrObject(rhs)) {
+        return lhs === rhs;
+    }
+    if (Object.keys(lhs).length !== Object.keys(rhs).length) {
+        return false;
     }
 
-    if (value !== rightValue) {
-      return false;
-    }
-  }
+    for (const [key, value] of Object.entries(lhs)) {
+        const rightValue = (rhs as PlainObject)[key];
+        if (isArrayOrObject(value) && isArrayOrObject(rightValue)) {
+            if (isEqual(value, rightValue)) {
+                continue;
+            }
+            return false;
+        }
 
-  return true;
+        if (value !== rightValue) {
+            return false;
+        }
+    }
+
+    return true;
 }
