@@ -21,6 +21,8 @@ type ModalDeleteUsersProps = {
     listUsersComponent?: ListUsers;
 };
 
+
+
 export default class ModalDeleteUsers extends Block {
     constructor(props: ModalDeleteUsersProps) {
         props.title = "Удалить пользователя";
