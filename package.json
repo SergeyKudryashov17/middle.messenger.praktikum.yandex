@@ -10,8 +10,12 @@
     "eslint-fix": "eslint \"**/*.ts\" --fix",
     "dev": "webpack serve",
     "build": "webpack",
-    "start": "node src/server.js",
-    "precommit": "npm run test"
+    "start": "node src/server.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test"
+    }
   },
   "repository": {
     "type": "git",
@@ -66,4 +70,4 @@
     "handlebars": "4.7.7",
     "uuid": "9.0.0"
   }
-}
+},
