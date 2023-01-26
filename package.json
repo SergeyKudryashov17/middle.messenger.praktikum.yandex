@@ -10,11 +10,12 @@
     "eslint-fix": "eslint \"**/*.ts\" --fix",
     "dev": "webpack serve",
     "build": "webpack",
-    "start": "node src/server.js"
+    "start": "node src/server.js",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run stylelint"
+      "pre-commit": "npm run test"
     }
   },
   "repository": {
