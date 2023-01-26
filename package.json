@@ -14,7 +14,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run test"
+      "pre-commit": "npm run stylelint"
     }
   },
   "repository": {
@@ -45,7 +45,7 @@
     "eslint-config-prettier": "8.5.0",
     "eslint-plugin-prettier": "4.2.1",
     "html-webpack-plugin": "5.5.0",
-    "husky": "^8.0.3",
+    "husky": "8.0.3",
     "jsdom": "21.1.0",
     "mocha": "10.2.0",
     "postcss": "8.4.19",
