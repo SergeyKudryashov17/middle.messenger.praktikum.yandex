@@ -1,44 +1,45 @@
-import Block from '../../core/Block';
+import Block from "../../core/Block";
 import Badge from "../badge/Badge";
 import store from "../../core/Store";
 
 import getShortDate from "../../utils/getShortDate";
 import { IChat, IShortDataChat } from "../../api/types";
 
-import './dialogItem.css';
+import "./dialogItem.css";
 
 interface IDialogItemProps extends IChat {
-  unreadMessageCounter?: Badge | null,
-  events?: Record<string, Function>
+    unreadMessageCounter?: Badge | null;
+    events?: Record<string, Function>;
 }
 
 export default class DialogItem extends Block {
-  unreadMessageCounter: Block | string;
+    unreadMessageCounter: Block | string;
 
-  constructor(props: IDialogItemProps) {
-    props.unreadMessageCounter = (props.unread_count)
-      ? new Badge({
-        value: props.unread_count
-      }) : null;
+    constructor(props: IDialogItemProps) {
+        props.unreadMessageCounter = props.unread_count
+            ? new Badge({
+                  value: props.unread_count,
+              })
+            : null;
 
-    props.events = {
-      click: () => {
-        const selectedChat: IShortDataChat = {
-          id: props.id,
-          title: props.title,
-          avatar: props.avatar
+        props.events = {
+            click: () => {
+                const selectedChat: IShortDataChat = {
+                    id: props.id,
+                    title: props.title,
+                    avatar: props.avatar,
+                };
+                store.set("selectedChat", selectedChat);
+            },
         };
-        store.set('selectedChat', selectedChat);
-      }
+
+        super("li", { ...props });
     }
 
-    super("li", {...props});
-  }
+    render(): string {
+        const time = this.props.last_message?.time ? getShortDate(this.props.last_message?.time) : "";
 
-  render(): string {
-    const time = this.props.last_message?.time ? getShortDate(this.props.last_message?.time) : "";
-
-    return `
+        return `
         <li class="dialog-list__item" data-chat-id="${this.props.id}">
             <div class="dialog">
                 <div class="dialog__interlocutor-photo"></div>
@@ -55,5 +56,5 @@ export default class DialogItem extends Block {
             </div>
         </li>
     `;
-  }
+    }
 }

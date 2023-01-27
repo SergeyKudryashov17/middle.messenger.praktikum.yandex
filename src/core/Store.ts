@@ -3,36 +3,36 @@ import EventBus from "./EventBus";
 import { IState } from "../api/types";
 
 export enum StoreEvents {
-  Updated = 'updated'
+    Updated = "updated",
 }
 
 export class Store extends EventBus {
-  private state: IState = {
-    user: undefined,
-    selectedChat: undefined,
-    isLoading: undefined,
-    messages: undefined,
-    chats: undefined
-  };
+    private state: IState = {
+        user: undefined,
+        selectedChat: undefined,
+        isLoading: undefined,
+        messages: undefined,
+        chats: undefined,
+    };
 
-  public set(keypath: string, data: unknown) {
-    set(this.state, keypath, data);
-    this.emit(StoreEvents.Updated, this.getState());
-  }
-
-  public getState() {
-    return this.state;
-  }
-
-  public clear() {
-    this.state = {
-      user: undefined,
-      selectedChat: undefined,
-      isLoading: undefined,
-      messages: undefined,
-      chats: undefined
+    public set(keypath: string, data: unknown) {
+        set(this.state, keypath, data);
+        this.emit(StoreEvents.Updated, this.getState());
     }
-  }
+
+    public getState() {
+        return this.state;
+    }
+
+    public clear() {
+        this.state = {
+            user: undefined,
+            selectedChat: undefined,
+            isLoading: undefined,
+            messages: undefined,
+            chats: undefined,
+        };
+    }
 }
 
 const store = new Store();

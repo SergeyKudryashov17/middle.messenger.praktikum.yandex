@@ -1,46 +1,35 @@
-import Block from '../../core/Block';
+import Block from "../../core/Block";
 
 interface IFormProps {
-  title?: string,
-  className?: string,
-  fields: Block[],
-  controls: Block[],
-  events?: Record<string, Function>
+    title?: string;
+    className?: string;
+    fields: Block[];
+    controls: Block[];
+    events?: Record<string, Function>;
 }
 
 export default class Form extends Block {
-  fieldsList: string = '';
-  controlsList: string = '';
+    constructor(props: IFormProps) {
+        super("form", { ...props });
+    }
 
-  constructor(props: IFormProps) {
-    props.fieldsList = '';
-    props.fields.forEach((component: Block, index: number) => {
-      props.fieldsList += `{{{ field${index} }}}`;
-      props[`field${index}`] = component;
-    });
+    render() {
+        const title = this.props.title ? `<div class="form__title">${this.props.title}</div>` : "";
 
-    props.controlsList = '';
-    props.controls.forEach((component: Block, index: number) => {
-      props.controlsList += `{{{ control${index} }}}`;
-      props[`control${index}`] = component;
-    });
-
-    super("form", { ...props});
-  }
-
-  render() {
-    const title = this.props.title ? `<div class="form__title">${this.props.title}</div>` : '';
-
-    return `
+        return `
       <form class="${this.props.className}">
         ${title}
         <div class="form__fields">
-          ${this.props.fieldsList}
+          {{#each fields}}
+            {{{this}}}
+          {{/each}}
         </div>
         <div class="form__footer">
-          ${this.props.controlsList}
+          {{#each controls}}
+            {{{this}}}
+          {{/each}}
         </div>
       </form>
     `;
-  }
+    }
 }

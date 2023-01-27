@@ -1,7 +1,9 @@
-type TLoadingState = {
-  isLoading: boolean
-}
+import { IState } from "../api/types";
 
-export const getLoadingState = (state): TLoadingState => {
-  return { isLoading: state.isLoading }
+type TLoadingState = {
+    isLoading?: boolean;
+};
+
+export const getLoadingState = (state: IState): TLoadingState => {
+    return { isLoading: state.isLoading };
 };

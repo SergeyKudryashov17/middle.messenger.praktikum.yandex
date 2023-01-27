@@ -1,28 +1,27 @@
 import store, { StoreEvents } from "../core/Store";
-import isEqual from "../utils/isEqual";
-import Block from "../core/Block";
+import isEqual, { PlainObject } from "../utils/isEqual";
 import { IState } from "../api/types";
+import { BlockConstructable } from "./types";
 
-export function withStore<SP>(mapStateToProps: (state: IState) => SP) {
-  return function wrap<P>(Component: typeof Block<SP & P>) {
+export function withStore(mapStateToProps: (state: IState) => any) {
+    return function wrap(Component: BlockConstructable) {
+        return class WithStore extends Component {
+            constructor(props: any) {
+                let previousState = mapStateToProps(store.getState());
 
-    return class WithStore extends Component {
-      constructor(props: Omit<P, keyof SP>) {
-        let previousState = mapStateToProps(store.getState());
+                super({ ...props, ...previousState });
 
-        super({ ...(props as P), ...previousState });
+                store.on(StoreEvents.Updated, () => {
+                    const propsFromState = mapStateToProps(store.getState());
 
-        store.on(StoreEvents.Updated, () => {
-          const propsFromState = mapStateToProps(store.getState());
+                    if (isEqual(previousState as PlainObject, propsFromState as PlainObject)) {
+                        return;
+                    }
 
-          if (isEqual(previousState, propsFromState)) {
-            return;
-          }
-
-          previousState = propsFromState;
-          this.setProps({ ...propsFromState });
-        })
-      }
-    }
-  }
+                    previousState = propsFromState;
+                    this.setProps({ ...propsFromState });
+                });
+            }
+        };
+    };
 }

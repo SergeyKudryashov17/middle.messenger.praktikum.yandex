@@ -1,65 +1,65 @@
 .button {
-    margin: 0;
-    padding: 12px;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    text-align: center;
+  margin: 0;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
 }
 
 .button_main {
-    background: var(--main-color);
-    color: #FFF;
-    font-size: var(--base-size-text);
+  background: var(--main-color);
+  color: #fff;
+  font-size: var(--base-size-text);
 }
 
 .button_small {
-    padding: 6px 12px;
+  padding: 6px 12px;
 }
 
 .button_full-width {
-    width: 100%;
+  width: 100%;
 }
 
 .button_centered {
-    display: block;
-    margin: 0 auto;
+  display: block;
+  margin: 0 auto;
 }
 
 .button_circle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 30px;
-    height: 30px;
-    font-size: 14px;
-    border-radius: 50%;
-    padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  font-size: 14px;
+  border-radius: 50%;
+  padding: 0;
 }
 
 .button_danger {
-    background-color: var(--danger-color);
-    color: #fff;
+  background-color: var(--danger-color);
+  color: #fff;
 }
 
 .button_icon {
-    padding: 0;
-    background: transparent;
+  padding: 0;
+  background: transparent;
 }
 
 .button_link {
-    padding: 0;
-    background: transparent;
-    font-size: inherit;
-    border-radius: 0;
-    text-align: left;
+  padding: 0;
+  background: transparent;
+  font-size: inherit;
+  border-radius: 0;
+  text-align: left;
 }
 
 .button_link:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .button_new-chat {
-    color: var(--main-color);
-    font-size: 24px;
+  color: var(--main-color);
+  font-size: 24px;
 }

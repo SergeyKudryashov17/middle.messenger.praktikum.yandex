@@ -1,8 +1,3 @@
 {
-  "rules": {
-    "duplicate": "no-duplicate",
-    "empty": "no-empty",
-    "invalid": "no-invalid",
-    "unknown": "no-unknown"
-  }
+  "extends": "stylelint-config-standard"
 }

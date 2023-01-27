@@ -1,15 +1,15 @@
-import Block from '../../core/Block';
+import Block from "../../core/Block";
 
-import './badge.css';
+import "./badge.css";
 
 interface IBadgeProps {
-    value: number,
-    events?: Record<string, Function>
+    value: number;
+    events?: Record<string, Function>;
 }
 
 export default class Badge extends Block {
     constructor(props: IBadgeProps) {
-        super("li", {...props});
+        super("li", { ...props });
     }
 
     render(): string {

@@ -1,13 +1,14 @@
 .error-label {
-    display: none;
-    font-size: 8px;
-    line-height: 1;
-    color: var(--danger-color);
+  display: none;
+  font-size: 8px;
+  line-height: 1;
+  color: var(--danger-color);
 }
 
 .error-label_show {
-    display: block;
+  display: block;
 }
+
 .error-label_right {
-    text-align: right;
+  text-align: right;
 }

@@ -1,37 +1,36 @@
-import Block from '../../core/Block';
+import Block from "../../core/Block";
 import DialogItem from "../dialogItem/DialogItem";
 import { getChatsState } from "../../utils/getChatsState";
 import { withStore } from "../../hocs/withStore";
 
-import './dialogList.css';
+import "./dialogList.css";
 import { IChat, UserData } from "../../api/types";
 
 export type dialogsData = {
-    name: string,
-    time: string,
-    isMyMessage: boolean,
-    preview: string,
-    unread: number
-}
+    name: string;
+    time: string;
+    isMyMessage: boolean;
+    preview: string;
+    unread: number;
+};
 
 interface IDialogListProps {
-    isLoading?: boolean,
-    dialogsData: dialogsData[],
-    chatState?: IChat[],
-    userState?: UserData,
-    dialogComponentsLabels: string
+    isLoading?: boolean;
+    dialogsData: dialogsData[];
+    chatState?: IChat[];
+    userState?: UserData;
+    dialogsComponents?: DialogItem[];
+    dialogComponentsLabels: string;
 }
 
 class DialogList extends Block {
     constructor(props: IDialogListProps) {
-        props.dialogComponentsLabels = '';
-        props.chatState?.forEach((data: IChat, index: number) => {
-            const componentLabel = `dialog${index}`;
-            props.dialogComponentsLabels += `{{{ ${componentLabel} }}}`;
-            props[componentLabel] = new DialogItem(data);
+        props.dialogsComponents = [];
+        props.chatState?.forEach((data: IChat) => {
+            props.dialogsComponents?.push(new DialogItem(data));
         });
 
-        super("div", {...props});
+        super("div", { ...props });
     }
 
     render(): string {
@@ -41,9 +40,15 @@ class DialogList extends Block {
           </div>
         `;
 
+        const listDialogs = `
+            {{#each dialogsComponents}}
+              {{{this}}}
+            {{/each}}`;
+
         this.dispatchComponentDidMount();
+
         return `<ul class="dialog-list">
-                  ${this.props.chatState === undefined ? loader : this.props.dialogComponentsLabels}
+                  ${this.props.chatState === undefined ? loader : listDialogs}
                 </ul>`;
     }
 }

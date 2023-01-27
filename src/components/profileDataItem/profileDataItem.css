@@ -1,17 +1,19 @@
 .profile-data {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
+
 .profile-data__label {
-    color: var(--base-text-color);
-    font-size: var(--base-size-text);
-    flex-shrink: 0;
-    margin-right: 15px;
+  color: var(--base-text-color);
+  font-size: var(--base-size-text);
+  flex-shrink: 0;
+  margin-right: 15px;
 }
+
 .profile-data__value {
-    color: var(--secondary-text-color);
-    font-size: var(--base-size-text);
-    flex-grow: 1;
-    text-align: right;
+  color: var(--secondary-text-color);
+  font-size: var(--base-size-text);
+  flex-grow: 1;
+  text-align: right;
 }

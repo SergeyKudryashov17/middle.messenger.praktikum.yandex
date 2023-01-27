@@ -1,174 +1,181 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap');
-@import '../../node_modules/font-awesome/css/font-awesome.min.css';
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&display=swap");
+@import url("../../node_modules/font-awesome/css/font-awesome.min.css");
 
 :root {
-    --main-color: #3369f3;
-    --danger-color: #FF2F2F;
-    --base-text-color: #1E1E1E;
-    --bg-color: #EFEFEF;
-    --base-border: 1px solid #EAEAEA;
-    --base-border-radius: 12px;
-    --secondary-text-color: #999999;
-    --base-size-text: 13px;
-    --mini-size-text: 11px;
-    --font-weight-bold: 600;
-    --font-weight-medium: 500;
-    --font-weight-base: 400;
+  --main-color: #3369f3;
+  --danger-color: #ff2f2f;
+  --base-text-color: #1e1e1e;
+  --bg-color: #efefef;
+  --base-border: 1px solid #eaeaea;
+  --base-border-radius: 12px;
+  --secondary-text-color: #999;
+  --base-size-text: 13px;
+  --mini-size-text: 11px;
+  --font-weight-bold: 600;
+  --font-weight-medium: 500;
+  --font-weight-base: 400;
 }
 
-html, body {
-    margin: 0;
-    padding: 0;
-    font-family: Inter;
-    font-weight: var(--font-weight-base);
-    font-size: var(--base-size-text);
-    color: var(--base-text-color);
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Inter;
+  font-weight: var(--font-weight-base);
+  font-size: var(--base-size-text);
+  color: var(--base-text-color);
 }
 
 h1 {
-    display: block;
-    font-size: 60px;
-    font-weight: var(--font-weight-medium);
-    margin-top: 0;
-    margin-bottom: 20px;
+  display: block;
+  font-size: 60px;
+  font-weight: var(--font-weight-medium);
+  margin-top: 0;
+  margin-bottom: 20px;
 }
 
 h2 {
-    display: block;
-    font-size: 30px;
-    font-weight: var(--font-weight-medium);
-    margin-top: 0;
-    margin-bottom: 60px;
+  display: block;
+  font-size: 30px;
+  font-weight: var(--font-weight-medium);
+  margin-top: 0;
+  margin-bottom: 60px;
 }
 
 [type="button"] {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .messenger-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
 }
 
 .messenger-body {
-    display: grid;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    max-width: 1280px;
-    max-height: 720px;
-    grid-template-columns: 25% 75%;
-    border: var(--base-border);
+  display: grid;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: 1280px;
+  max-height: 720px;
+  grid-template-columns: 25% 75%;
+  border: var(--base-border);
 }
+
 .messenger-body_profile {
-    grid-template-columns: 80px 1fr;
+  grid-template-columns: 80px 1fr;
 }
+
 .messenger-body_default {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .messenger-controls {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .chat-body {
-    position: relative;
+  position: relative;
 }
 
 .empty-chat-warning {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--secondary-text-color);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--secondary-text-color);
 }
-
 
 .setting-dialog:hover {
-    color: var(--main-color);
+  color: var(--main-color);
 }
+
 .search-dialog:focus {
-    outline: 0;
+  outline: 0;
 }
 
 .setting-dialog {
-    font-size: 20px;
-    cursor: pointer;
-    color: var(--base-text-color);
+  font-size: 20px;
+  cursor: pointer;
+  color: var(--base-text-color);
 }
+
 .setting-dialog:hover,
 .setting-dialog_active {
-    background-color: #F5F5F5;
+  background-color: #f5f5f5;
 }
 
 .input-message {
-    background: var(--bg-color);
-    border-radius: 25px;
-    padding: 10px 15px;
-    border: 1px solif var(--bg-color);
+  background: var(--bg-color);
+  border-radius: 25px;
+  padding: 10px 15px;
+  border: 1px solif var(--bg-color);
 }
+
 .input-message:focus {
-    outline: 0;
+  outline: 0;
 }
 
 .add-attached-file {
-    font-size: 30px;
-    color: var(--secondary-text-color);
-    cursor: pointer;
+  font-size: 30px;
+  color: var(--secondary-text-color);
+  cursor: pointer;
 }
+
 .add-attached-file:hover,
 .add-attached-file_active {
-    color: var(--main-color);
+  color: var(--main-color);
 }
 
 .profile-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100%;
-    max-width: 550px;
-    margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: 550px;
+  margin: 0 auto;
 }
 
 .profile-name {
-    font-size: 16px;
-    font-weight: var(--font-weight-bold);
-    text-align: center;
-    margin: 20px 0 60px;
+  font-size: 16px;
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+  margin: 20px 0 60px;
 }
 
 .load-file-name {
-    text-align: center;
-    color: #8D8D8D;
-    font-size: 14px;
-    line-height: 16px;
-    margin-bottom: 50px;
+  text-align: center;
+  color: #8d8d8d;
+  font-size: 14px;
+  line-height: 16px;
+  margin-bottom: 50px;
 }
 
 .error-label {
-    color: var(--danger-color);
-    font-size: var(--mini-size-text);
+  color: var(--danger-color);
+  font-size: var(--mini-size-text);
 }
+
 .error-label_center {
-    text-align: center;
+  text-align: center;
 }
 
 .text-danger {
-    color: var(--danger-color);
+  color: var(--danger-color);
 }
 
 .text-main {
-    color: var(--main-color);
+  color: var(--main-color);
 }
 
 .list-users {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }

@@ -16,18 +16,16 @@ export default class EventBus {
             throw new Error(`Нет события: ${event}`);
         }
 
-        this.listeners[event] = this.listeners[event].filter(
-            listener => listener !== callback
-        );
+        this.listeners[event] = this.listeners[event].filter((listener) => listener !== callback);
     }
 
-    emit(event: string, ...args:any) {
+    emit(event: string, ...args: any) {
         if (!this.listeners[event]) {
             console.error(`Нет события: ${event}`);
             return;
         }
 
-        this.listeners[event].forEach(listener => {
+        this.listeners[event].forEach((listener) => {
             listener(...args);
         });
     }
