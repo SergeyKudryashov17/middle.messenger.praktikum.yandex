@@ -1,13 +1,14 @@
 .list {
-    padding: 0;
-    margin: 0 0 50px;
-    list-style-type: none;
+  padding: 0;
+  margin: 0 0 50px;
+  list-style-type: none;
 }
+
 .list_full {
-    width: 100%;
+  width: 100%;
 }
 
 .list__item {
-    padding: 10px 0;
-    border-bottom: var(--base-border);
+  padding: 10px 0;
+  border-bottom: var(--base-border);
 }

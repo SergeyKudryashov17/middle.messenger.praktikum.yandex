@@ -1,16 +1,16 @@
 .interlocutor {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .interlocutor__photo {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background-color: var(--bg-color);
-    margin-right: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--bg-color);
+  margin-right: 10px;
 }
 
 .interlocutor__name {
-    font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-bold);
 }
